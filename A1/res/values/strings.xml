@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 	<string name="app_name">A11</string>
-	<string name="hello_world">Hello world!</string>
 	<string name="action_settings">Settings</string>
+	<string name="text1">This is my first</string>
+	<string name="text2">app</string>
 </resources>

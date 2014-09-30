@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="app_name">A1_2</string>
+	<string name="button_text">push me</string>
+	<string name="action_settings">Settings</string>
+</resources>

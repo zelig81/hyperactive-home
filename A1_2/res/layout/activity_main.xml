@@ -3,21 +3,23 @@
 	android:id="@+id/LinearLayout1"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
-	android:orientation="horizontal"
+	android:orientation="vertical"
 	android:paddingBottom="@dimen/activity_vertical_margin"
 	android:paddingLeft="@dimen/activity_horizontal_margin"
 	android:paddingRight="@dimen/activity_horizontal_margin"
 	android:paddingTop="@dimen/activity_vertical_margin"
-	tools:context="il.co.hyperactive.ilyagorban.a11.MainActivity" >
-	<TextView
+	tools:context="com.example.a1_2.MainActivity" >
+	<EditText
+		android:id="@+id/editText1"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:ems="10"
+		android:inputType="number" >
+		<requestFocus />
+	</EditText>
+	<Button
+		android:id="@+id/button1"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-		android:text="@string/text1"
-		android:textSize="@dimen/activity_horizontal_margin" />
-	<TextView
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:paddingLeft="@dimen/padding"
-		android:text="@string/text2"
-		android:textSize="@dimen/activity_horisontal_margin2" />
+		android:text="@string/button_text" />
 </LinearLayout>
