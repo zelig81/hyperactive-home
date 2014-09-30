@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="app_name">A2_2</string>
+	<string name="hello_world">Hello world!</string>
+	<string name="action_settings">Settings</string>
+	<string name="welcome">Please put your nickname/username/password:</string>
+	<string name="button">sign in</string>
+	<string name="hint_nickname">put here your nickname</string>
+	<string name="hint_username">put here your username</string>
+	<string name="hint_password">type here your password</string>
+</resources>

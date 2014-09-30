@@ -19,5 +19,37 @@
 				<category android:name="android.intent.category.LAUNCHER" />
 			</intent-filter>
 		</activity>
+		<activity
+			android:name="com.example.a21.AdditionActivity"
+			android:label="Addition" >
+			<intent-filter>
+				<action android:name="com.example.calculate" />
+				<category android:name="android.intent.category.DEFAULT" />
+			</intent-filter>
+		</activity>
+		<activity
+			android:name="com.example.a21.SubstractionActivity"
+			android:label="Substraction" >
+			<intent-filter>
+				<action android:name="com.example.calculate" />
+				<category android:name="android.intent.category.DEFAULT" />
+			</intent-filter>
+		</activity>
+		<activity
+			android:name="com.example.a21.MultiplicationActivity"
+			android:label="Multiplication" >
+			<intent-filter>
+				<action android:name="com.example.calculate" />
+				<category android:name="android.intent.category.DEFAULT" />
+			</intent-filter>
+		</activity>
+		<activity
+			android:name="com.example.a21.DivisionActivity"
+			android:label="Division" >
+			<intent-filter>
+				<action android:name="com.example.calculate" />
+				<category android:name="android.intent.category.DEFAULT" />
+			</intent-filter>
+		</activity>
 	</application>
 </manifest>

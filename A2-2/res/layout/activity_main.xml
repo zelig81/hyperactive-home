@@ -8,13 +8,17 @@
 	android:paddingLeft="@dimen/activity_horizontal_margin"
 	android:paddingRight="@dimen/activity_horizontal_margin"
 	android:paddingTop="@dimen/activity_vertical_margin"
-	tools:context="com.example.a21.MainActivity" >
+	tools:context="com.example.a2_2.MainActivity" >
+	<TextView
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:text="@string/welcome" />
 	<EditText
 		android:id="@+id/editText1"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:ems="10"
-		android:inputType="number" >
+		android:hint="@string/hint_nickname" >
 		<requestFocus />
 	</EditText>
 	<EditText
@@ -22,10 +26,17 @@
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:ems="10"
-		android:inputType="number" />
-	<Button
-		android:id="@+id/button1"
+		android:hint="@string/hint_username" />
+	<EditText
+		android:id="@+id/editText3"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:text="@string/calculate" />
+		android:ems="10"
+		android:hint="@string/hint_password"
+		android:inputType="textPassword" />
+	<Button
+		android:id="@+id/button1"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:text="@string/button" />
 </LinearLayout>
