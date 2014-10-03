@@ -2,6 +2,7 @@ package com.example.a2_2;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
 
 public class WelcomeActivity extends Activity {
@@ -9,11 +10,12 @@ public class WelcomeActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
 		setContentView(R.layout.layout_welcome);
-		Bundle bundle = getIntent().getExtras();
-		String nickname = bundle.getString("nickname");
+		Log.i("1", "1");
+		String nickname = getIntent().getStringExtra("nickname");
 		TextView tv = (TextView) findViewById(R.id.textView1);
-		tv.setText(nickname);
+		tv.setText("Welcome brother " + nickname);
 	}
 
 }

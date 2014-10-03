@@ -18,10 +18,9 @@ public class MultiplicationActivity extends Activity {
 		TextView output = (TextView) findViewById(R.id.output);
 		name.setText("Multiplication result:");
 		Intent intent = getIntent();
-		Bundle bund = intent.getExtras();
-		int i1 = bund.getInt("first");
-		int i2 = bund.getInt("second");
-		output.setText(i1 * i2);
+		int i1 = intent.getIntExtra("first", 0);
+		int i2 = intent.getIntExtra("second", 0);
+		output.setText(i1 * i2 +"");
 	}
 
 }

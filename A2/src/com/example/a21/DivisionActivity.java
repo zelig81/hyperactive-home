@@ -18,11 +18,10 @@ public class DivisionActivity extends Activity {
 		TextView output = (TextView) findViewById(R.id.output);
 		name.setText("Division result:");
 		Intent intent = getIntent();
-		Bundle bund = intent.getExtras();
-		int i1 = bund.getInt("first");
-		int i2 = bund.getInt("second");
+		int i1 = intent.getIntExtra("first", 0);
+		int i2 = intent.getIntExtra("second", 0);
 		if (i2 != 0)
-			output.setText(i1 / i2);
+			output.setText(i1 / i2 +"");
 		else
 			output.setText("could not devide by null");
 	}

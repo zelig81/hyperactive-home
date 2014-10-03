@@ -27,6 +27,7 @@ public class MainActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				Intent intent = new Intent("com.example.calculate");
+								
 				int i1 = Integer.parseInt(et1.getText().toString());
 				int i2 = Integer.parseInt(et2.getText().toString());
 				intent.putExtra("first", i1);
