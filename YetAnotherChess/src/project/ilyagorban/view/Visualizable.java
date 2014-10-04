@@ -1,6 +1,5 @@
 package project.ilyagorban.view;
 
-import project.ilyagorban.model.Owner;
 import project.ilyagorban.model.figures.Figure;
 
 public interface Visualizable {
@@ -11,6 +10,6 @@ public interface Visualizable {
 
 	void setMessage(String message);
 
-	String showBoard(Figure[][] figures, Owner currentOwner);
+	String showBoard(Figure[] figures, boolean currentOwner);
 
 }
