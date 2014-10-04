@@ -6,9 +6,11 @@ import project.ilyagorban.view.Visualizable;
 import static project.ilyagorban.model.ChessModel.*;
 
 public class ChessController {
+	private static boolean WHITE = true;
+	private static boolean BLACK = false;
 
-	private ChessModel cm;
-	private Visualizable cv;
+	private final ChessModel cm;
+	private final Visualizable cv;
 
 	public ChessController(ChessModel cm, Visualizable cv) {
 		this.cm = cm;
@@ -21,7 +23,7 @@ public class ChessController {
 			System.out.println("the game is not started");
 			return;
 		}
-		Owner currentOwner = Owner.WHITE;
+		boolean currentOwner = WHITE;
 		while (true) {
 			String input = cv.showBoard(cm.getBoard(), currentOwner);
 

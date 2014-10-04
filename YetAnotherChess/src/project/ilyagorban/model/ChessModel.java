@@ -22,11 +22,11 @@ public class ChessModel {
 	public static final int DRAW_IMPOSSIBILITY_OF_MATE = 205;
 	public static final int DRAW_STALEMATE = 206;
 
-	private static Board board;
+	private Figure[] board = new Figure[64];
 
-	public boolean initializeGame() {
-		board = Board.getInstance();
-		return board.initializeGame();
+	public Figure[] initializeGame() {
+		board = Board.initializeGame();
+		return board;
 	}
 
 	public int move(String input, Owner o) {
@@ -79,8 +79,8 @@ public class ChessModel {
 			return board.promotePawn(pawn, gotRank, to);
 	}
 
-	public Figure[][] getBoard() {
-		return board.getBoard();
+	public Figure[] getBoard() {
+		return board;
 	}
 
 	public Board getBoardObject() {
