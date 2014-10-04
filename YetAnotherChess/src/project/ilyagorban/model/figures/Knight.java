@@ -16,7 +16,7 @@ public class Knight extends Figure {
 	}
 
 	@Override
-	public int checkIllegalMove(Figure[] board, int to) {
+	public int checkIllegalMove(Figure[] board, int to, Figure f, boolean b) {
 		int from = this.getXY();
 		if (to > 63 || to < 0 || from == to)
 			return INCORRECT_INPUT;
@@ -27,7 +27,7 @@ public class Knight extends Figure {
 		int[] difXY = XY.getDifferenceXY(from, to);
 		int dx = difXY[0];
 		int dy = difXY[1];
-		int output = (Math.abs(dx) * Math.abs(dy) == 2) ? CORRECT_MOVE
+		int output = Math.abs(dx) * Math.abs(dy) == 2 ? CORRECT_MOVE
 				: INCORRECT_MOVE;
 		return output;
 	}

@@ -31,11 +31,12 @@ public abstract class Figure {
 
 	protected Figure(int xy, Rank r) {
 		this.xy = xy;
-		this.setRank(r);
+		setRank(r);
 	}
 
-	public int checkIllegalMove(Figure[] board, int to) {
-		int from = this.getXY();
+	public int checkIllegalMove(Figure[] board, int to, Figure lastMoved,
+			boolean isLastMovedWasNotTouchedBefore) {
+		int from = getXY();
 		if (to > 63 || to < 0 || from == to)
 			return INCORRECT_INPUT;
 		Figure figTo = board[to];
@@ -82,11 +83,11 @@ public abstract class Figure {
 	}
 
 	public boolean isEnemy(boolean currentOwner) {
-		return this.getRank().getOwner() != currentOwner;
+		return getRank().getOwner() != currentOwner;
 	}
 
 	public boolean isEnemy(Figure fig) {
-		return this.getRank().getOwner() != fig.getRank().getOwner();
+		return getRank().getOwner() != fig.getRank().getOwner();
 	}
 
 	public boolean isTouched() {
