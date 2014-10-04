@@ -15,7 +15,7 @@ public class Figures {
 			return null;
 		}
 		String[] aChar = startGamePosition.split("");
-		int index = ConvXY.getIndexFromXY(aChar[2], aChar[3]);
+		int index = XY.getIndexFromXY(aChar[2], aChar[3]);
 		if (index == INCORRECT_INPUT) {
 			return null;
 		}

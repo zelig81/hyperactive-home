@@ -33,7 +33,7 @@ public class ChessModel {
 	public static HashMap<Boolean, String> mColors = new HashMap<>(2);
 	static {
 		mColors.put(WHITE, "Whites");
-		mColors.put(BLACK, "Blackes");
+		mColors.put(BLACK, "Blacks");
 	}
 
 	private final Figure[] board = new Figure[64];
@@ -54,17 +54,16 @@ public class ChessModel {
 	}
 
 	public int tryToMove(String input, boolean currentOwner) {
-		int[] arrIndices = ConvXY.getIndicesfromInput(input);
+		int[] arrIndices = XY.getIndicesfromInput(input);
 		if (arrIndices == null) {
 			return INCORRECT_INPUT;
 		}
 		int from = arrIndices[0];
 		int to = arrIndices[1];
-		int checkMove = INCORRECT_MOVE;
 		Figure figFrom = board[from];
 
 		if (figFrom != null && figFrom.isEnemy(currentOwner) == false) {
-			// checkMove = board.checkMove(from, to);
+			int checkMove = figFrom.checkIllegalMove(board, from, to);
 
 			if (checkMove >= CORRECT_MOVE) {
 				// board.savePossibleLastMovedFigure(figFrom, from, to);
@@ -94,7 +93,7 @@ public class ChessModel {
 	}
 
 	public boolean promotePawn(String input, String promotion) {
-		int to = ConvXY.getIndexFromXY(input);
+		int to = XY.getIndexFromXY(input);
 		Figure pawn = board[to];
 		Rank gotRank = Rank.getRank(promotion, pawn.getRank().getOwner());
 		if (gotRank == null)

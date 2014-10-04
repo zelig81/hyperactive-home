@@ -32,22 +32,43 @@ public class ChessController {
 				break; // end of game
 			if ("draw".equals(input)) {
 				String color = mColors.get(currentOwner);
-				//TODO could add draw check
-				String answer = cv.getInput(color + " want draw. Are you agree?(type 'yes' to agree, other answer is equals to no):");
-				if (answer != null && answer.toLowerCase().equals("yes")) {
+				// TODO could add draw check
+				String answer = cv
+						.getInput(color
+								+ " want a draw. Are you agree?(type 'yes' to agree, other answer is equals to no):");
+				if (answer != null && answer.toLowerCase().equals("yes"))
 					break;
 			}
 
 			int returnMessage = cm.tryToMove(input, currentOwner);
-			if (returnMessage == PAWN_PROMOTION) {
-				boolean success = false;
-				while (success == false) {
-					String promotion = cv
-							.getInput("Your pawn is ready to be promoted. To which figure you want to promote it (r)ook/k(n)ight/(b)ishop/(q)ueen?");
-					success = cm.promotePawn(input, promotion);
+			if (returnMessage >= CORRECT_MOVE && returnMessage < GAME_ENDINGS) {
+				if (returnMessage == PAWN_PROMOTION) {
+					boolean success = false;
+					while (success == false) {
+						String promotion = cv
+								.getInput("Your pawn is ready to be promoted. To which figure you want to promote it (r)ook/k(n)ight/(b)ishop/(q)ueen?");
+						success = cm.promotePawn(input, promotion);
+					}
 				}
-			}
-			if (returnMessage > GAME_ENDINGS) {
+
+				if (returnMessage >= CORRECT_MOVE) {
+					switch (returnMessage) {
+					case EN_PASSANT:
+						cv.getMessageToView("Made en-passant");
+						break;
+					case CHECK_TO_AWAITING_SIDE:
+						if (currentOwner == BLACK) {
+							cv.getMessageToView("Whites make check");
+						} else {
+							cv.getMessageToView("Blacks make check");
+						}
+						break;
+					}
+
+					cm.saveMove();
+					currentOwner = !currentOwner;
+				}
+			} else if (returnMessage > GAME_ENDINGS) {
 				if (returnMessage > DRAW) {
 					cv.getMessageToView("There is possibility for draw!!!!");
 					break; // end of game
@@ -58,23 +79,7 @@ public class ChessController {
 					cv.getMessageToView("White wins!!!!!");
 					break; // end of game
 				}
-			} else if (returnMessage >= CORRECT_MOVE) {
-				switch (returnMessage) {
-				case EN_PASSANT:
-					cv.getMessageToView("Made en-passant");
-					break;
-				case CHECK_TO_AWAITING_SIDE:
-					if (currentOwner == Owner.BLACK) {
-						cv.getMessageToView("White make check");
-					} else {
-						cv.getMessageToView("Black make check");
-					}
-					break;
-				}
-
-				cm.saveMove();
-				currentOwner = currentOwner.oppositeOwner();
-			} else {
+			} else if (returnMessage < CORRECT_MOVE) {
 				switch (returnMessage) {
 				case CHECK_TO_CURRENT_SIDE:
 					cv.getMessageToView("Incorrect move - you are under check");
@@ -83,7 +88,7 @@ public class ChessController {
 					cv.setMessage("incorrect input string");
 					break;
 				case DONT_TOUCH_NOT_YOUR_FIGURE_TO_MOVE:
-					cv.setMessage("there is no " + currentOwner.name()
+					cv.setMessage("there is no " + mColors.get(currentOwner)
 							+ "'s figure on the start coordinate");
 					break;
 				case INCORRECT_MOVE:

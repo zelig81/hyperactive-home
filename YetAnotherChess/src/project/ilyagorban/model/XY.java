@@ -4,13 +4,13 @@ import java.util.Arrays;
 import static project.ilyagorban.model.ChessModel.*;
 import java.util.List;
 
-public class ConvXY {
+public class XY {
 	private static List<String> xRepresentations = Arrays.asList(new String[] {
 			"a", "b", "c", "d", "e", "f", "g", "h" });
 	private static List<String> yRepresentations = Arrays.asList(new String[] {
 			"1", "2", "3", "4", "5", "6", "7", "8" });
 
-	private ConvXY() {
+	private XY() {
 	}
 
 	public static int getIndexFromXY(int x, int y) {

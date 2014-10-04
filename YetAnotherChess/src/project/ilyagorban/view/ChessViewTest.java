@@ -2,7 +2,6 @@ package project.ilyagorban.view;
 
 import java.util.ArrayList;
 
-import project.ilyagorban.model.Owner;
 import project.ilyagorban.model.figures.Figure;
 
 public class ChessViewTest implements Visualizable {
@@ -42,7 +41,7 @@ public class ChessViewTest implements Visualizable {
 	}
 
 	@Override
-	public String showBoard(Figure[][] figures, Owner currentOwner) {
+	public String showBoard(Figure[] figures, boolean currentOwner) {
 		String output = moves.get(move);
 		move++;
 		return output;

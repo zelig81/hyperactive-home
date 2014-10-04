@@ -2,7 +2,7 @@ package project.ilyagorban.view;
 
 import java.util.Scanner;
 
-import project.ilyagorban.model.ConvXY;
+import project.ilyagorban.model.XY;
 import project.ilyagorban.model.figures.Figure;
 
 public class ChessViewConsole implements Visualizable {
@@ -45,7 +45,7 @@ public class ChessViewConsole implements Visualizable {
 					.append("|");
 			for (int x = 0; x <= 7; x++) {
 				String color = ((x + y) % 2 == 1) ? "▓" : "░";
-				Figure fig = figures[ConvXY.getIndexFromXY(x, y)];
+				Figure fig = figures[XY.getIndexFromXY(x, y)];
 				if (fig != null) {
 					output.append(color).append(fig).append(color).append("|");
 				} else {

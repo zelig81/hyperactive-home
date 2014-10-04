@@ -5,12 +5,11 @@ package project.ilyagorban.model.figures;
 
 import static project.ilyagorban.model.ChessModel.*;
 
-import project.ilyagorban.model.Owner;
 import project.ilyagorban.model.Rank;
-import project.ilyagorban.model.ConvXY;
+import project.ilyagorban.model.XY;
 
 /**
- * @author zelig
+ * @author ilya gorban
  * 
  */
 public abstract class Figure {
@@ -120,11 +119,22 @@ public abstract class Figure {
 	}
 
 	public String toLog() {
-		return getRank().toLog() + ConvXY.xyToString(xy);
+		return getRank().toLog() + XY.xyToString(xy);
 	}
 
 	@Override
 	public String toString() {
 		return getRank().toString();
+	}
+
+	public int checkIllegalMove(Figure[] board, int from, int to) {
+
+		if (this instanceof MarkerRook) {
+		}
+		if (this instanceof MarkerBishop) {
+		}
+		if (this instanceof Knight) {
+		}
+		return 0;
 	}
 }

@@ -2,7 +2,7 @@ package project.ilyagorban.model.figures;
 
 import static project.ilyagorban.model.ChessModel.*;
 
-import project.ilyagorban.model.ConvXY;
+import project.ilyagorban.model.XY;
 import project.ilyagorban.model.Rank;
 
 // ♙♟ figures
@@ -32,8 +32,8 @@ public class Pawn extends Figure {
 			return INCORRECT_MOVE;
 		}
 		int from = this.getXY();
-		int yFrom = ConvXY.getXYFromIndex(from)[1];
-		int yTo = ConvXY.getXYFromIndex(to)[1];
+		int yFrom = XY.getXYFromIndex(from)[1];
+		int yTo = XY.getXYFromIndex(to)[1];
 
 		int enpassantY = (this.getRank().getOwner() == WHITE) ? 4 : 3;
 		if (yFrom == enpassantY) {

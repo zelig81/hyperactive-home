@@ -1,6 +1,6 @@
 package project.ilyagorban.model.figures;
 
-import project.ilyagorban.model.ConvXY;
+import project.ilyagorban.model.XY;
 import project.ilyagorban.model.Rank;
 import static project.ilyagorban.model.ChessModel.*;
 
@@ -25,7 +25,7 @@ public class King extends Figure {
 
 		boolean isAbleToCastle = false;
 		if (this.isTouched() == false) {
-			isAbleToCastle = (Math.abs(ConvXY.getX(from) - ConvXY.getX(to)) == 2);
+			isAbleToCastle = (Math.abs(XY.getX(from) - XY.getX(to)) == 2);
 		}
 		output = (isAbleToCastle == true) ? CASTLING : CORRECT_MOVE;
 		return output;
