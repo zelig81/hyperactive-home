@@ -42,13 +42,9 @@ public class ChessController {
 
 			int afterTryingToMove = cm.tryToMove(input, currentOwner);
 			if (afterTryingToMove >= CORRECT_MOVE) {
-				int afterCheck = cm.check(afterTryingToMove);
+				int afterCheck = cm.check(afterTryingToMove, currentOwner);
 				if (afterCheck >= CORRECT_MOVE) {
 					switch (afterCheck) {
-					case CHECK_TO_AWAITING_SIDE:
-						cv.getMessageToView("Check to "
-								+ mColors.get(currentOwner));
-						break;
 					case CASTLING:
 						cv.getMessageToView(mColors.get(currentOwner)
 								+ " made castling");
