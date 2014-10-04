@@ -1,13 +1,14 @@
 package project.ilyagorban.controllers;
 
+import java.util.HashMap;
+
 import project.ilyagorban.model.ChessModel;
 import project.ilyagorban.model.Owner;
+import project.ilyagorban.model.figures.Figure;
 import project.ilyagorban.view.Visualizable;
 import static project.ilyagorban.model.ChessModel.*;
 
 public class ChessController {
-	private static boolean WHITE = true;
-	private static boolean BLACK = false;
 
 	private final ChessModel cm;
 	private final Visualizable cv;
@@ -18,8 +19,8 @@ public class ChessController {
 	}
 
 	public void start() {
-		boolean isGameStarted = cm.initializeGame();
-		if (isGameStarted == false) {
+		boolean isStarted = cm.initializeGame();
+		if (isStarted == false) {
 			System.out.println("the game is not started");
 			return;
 		}
@@ -29,8 +30,23 @@ public class ChessController {
 
 			if ("exit".equals(input))
 				break; // end of game
+			if ("draw".equals(input)) {
+				String color = mColors.get(currentOwner);
+				//TODO could add draw check
+				String answer = cv.getInput(color + " want draw. Are you agree?(type 'yes' to agree, other answer is equals to no):");
+				if (answer != null && answer.toLowerCase().equals("yes")) {
+					break;
+			}
 
-			int returnMessage = cm.move(input, currentOwner);
+			int returnMessage = cm.tryToMove(input, currentOwner);
+			if (returnMessage == PAWN_PROMOTION) {
+				boolean success = false;
+				while (success == false) {
+					String promotion = cv
+							.getInput("Your pawn is ready to be promoted. To which figure you want to promote it (r)ook/k(n)ight/(b)ishop/(q)ueen?");
+					success = cm.promotePawn(input, promotion);
+				}
+			}
 			if (returnMessage > GAME_ENDINGS) {
 				if (returnMessage > DRAW) {
 					cv.getMessageToView("There is possibility for draw!!!!");
@@ -52,14 +68,6 @@ public class ChessController {
 						cv.getMessageToView("White make check");
 					} else {
 						cv.getMessageToView("Black make check");
-					}
-					break;
-				case PAWN_PROMOTION:
-					boolean success = false;
-					while (success == false) {
-						String promotion = cv
-								.getInput("Your pawn is ready to be promoted. To which figure you want to promote it (r)ook/k(n)ight/(b)ishop/(q)ueen?");
-						success = cm.promotePawn(input, promotion);
 					}
 					break;
 				}

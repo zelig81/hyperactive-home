@@ -7,49 +7,14 @@ import static project.ilyagorban.model.ChessModel.*;
 
 import project.ilyagorban.model.Owner;
 import project.ilyagorban.model.Rank;
-import project.ilyagorban.model.XY;
+import project.ilyagorban.model.ConvXY;
 
 /**
  * @author zelig
  * 
  */
 public abstract class Figure {
-	public static Figure newInstance(String startGamePosition) {
-		if (startGamePosition.length() != 4) {
-			return null;
-		}
-		String[] aChar = startGamePosition.split("");
-		XY xy = XY.getXYFromLog(startGamePosition);
-		if (xy == null) {
-			return null;
-		}
-		Owner owner = Owner.getOwner(aChar[0]);
-		if (owner == null) {
-			return null;
-		}
-		Rank rank = Rank.getRank(aChar[1], owner);
-		if (rank == null) {
-			return null;
-		}
-		switch (aChar[1]) {
-		case "p":
-			return new Pawn(xy, rank);
-		case "n":
-			return new Knight(xy, rank);
-		case "b":
-			return new Bishop(xy, rank);
-		case "r":
-			return new Rook(xy, rank);
-		case "q":
-			return new Queen(xy, rank);
-		case "k":
-			return new King(xy, rank);
-		default:
-			return null;
-		}
-	}
-
-	private XY xy;
+	private int xy;
 	private boolean touched;
 	private Rank rank;
 	private int[][] moveDirections;
@@ -81,7 +46,7 @@ public abstract class Figure {
 	public static final String[][] allKillerIndex = { { "n" }, { "q", "b" },
 			{ "q", "r" } };
 
-	protected Figure(XY xy, Rank r) {
+	protected Figure(int xy, Rank r) {
 		this.xy = xy;
 		this.setRank(r);
 	}
@@ -106,26 +71,20 @@ public abstract class Figure {
 		return rank;
 	}
 
-	public int getSpecialCorrectMoveName(XY to) {
+	public int getSpecialCorrectMoveName(int to) {
 		return CORRECT_MOVE;
 	}
 
-	public XY getXY() {
+	public int getXY() {
 		return xy;
 	}
 
-	public boolean isEnemy(Figure fig) {
-		if (fig == null) {
-			return false;
-		}
-		return this.getRank().getOwner() != fig.getRank().getOwner();
+	public boolean isEnemy(boolean currentOwner) {
+		return this.getRank().getOwner() != currentOwner;
 	}
 
-	public boolean isEnemy(Owner o) {
-		if (o == null) {
-			return false;
-		}
-		return this.getRank().getOwner() != o;
+	public boolean isEnemy(Figure fig) {
+		return this.getRank().getOwner() != fig.getRank().getOwner();
 	}
 
 	public boolean isTouched() {
@@ -156,16 +115,16 @@ public abstract class Figure {
 		this.touched = touched;
 	}
 
-	public void setXY(XY xy) {
+	public void setXY(int xy) {
 		this.xy = xy;
 	}
 
 	public String toLog() {
-		return getRank().toLog() + xy.toString();
+		return getRank().toLog() + ConvXY.xyToString(xy);
 	}
 
 	@Override
 	public String toString() {
-		return getRank().getPicture();
+		return getRank().toString();
 	}
 }

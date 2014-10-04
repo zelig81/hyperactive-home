@@ -1,8 +1,9 @@
 package project.ilyagorban.model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
-import project.ilyagorban.model.figures.Figure;
+import project.ilyagorban.model.figures.*;
 
 public class Board {
 	private static final ArrayList<String> startGamePositions = new ArrayList<>();
@@ -43,9 +44,26 @@ public class Board {
 		startGamePositions.add("bph7");
 	}
 
-	public static Figure[] initializeGame() {
-		// TODO Auto-generated method stub
-		return null;
+	public static boolean initializeGame(Figure[] board,
+			HashMap<Boolean, ArrayList<Figure>> hmFigures,
+			HashMap<Boolean, Figure> kings) {
+		if (board == null || hmFigures == null || kings == null)
+			return false;
+		for (String position : startGamePositions) {
+			Figure fig = Figures.newInstance(position);
+			if (fig == null)
+				return false;
+			board[fig.getXY()] = fig;
+			boolean color = fig.getRank().getOwner();
+			hmFigures.get(color).add(fig);
+			if (fig instanceof King) {
+				if (kings.get(color) != null)
+					return false;
+				kings.put(color, fig);
+			}
+		}
+		if (kings.size() != 2)
+			return false;
+		return true;
 	}
-
 }

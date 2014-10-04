@@ -1,5 +1,11 @@
 package project.ilyagorban.model;
 
+import static project.ilyagorban.model.ChessModel.BLACK;
+import static project.ilyagorban.model.ChessModel.WHITE;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+
 import project.ilyagorban.model.figures.Figure;
 
 public class ChessModel {
@@ -22,43 +28,61 @@ public class ChessModel {
 	public static final int DRAW_IMPOSSIBILITY_OF_MATE = 205;
 	public static final int DRAW_STALEMATE = 206;
 
-	private Figure[] board = new Figure[64];
+	public static boolean WHITE = true;
+	public static boolean BLACK = false;
+	public static HashMap<Boolean, String> mColors = new HashMap<>(2);
+	static {
+		mColors.put(WHITE, "Whites");
+		mColors.put(BLACK, "Blackes");
+	}
 
-	public Figure[] initializeGame() {
-		board = Board.initializeGame();
+	private final Figure[] board = new Figure[64];
+	private final HashMap<Boolean, ArrayList<Figure>> hmFigures = new HashMap<>();
+	private final HashMap<Boolean, Figure> kings = new HashMap<>();
+
+	public boolean initializeGame() {
+		hmFigures.put(WHITE, new ArrayList<Figure>());
+		hmFigures.put(BLACK, new ArrayList<Figure>());
+		boolean result = Board.initializeGame(board, hmFigures, kings);
+		if (result == false)
+			return false;
+		return true;
+	}
+
+	public Figure[] getBoard() {
 		return board;
 	}
 
-	public int move(String input, Owner o) {
-		XY[] arrXY = XY.getXYfromInput(input);
-		if (arrXY == null) {
+	public int tryToMove(String input, boolean currentOwner) {
+		int[] arrIndices = ConvXY.getIndicesfromInput(input);
+		if (arrIndices == null) {
 			return INCORRECT_INPUT;
 		}
-		XY from = arrXY[0];
-		XY to = arrXY[1];
+		int from = arrIndices[0];
+		int to = arrIndices[1];
 		int checkMove = INCORRECT_MOVE;
-		Figure figFrom = board.getFigure(from);
+		Figure figFrom = board[from];
 
-		if (figFrom != null && figFrom.isEnemy(o) == false) {
-			checkMove = board.checkMove(from, to);
+		if (figFrom != null && figFrom.isEnemy(currentOwner) == false) {
+			// checkMove = board.checkMove(from, to);
 
 			if (checkMove >= CORRECT_MOVE) {
-				board.savePossibleLastMovedFigure(figFrom, from, to);
+				// board.savePossibleLastMovedFigure(figFrom, from, to);
 				if (figFrom.getRank().getIndex().equals("p")) { // pawn move
-					board.resetNumberOfFiftyRule();
+					// board.resetNumberOfFiftyRule();
 				}
 				if (checkMove == CORRECT_MOVE) {
-					Figure figTo = board.getFigure(to);
+					Figure figTo = board[to];
 					if (figTo != null) {
-						board.remove(to);
-						board.resetNumberOfFiftyRule();
+						// board.remove(to);
+						// board.resetNumberOfFiftyRule();
 					}
-					board.move(figFrom, to);
-					board.savePossibleMove(from, to);
+					// board.move(figFrom, to);
+					// board.savePossibleMove(from, to);
 				} else if (checkMove == CASTLING) {
-					board.castling(figFrom, to);
+					// board.castling(figFrom, to);
 				} else if (checkMove == EN_PASSANT) {
-					board.enPassant(figFrom);
+					// board.enPassant(figFrom);
 				}
 			}
 			return checkMove;
@@ -70,25 +94,17 @@ public class ChessModel {
 	}
 
 	public boolean promotePawn(String input, String promotion) {
-		XY to = XY.getXYfromInput(input)[1];
-		Figure pawn = board.getFigure(to);
+		int to = ConvXY.getIndexFromXY(input);
+		Figure pawn = board[to];
 		Rank gotRank = Rank.getRank(promotion, pawn.getRank().getOwner());
 		if (gotRank == null)
 			return false;
 		else
-			return board.promotePawn(pawn, gotRank, to);
-	}
-
-	public Figure[] getBoard() {
-		return board;
-	}
-
-	public Board getBoardObject() {
-		return board;
+			return true;// board.promotePawn(pawn, gotRank, to);
 	}
 
 	public void saveMove() {
-		board.saveMove();
+		// board.saveMove();
 
 	}
 }

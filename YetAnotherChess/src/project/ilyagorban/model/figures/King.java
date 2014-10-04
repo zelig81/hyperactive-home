@@ -1,13 +1,13 @@
 package project.ilyagorban.model.figures;
 
+import project.ilyagorban.model.ConvXY;
 import project.ilyagorban.model.Rank;
-import project.ilyagorban.model.XY;
 import static project.ilyagorban.model.ChessModel.*;
 
 // ♚♔ figures
 public class King extends Figure {
 
-	public King(XY p, Rank r) {
+	public King(int p, Rank r) {
 		super(p, r);
 		setMoveDirections(moveDirectionsOfQueen);
 		setKillDirections(moveDirectionsOfQueen);
@@ -16,18 +16,18 @@ public class King extends Figure {
 	}
 
 	@Override
-	public int getSpecialCorrectMoveName(XY to) {
+	public int getSpecialCorrectMoveName(int to) {
 		int output = INCORRECT_MOVE;
-		if (to == null) {
+		if (to < 0 || to > 63) {
 			return INCORRECT_MOVE;
 		}
+		int from = this.getXY();
 
 		boolean isAbleToCastle = false;
 		if (this.isTouched() == false) {
-			isAbleToCastle = (Math.abs(this.getXY().getX() - to.getX()) == 2);
+			isAbleToCastle = (Math.abs(ConvXY.getX(from) - ConvXY.getX(to)) == 2);
 		}
 		output = (isAbleToCastle == true) ? CASTLING : CORRECT_MOVE;
 		return output;
 	}
-
 }

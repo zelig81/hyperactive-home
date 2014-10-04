@@ -134,13 +134,13 @@ public class Board_old {
 		int output = CORRECT_MOVE;
 		XY origXY = fig.getXY();
 		Owner o = fig.getRank().getOwner();
-		move(fig, to);
+		tryToMove(fig, to);
 		for (XY xy : xyOfSides.get(o.oppositeOwner())) {
 			output = checkInAssessMateOrStalemate(xy);
 			if (output != CHECK_TO_CURRENT_SIDE)
 				break;
 		}
-		move(fig, origXY);
+		tryToMove(fig, origXY);
 		if (output == CHECK_TO_CURRENT_SIDE) {
 			// mate or stalemate to awaiting side
 			if (checkOutput == CORRECT_MOVE) {
@@ -179,11 +179,11 @@ public class Board_old {
 		int kingY = kingXY.getY();
 		int newRookX = (to.getX() == 6) ? 5 : 3;
 		savePossibleMove(kingXY, to);
-		move(king, to);
+		tryToMove(king, to);
 		Figure rook = getFigure(rookX, kingY);
 		XY newRookXY = XY.getNewXY(newRookX, kingY);
 		savePossibleMove(rook.getXY(), newRookXY);
-		move(rook, newRookXY);
+		tryToMove(rook, newRookXY);
 
 	}
 
@@ -193,7 +193,7 @@ public class Board_old {
 		Owner o = figFrom.getRank().getOwner();
 		XY origXY = figFrom.getXY();
 		int result = CORRECT_MOVE;
-		move(figFrom, to);
+		tryToMove(figFrom, to);
 
 		if (to.equals(xyOfKings.get(o))) {
 			boolean isKingsNotOnNeighborSquares = Math.abs(xyOfKings.get(w)
@@ -206,7 +206,7 @@ public class Board_old {
 		}
 		result = check(o);
 
-		move(figFrom, origXY);
+		tryToMove(figFrom, origXY);
 		return result;
 
 	}
@@ -331,7 +331,7 @@ public class Board_old {
 				endPositions.getY()
 						+ pawnKiller.getRank().getOwner().getDirection());
 		savePossibleMove(pawnKiller.getXY(), newXYOfPawnKiller);
-		move(pawnKiller, newXYOfPawnKiller);
+		tryToMove(pawnKiller, newXYOfPawnKiller);
 	}
 
 	public Figure[][] getBoard() {
