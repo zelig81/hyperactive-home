@@ -127,13 +127,39 @@ public abstract class Figure {
 		return getRank().toString();
 	}
 
-	public int checkIllegalMove(Figure[] board, int from, int to) {
-
-		if (this instanceof MarkerRook) {
+	public int checkIllegalMove(Figure[] board, int to) {
+		int from = this.getXY();
+		if (to > 63 || to < 0 || from == to)
+			return INCORRECT_INPUT;
+		Figure figTo = board[to];
+		if (figTo != null && figTo.isEnemy(this) == false) {
+			return OBSTACLE_ON_THE_WAY;
 		}
-		if (this instanceof MarkerBishop) {
+		int[] difXY = XY.getDifferenceXY(from, to);
+		int dx = difXY[0];
+		int dy = difXY[1];
+		int output = INCORRECT_MOVE;
+		if (this instanceof MarkerRook) {
+			if (dx * dy == 0) {
+				int dirX = dx / (dx + dy);
+				int dirY = dy / (dx + dy);
+				output = CORRECT_MOVE;
+				for (int i = 1; i < dx + dy || i <= killLen; i++) {
+					Figure temp = board[XY.addToIndex(from, dirX * i, dirY * i)];
+					if (temp != null && temp.equals(figTo) == false)
+						return OBSTACLE_ON_THE_WAY;
+				}
+			}
+		}
+		if (this instanceof MarkerBishop && output == INCORRECT_MOVE) {
+			if (Math.abs(dx) == Math.abs(dy)) {
+				output = CORRECT_MOVE;
+			}
 		}
 		if (this instanceof Knight) {
+			if (Math.abs(dx) * Math.abs(dy) == 2) {
+				output = CORRECT_MOVE;
+			}
 		}
 		return 0;
 	}

@@ -10,7 +10,7 @@ import project.ilyagorban.model.figures.Figure;
 
 public class ChessModel {
 	public static final int CHECK_TO_CURRENT_SIDE = -7;
-	public static final int OBSTACLE_ON_WAY = -6;
+	public static final int OBSTACLE_ON_THE_WAY = -6;
 	public static final int DONT_TOUCH_NOT_YOUR_FIGURE_TO_MOVE = -5;
 	public static final int INCORRECT_MOVE = -2;
 	public static final int INCORRECT_INPUT = -1;
@@ -63,7 +63,7 @@ public class ChessModel {
 		Figure figFrom = board[from];
 
 		if (figFrom != null && figFrom.isEnemy(currentOwner) == false) {
-			int checkMove = figFrom.checkIllegalMove(board, from, to);
+			int checkMove = figFrom.checkIllegalMove(board, to);
 
 			if (checkMove >= CORRECT_MOVE) {
 				// board.savePossibleLastMovedFigure(figFrom, from, to);

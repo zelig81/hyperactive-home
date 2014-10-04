@@ -94,7 +94,7 @@ public class ChessController {
 				case INCORRECT_MOVE:
 					cv.setMessage("incorrect move for this figure");
 					break;
-				case OBSTACLE_ON_WAY:
+				case OBSTACLE_ON_THE_WAY:
 					cv.setMessage("there is an unpassable obstacle on the end point of your move");
 					break;
 				}

@@ -78,4 +78,14 @@ public class XY {
 			return xRepresentations.get(xy[0]) + yRepresentations.get(xy[1]);
 		}
 	}
+
+	public static int[] getDifferenceXY(int from, int to) {
+		int difX = getX(to) - getX(from);
+		int difY = getY(to) - getY(from);
+		return new int[] { difX, difY };
+	}
+
+	public static int addToIndex(int from, int dx, int dy) {
+		return from + dx * 8 + dy;
+	}
 }
