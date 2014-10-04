@@ -9,21 +9,7 @@ import project.ilyagorban.model.Rank;
 public class Pawn extends Figure {
 	public Pawn(int xy, Rank r) {
 		super(xy, r);
-		if (r.getOwner() == BLACK) {
-			setMoveDirections(moveDirectionsOfBlackPawn);
-			setKillDirections(killDirectionsOfBlackPawn);
-		} else {
-			setMoveDirections(moveDirectionsOfWhitePawn);
-			setKillDirections(killDirectionsOfWhitePawn);
-		}
-		setMoveLen(2);
 		setKillLen(1);
-	}
-
-	@Override
-	public void setTouched(boolean touched) {
-		super.setTouched(touched);
-		setMoveLen(1);
 	}
 
 	@Override

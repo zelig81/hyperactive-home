@@ -1,6 +1,5 @@
 package project.ilyagorban.view;
 
-import project.ilyagorban.model.Owner;
 import project.ilyagorban.model.figures.Figure;
 
 public class ChessViewWindow implements Visualizable {
@@ -21,7 +20,7 @@ public class ChessViewWindow implements Visualizable {
 	}
 
 	@Override
-	public String showBoard(Figure[][] figures, Owner currentOwner) {
+	public String showBoard(Figure[] figures, boolean currentOwner) {
 		return null;
 	}
 
