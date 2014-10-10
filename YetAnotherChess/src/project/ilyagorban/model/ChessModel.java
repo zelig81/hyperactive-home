@@ -2,11 +2,12 @@ package project.ilyagorban.model;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 
 import project.ilyagorban.model.figures.*;
 
 public class ChessModel {
-	public static final int CHECK_TO_CURRENT_SIDE = -7;
+	public static final int CHECK = -7;
 	public static final int OBSTACLE_ON_THE_WAY = -6;
 	public static final int DONT_TOUCH_NOT_YOUR_FIGURE_TO_MOVE = -5;
 	public static final int INCORRECT_MOVE = -2;
@@ -38,23 +39,40 @@ public class ChessModel {
 	private final HashMap<Boolean, Figure> kings = new HashMap<>();
 	private Figure lastMoved = null;
 	private boolean isLastMovedWasNotTouchedBefore = false;
-	private HashMap<Integer, Object> savedState = new HashMap<>(3);
-	private int draw50Rule = 0;
+	private HashMap<Integer, ArrayList<Object>> savedState = new HashMap<>(3);
+	private int rule50Draw = 0;
+	private HashSet<String> rule3FoldSet = null;
+	private ArrayList<String> movesLog = null;
+	private int rule3FoldCount = 0;
+	private int Rule3FoldPreviousLen = 0;
 
 	public int assessPositions(int returnMessage) {
 		// TODO assessPositions
 		return returnMessage;
 	}
 
-	public int check(int afterTryingToMove, boolean currentOwner) {
-		int output = afterTryingToMove;
-		for (Figure fig : hmFigures.get(!currentOwner)) {
-			int result = fig.checkIllegalMove(board, kings.get(currentOwner)
+	public int check(boolean ownerUnderCheck) {
+		for (Figure fig : hmFigures.get(!ownerUnderCheck)) {
+			int result = fig.checkIllegalMove(board, kings.get(ownerUnderCheck)
 					.getXY(), lastMoved, true);
 			if (result == CORRECT_MOVE) {
-				return CHECK_TO_CURRENT_SIDE;
+				return CHECK;
 			}
+		}
 
+		return 0;
+	}
+
+	public int check(int[] moves, int afterTryingToMove, boolean currentOwner) {
+		int output = check(currentOwner);
+		if (output >= CORRECT_MOVE && afterTryingToMove == CASTLING) {
+			move(moves[1], moves[0]);
+			output = check(currentOwner);
+			if (output >= CORRECT_MOVE) {
+				move(moves[0], (moves[0] + moves[1]) / 2);
+				output = check(currentOwner);
+			}
+			move(kings.get(currentOwner).getXY(), moves[1]);
 		}
 		return output;
 	}
@@ -78,12 +96,12 @@ public class ChessModel {
 		int xFrom = rightCastling == true ? 7 : 0;
 		int dx = rightCastling == true ? -2 : 3;
 		int rookXY = XY.getIndexFromXY(xFrom, yFrom);
-		int[] rookXYmoves = new int[] { XY.addToIndex(rookXY, dx, 0),
-				XY.addToIndex(rookXY, dx, 0) };
-		move(moves);
-		move(rookXYmoves);
+		int rookXYFrom = XY.addToIndex(rookXY, dx, 0);
+		int rookXYTo = XY.addToIndex(rookXY, dx, 0);
+		move(moves[0], moves[1]);
+		move(rookXYFrom, rookXYTo);
 
-		draw50Rule++;
+		rule50Draw++;
 
 	}
 
@@ -91,12 +109,12 @@ public class ChessModel {
 		// possible move + possible take
 		Figure figTo = board[moves[1]];
 		if (board[moves[0]] instanceof Pawn)
-			draw50Rule = 0;
+			rule50Draw = 0;
 		if (figTo != null) {
 			hmFigures.get(figTo.getRank().getOwner()).remove(figTo);
-			draw50Rule = 0;
+			rule50Draw = 0;
 		}
-		move(moves);
+		move(moves[0], moves[1]);
 
 	}
 
@@ -104,20 +122,20 @@ public class ChessModel {
 		int[] difXY = XY.getDifferenceXY(moves[0], moves[1]);
 		Figure figEP = board[XY.addToIndex(moves[0], difXY[0], 0)];
 		hmFigures.get(figEP.getRank().getOwner()).remove(figEP);
-		draw50Rule = 0;
-		move(moves);
+		rule50Draw = 0;
+		move(moves[0], moves[1]);
 
 	}
 
-	private void move(int[] moves) {
-		board[moves[1]] = board[moves[0]];
-		board[moves[0]] = null;
-		Figure fig = board[moves[1]];
-		fig.setXY(moves[1]);
+	private void move(int from, int to) {
+		Figure fig = board[from];
+		fig.setXY(to);
+		board[to] = board[from];
+		board[from] = null;
+
 	}
 
-	public boolean promotePawn(String input, String promotion) {
-		int[] moves = XY.getIndicesfromInput(input);
+	public boolean promotePawn(int[] moves, String promotion) {
 		Figure pawn = board[moves[1]];
 		Rank gotRank = Rank.getRank(promotion, pawn.getRank().getOwner());
 		if (gotRank == null)
@@ -128,24 +146,58 @@ public class ChessModel {
 		}
 	}
 
-	public void restoreStateBeforeMove() {
-		// TODO restoreStateBeforeMove
+	public void restoreStateBeforeMove(int afterTryingToMove) {
+		ArrayList<Object> list = savedState.get(afterTryingToMove);
+		rule50Draw = (Integer) list.get(0);
+		int[] moves;
+		switch (afterTryingToMove) {
+		case CASTLING:
+			moves = (int[]) list.get(1);
+			move(moves[1], moves[0]);
+			moves = (int[]) list.get(2);
+			move(moves[1], moves[0]);
+			break;
+		case EN_PASSANT:
+			moves = (int[]) list.get(1);
+			move(moves[1], moves[0]);
+			Figure removedPawn = (Figure) list.get(2);
+			board[removedPawn.getXY()] = removedPawn;
+			break;
+		case CORRECT_MOVE:
+			moves = (int[]) list.get(1);
+			move(moves[1], moves[0]);
+			Figure removedFigure = (Figure) list.get(2);
+			if (removedFigure != null)
+				board[removedFigure.getXY()] = removedFigure;
+			break;
+		}
 
 	}
 
-	public void saveMove() {
-		// TODO saveMove
+	public void saveMove(int from, int to) {
 		// add to log;
+		if (movesLog == null)
+			movesLog = new ArrayList<>();
+		String madeMove = board[to].toLog() + XY.xyToString(from)
+				+ XY.xyToString(to);
+		movesLog.add(madeMove);
+
 		// add to 3 fold set check
+		if (rule3FoldSet == null)
+			rule3FoldSet = new HashSet<>();
+		rule3FoldSet.add(madeMove);
+		int len = rule3FoldSet.size();
+		if (Rule3FoldPreviousLen == len)
+			rule3FoldCount++;
+
 		// save lastmoved + its state
 	}
 
 	public void saveStateBeforeMove(int result, int[] moves) {
 		ArrayList<Object> list = new ArrayList<>(3);
-		list.add(draw50Rule);
+		list.add(rule50Draw);
 		switch (result) {
 		case CASTLING:
-			list.add(moves);
 			int yFrom = XY.getY(moves[0]);
 			boolean rightCastling = XY.getDifferenceXY(moves[0], moves[1])[0] > 0;
 			int xFrom = rightCastling == true ? 7 : 0;
@@ -153,12 +205,13 @@ public class ChessModel {
 			int rookXY = XY.getIndexFromXY(xFrom, yFrom);
 			int[] rookXYmoves = new int[] { XY.addToIndex(rookXY, dx, 0),
 					XY.addToIndex(rookXY, dx, 0) };
+			list.add(moves);
 			list.add(rookXYmoves);
 			savedState.put(CASTLING, list);
 			break;
 		case EN_PASSANT:
-			list.add(moves);
 			int[] difXY = XY.getDifferenceXY(moves[0], moves[1]);
+			list.add(moves);
 			list.add(board[XY.addToIndex(moves[0], difXY[0], 0)]);
 			savedState.put(EN_PASSANT, list);
 			break;
@@ -173,11 +226,7 @@ public class ChessModel {
 
 	}
 
-	public int tryToMove(String input, boolean currentOwner) {
-		int[] moves = XY.getIndicesfromInput(input);
-		if (moves == null) {
-			return INCORRECT_INPUT;
-		}
+	public int tryToMove(int[] moves, boolean currentOwner) {
 		int from = moves[0];
 		int to = moves[1];
 		Figure figFrom = board[from];

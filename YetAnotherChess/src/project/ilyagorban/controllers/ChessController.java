@@ -1,10 +1,7 @@
 package project.ilyagorban.controllers;
 
-import java.util.HashMap;
-
 import project.ilyagorban.model.ChessModel;
-import project.ilyagorban.model.Owner;
-import project.ilyagorban.model.figures.Figure;
+import project.ilyagorban.model.XY;
 import project.ilyagorban.view.Visualizable;
 import static project.ilyagorban.model.ChessModel.*;
 
@@ -40,9 +37,16 @@ public class ChessController {
 					break;
 			}
 
-			int afterTryingToMove = cm.tryToMove(input, currentOwner);
+			int[] moves = XY.getIndicesfromInput(input);
+			if (moves == null) {
+				cv.setMessage("incorrect input string");
+				continue;
+			}
+
+			int afterTryingToMove = cm.tryToMove(moves, currentOwner);
 			if (afterTryingToMove >= CORRECT_MOVE) {
-				int afterCheck = cm.check(afterTryingToMove, currentOwner);
+				int afterCheck = cm.check(moves, afterTryingToMove,
+						currentOwner);
 				if (afterCheck >= CORRECT_MOVE) {
 					switch (afterCheck) {
 					case CASTLING:
@@ -58,7 +62,7 @@ public class ChessController {
 						while (success == false) {
 							String promotion = cv
 									.getInput("Your pawn is ready to be promoted. To which figure you want to promote it (r)ook/k(n)ight/(b)ishop/(q)ueen?");
-							success = cm.promotePawn(input, promotion);
+							success = cm.promotePawn(moves, promotion);
 						}
 						break;
 					}
@@ -66,11 +70,11 @@ public class ChessController {
 					// TODO assessPositions
 					if (afterAssessPositions >= CORRECT_MOVE
 							&& afterAssessPositions < GAME_ENDINGS) {
-						cm.saveMove();
-						currentOwner = !currentOwner;
-					}
 
-					if (afterAssessPositions > GAME_ENDINGS) {
+						cm.saveMove(moves[0], moves[1]);
+						currentOwner = !currentOwner;
+
+					} else if (afterAssessPositions > GAME_ENDINGS) {
 						if (afterAssessPositions > DRAW) {
 							cv.getMessageToView("There is possibility for draw!!!!");
 							break; // end of game
@@ -81,17 +85,22 @@ public class ChessController {
 							cv.getMessageToView("White wins!!!!!");
 							break; // end of game
 						}
+					} else {
+						System.out
+								.println("should not get here afterAssessPositions="
+										+ afterAssessPositions);
+						break;
 					}
 
-				} else if (afterCheck == CHECK_TO_CURRENT_SIDE) {
+				} else if (afterCheck == CHECK) {
 					cv.getMessageToView("Incorrect move - you are under check");
-					cm.restoreStateBeforeMove();
+					cm.restoreStateBeforeMove(afterTryingToMove);
 				}
 
 			} else if (afterTryingToMove < CORRECT_MOVE) {
 				switch (afterTryingToMove) {
 				case INCORRECT_INPUT:
-					cv.setMessage("incorrect input string");
+					cv.setMessage("switch: incorrect input string (should not get here)");
 					break;
 				case DONT_TOUCH_NOT_YOUR_FIGURE_TO_MOVE:
 					cv.setMessage("there is no " + mColors.get(currentOwner)

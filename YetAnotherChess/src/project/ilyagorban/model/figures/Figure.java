@@ -111,7 +111,7 @@ public abstract class Figure {
 	}
 
 	public String toLog() {
-		return getRank().toLog() + XY.xyToString(xy);
+		return getRank().toLog();
 	}
 
 	@Override
