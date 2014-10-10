@@ -13,8 +13,8 @@ public class King extends Figure implements MarkerRook, MarkerBishop {
 	}
 
 	@Override
-	public int checkIllegalMove(Figure[] board, int to, Figure f, boolean b) {
-		int output = super.checkIllegalMove(board, to, f, b);
+	public int checkIllegalMove(Figure[] board, int to, Figure f, int lf) {
+		int output = super.checkIllegalMove(board, to, f, lf);
 		if (output != INCORRECT_MOVE)
 			return output; // correct_move || obstacle_on_the_way ||
 							// incorrect_input

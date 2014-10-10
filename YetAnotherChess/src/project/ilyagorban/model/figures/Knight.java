@@ -16,7 +16,7 @@ public class Knight extends Figure {
 	}
 
 	@Override
-	public int checkIllegalMove(Figure[] board, int to, Figure f, boolean b) {
+	public int checkIllegalMove(Figure[] board, int to, Figure f, int lf) {
 		int from = this.getXY();
 		if (to > 63 || to < 0 || from == to)
 			return INCORRECT_INPUT;

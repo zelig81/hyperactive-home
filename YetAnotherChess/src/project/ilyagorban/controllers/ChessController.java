@@ -29,7 +29,7 @@ public class ChessController {
 				break; // end of game
 			if ("draw".equals(input)) {
 				String color = mColors.get(currentOwner);
-				// TODO could add draw check
+				// draw by agreement
 				String answer = cv
 						.getInput(color
 								+ " want a draw. Are you agree?(type 'yes' to agree, other answer is equals to no):");
@@ -66,8 +66,8 @@ public class ChessController {
 						}
 						break;
 					}
-					int afterAssessPositions = cm.assessPositions(afterCheck);
-					// TODO assessPositions
+					int afterAssessPositions = cm.assessPositions(afterCheck,
+							currentOwner);
 					if (afterAssessPositions >= CORRECT_MOVE
 							&& afterAssessPositions < GAME_ENDINGS) {
 

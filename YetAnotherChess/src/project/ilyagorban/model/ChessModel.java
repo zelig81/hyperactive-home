@@ -16,7 +16,6 @@ public class ChessModel {
 	public static final int PAWN_PROMOTION = 1;
 	public static final int CASTLING = 2;
 	public static final int EN_PASSANT = 3;
-	public static final int CHECK_TO_AWAITING_SIDE = 4;
 	public static final int GAME_ENDINGS = 100;
 	public static final int CHECKMATE_TO_WHITE = 101;
 	public static final int CHECKMATE_TO_BLACK = 102;
@@ -35,26 +34,101 @@ public class ChessModel {
 	}
 
 	private final Figure[] board = new Figure[64];
-	private final HashMap<Boolean, ArrayList<Figure>> hmFigures = new HashMap<>();
+	private final HashMap<Boolean, HashSet<Figure>> hmFigures = new HashMap<>();
 	private final HashMap<Boolean, Figure> kings = new HashMap<>();
 	private Figure lastMoved = null;
-	private boolean isLastMovedWasNotTouchedBefore = false;
+	private int lastFrom = 0;
 	private HashMap<Integer, ArrayList<Object>> savedState = new HashMap<>(3);
 	private int rule50Draw = 0;
-	private HashSet<String> rule3FoldSet = null;
+	private int movesCount = 0;
+	private final static int[][] pool = new int[][] { { 0, 1 }, { 1, 1 },
+			{ 1, 0 }, { -1, 1 }, { -1, 0 }, { -1, -1 }, { 0, -1 }, { 1, -1 } };
+	private HashSet<HashSet<String>> rule3FoldSet = null;
 	private ArrayList<String> movesLog = null;
-	private int rule3FoldCount = 0;
-	private int Rule3FoldPreviousLen = 0;
 
-	public int assessPositions(int returnMessage) {
-		// TODO assessPositions
+	public int assessPositions(int returnMessage, boolean currentOwner) {
+		int oppositeCheck = check(!currentOwner);
+		if (oppositeCheck != CHECK) {
+			if (rule50Draw >= 50)
+				returnMessage = DRAW_50_RULE;
+			if (movesCount - rule3FoldSet.size() >= 3)
+				returnMessage = DRAW_3_FOLD_REPETITION;
+			int wCount = hmFigures.get(WHITE).size();
+			int bCount = hmFigures.get(BLACK).size();
+			if (wCount * bCount == 1) {
+				returnMessage = DRAW_IMPOSSIBILITY_OF_MATE;
+			} else if (wCount * bCount == 2) {
+				boolean side = wCount == 2 ? WHITE : BLACK;
+				for (Figure fig : hmFigures.get(side)) {
+					int importance = fig.getRank().getImportance();
+					if (importance == 100)
+						continue;
+					if (importance == 1)
+						returnMessage = DRAW_IMPOSSIBILITY_OF_MATE;
+
+				}
+			} else {
+				// TODO unsufficient material for mate k+b/k+b on same color
+				int oddnessOfBishop = -1;
+				boolean correctness = true;
+				for (int i = 0; i < 2; i++) {
+					boolean side = i % 2 == 0 ? WHITE : BLACK;
+					for (Figure fig : hmFigures.get(side)) {
+						if (fig.equals(kings.get(side)) == true)
+							continue;
+						if (fig instanceof Bishop) {
+							if (oddnessOfBishop == -1) {
+								oddnessOfBishop = fig.getXY() % 2;
+								continue;
+							} else {
+								if (oddnessOfBishop == fig.getXY() % 2)
+									continue;
+							}
+						}
+						correctness = false;
+						break;
+					}
+					if (correctness == false) {
+						break;
+					}
+				}
+
+			}
+
+		}
+		if (returnMessage >= CORRECT_MOVE) {
+			Figure oppositeKing = kings.get(!currentOwner);
+			Figure ownKing = kings.get(currentOwner);
+			int xyOppKing = oppositeKing.getXY();
+			int xyOwnKing = ownKing.getXY();
+			int[] difXY = XY.getDifferenceXY(xyOppKing, xyOwnKing);
+			if (Math.abs(difXY[0]) == 1 && Math.abs(difXY[1]) == 1
+					|| Math.abs(difXY[0]) + Math.abs(difXY[1]) == 1)
+				return INCORRECT_MOVE;
+			for (int[] coord : pool) {
+				int illegalMoveResult = oppositeKing.checkIllegalMove(board,
+						XY.addToIndex(xyOppKing, coord[0], coord[1]),
+						lastMoved, lastFrom);
+				if (illegalMoveResult >= CORRECT_MOVE) {
+					int checkOnMove = check(!currentOwner);
+					if (checkOnMove != CHECK)
+						return CORRECT_MOVE;
+				}
+			}
+			if (oppositeCheck == CHECK) {
+				returnMessage = currentOwner == WHITE ? CHECKMATE_TO_BLACK
+						: CHECKMATE_TO_WHITE;
+			} else {
+				returnMessage = DRAW_STALEMATE;
+			}
+		}
 		return returnMessage;
 	}
 
 	public int check(boolean ownerUnderCheck) {
 		for (Figure fig : hmFigures.get(!ownerUnderCheck)) {
 			int result = fig.checkIllegalMove(board, kings.get(ownerUnderCheck)
-					.getXY(), lastMoved, true);
+					.getXY(), lastMoved, lastFrom);
 			if (result == CORRECT_MOVE) {
 				return CHECK;
 			}
@@ -82,8 +156,8 @@ public class ChessModel {
 	}
 
 	public boolean initializeGame() {
-		hmFigures.put(WHITE, new ArrayList<Figure>());
-		hmFigures.put(BLACK, new ArrayList<Figure>());
+		hmFigures.put(WHITE, new HashSet<Figure>());
+		hmFigures.put(BLACK, new HashSet<Figure>());
 		boolean result = Board.initializeGame(board, hmFigures, kings);
 		if (result == false)
 			return false;
@@ -185,12 +259,18 @@ public class ChessModel {
 		// add to 3 fold set check
 		if (rule3FoldSet == null)
 			rule3FoldSet = new HashSet<>();
-		rule3FoldSet.add(madeMove);
-		int len = rule3FoldSet.size();
-		if (Rule3FoldPreviousLen == len)
-			rule3FoldCount++;
-
+		HashSet<String> positions = new HashSet<>();
+		for (int i = 0; i < 2; i++) {
+			boolean color = i % 2 == 0;
+			for (Figure fig : hmFigures.get(color)) {
+				positions.add(fig.toLog() + XY.xyToString(fig.getXY()));
+			}
+		}
+		rule3FoldSet.add(positions);
 		// save lastmoved + its state
+		lastMoved = board[to];
+		lastFrom = from;
+		movesCount++;
 	}
 
 	public void saveStateBeforeMove(int result, int[] moves) {
@@ -233,7 +313,7 @@ public class ChessModel {
 
 		if (figFrom != null && figFrom.isEnemy(currentOwner) == false) {
 			int checkMove = figFrom.checkIllegalMove(board, to, lastMoved,
-					isLastMovedWasNotTouchedBefore);
+					lastFrom);
 
 			if (checkMove >= CORRECT_MOVE) {
 				saveStateBeforeMove(checkMove, moves);

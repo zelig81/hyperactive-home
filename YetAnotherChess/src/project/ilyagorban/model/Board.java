@@ -2,6 +2,7 @@ package project.ilyagorban.model;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 
 import project.ilyagorban.model.figures.*;
 
@@ -45,7 +46,7 @@ public class Board {
 	}
 
 	public static boolean initializeGame(Figure[] board,
-			HashMap<Boolean, ArrayList<Figure>> hmFigures,
+			HashMap<Boolean, HashSet<Figure>> hmFigures,
 			HashMap<Boolean, Figure> kings) {
 		if (board == null || hmFigures == null || kings == null)
 			return false;

@@ -13,7 +13,7 @@ public class Pawn extends Figure {
 
 	@Override
 	public int checkIllegalMove(Figure[] board, int to, Figure lastMoved,
-			boolean isLastMovedWasNotTouchedBefore) {
+			int lastFrom) {
 		int from = getXY();
 		if (to > 63 || to < 0 || from == to)
 			return INCORRECT_INPUT;
@@ -51,7 +51,8 @@ public class Pawn extends Figure {
 			if (y == rightEnpassantY) {
 				Figure victimOfEnpassant = board[XY.addToIndex(from, difXY[0],
 						0)];
-				if (victimOfEnpassant != null && isLastMovedWasNotTouchedBefore
+				if (victimOfEnpassant != null
+						&& (XY.getY(lastFrom) == 1 || XY.getY(lastFrom) == 6)
 						&& victimOfEnpassant.equals(lastMoved))
 					return EN_PASSANT;
 			}

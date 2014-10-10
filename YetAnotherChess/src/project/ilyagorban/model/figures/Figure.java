@@ -35,7 +35,7 @@ public abstract class Figure {
 	}
 
 	public int checkIllegalMove(Figure[] board, int to, Figure lastMoved,
-			boolean isLastMovedWasNotTouchedBefore) {
+			int lastFrom) {
 		int from = getXY();
 		if (to > 63 || to < 0 || from == to)
 			return INCORRECT_INPUT;
@@ -74,12 +74,22 @@ public abstract class Figure {
 		return output;
 	}
 
+	@Override
+	public boolean equals(Object obj) {
+		return this.xy == ((Figure) obj).xy;
+	}
+
 	public Rank getRank() {
 		return rank;
 	}
 
 	public int getXY() {
 		return xy;
+	}
+
+	@Override
+	public int hashCode() {
+		return this.xy;
 	}
 
 	public boolean isEnemy(boolean currentOwner) {
@@ -118,4 +128,5 @@ public abstract class Figure {
 	public String toString() {
 		return getRank().toString();
 	}
+
 }
