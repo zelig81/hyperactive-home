@@ -11,8 +11,9 @@ public class ChessView implements Visualizable {
 	}
 
 	public ChessView(String typeOfView) {
-		if (typeOfView == null)
+		if (typeOfView == null) {
 			throw new IllegalArgumentException("Wrong argument for ChessView constructor");
+		}
 		switch (typeOfView) {
 		case "console":
 			this.view = new ChessViewConsole();

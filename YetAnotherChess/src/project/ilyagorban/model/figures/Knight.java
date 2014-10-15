@@ -12,14 +12,15 @@ public class Knight extends Figure {
 
 	public Knight(int p, Rank r) {
 		super(p, r);
-		setKillLen(1);
+		this.setKillLen(1);
 	}
 
 	@Override
 	public int checkIllegalMove(Figure[] board, int to, Figure f, int lf) {
 		int from = this.getXY();
-		if (to > 63 || to < 0 || from == to)
+		if (to > 63 || to < 0 || from == to) {
 			return INCORRECT_INPUT;
+		}
 		Figure figTo = board[to];
 		if (figTo != null && figTo.isEnemy(this) == false) {
 			return OBSTACLE_ON_THE_WAY;

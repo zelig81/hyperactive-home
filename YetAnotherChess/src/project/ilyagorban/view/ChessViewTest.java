@@ -9,12 +9,8 @@ public class ChessViewTest implements Visualizable {
 
 	private int					move;
 
-	public ArrayList<String> getMoves() {
-		return moves;
-	}
-
 	public void addMove(String str) {
-		moves.add(str);
+		this.moves.add(str);
 	}
 
 	@Override
@@ -27,6 +23,14 @@ public class ChessViewTest implements Visualizable {
 
 	}
 
+	public ArrayList<String> getMoves() {
+		return this.moves;
+	}
+
+	public void resetMove() {
+		this.move = 0;
+	}
+
 	public void setInput(ArrayList<String> input) {
 		this.moves = input;
 	}
@@ -36,14 +40,10 @@ public class ChessViewTest implements Visualizable {
 
 	}
 
-	public void resetMove() {
-		this.move = 0;
-	}
-
 	@Override
 	public String showBoard(Figure[] figures, boolean currentOwner) {
-		String output = moves.get(move);
-		move++;
+		String output = this.moves.get(this.move);
+		this.move++;
 		return output;
 	}
 }

@@ -7,7 +7,7 @@ public class Rook extends Figure implements MarkerRook {
 
 	public Rook(int p, Rank r) {
 		super(p, r);
-		setKillLen(8);
+		this.setKillLen(8);
 	}
 
 }

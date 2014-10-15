@@ -48,23 +48,27 @@ public class Board {
 	public static boolean initializeGame(Figure[] board,
 			HashMap<Boolean, HashSet<Figure>> hmFigures,
 			HashMap<Boolean, Figure> kings) {
-		if (board == null || hmFigures == null || kings == null)
+		if (board == null || hmFigures == null || kings == null) {
 			return false;
+		}
 		for (String position : startGamePositions) {
 			Figure fig = Figures.newInstance(position);
-			if (fig == null)
+			if (fig == null) {
 				return false;
+			}
 			board[fig.getXY()] = fig;
 			boolean color = fig.getRank().getOwner();
 			hmFigures.get(color).add(fig);
 			if (fig instanceof King) {
-				if (kings.get(color) != null)
+				if (kings.get(color) != null) {
 					return false;
+				}
 				kings.put(color, fig);
 			}
 		}
-		if (kings.size() != 2)
+		if (kings.size() != 2) {
 			return false;
+		}
 		return true;
 	}
 }

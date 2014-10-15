@@ -27,13 +27,14 @@ public abstract class Figure {
 
 	protected Figure(int xy, Rank r) {
 		this.xy = xy;
-		setRank(r);
+		this.setRank(r);
 	}
 
 	public int checkIllegalMove(Figure[] board, int to, Figure lastMoved, int lastFrom) {
-		int from = getXY();
-		if (to > 63 || to < 0 || from == to)
+		int from = this.getXY();
+		if (to > 63 || to < 0 || from == to) {
 			return INCORRECT_INPUT;
+		}
 		Figure figTo = board[to];
 		if (figTo != null && figTo.isEnemy(this) == false) {
 			return OBSTACLE_ON_THE_WAY;
@@ -44,26 +45,29 @@ public abstract class Figure {
 		int output = INCORRECT_MOVE;
 		int jumpLength = 0;
 
-		if (this instanceof MarkerRook)
+		if (this instanceof MarkerRook) {
 			if (dx * dy == 0) {
 				output = CORRECT_MOVE;
 				jumpLength = dx + dy;
 			}
+		}
 
-		if (this instanceof MarkerBishop && output == INCORRECT_MOVE)
+		if (this instanceof MarkerBishop && output == INCORRECT_MOVE) {
 			if (Math.abs(dx) == Math.abs(dy)) {
 				output = CORRECT_MOVE;
 				jumpLength = Math.abs(dx);
 			}
+		}
 
 		if (output == CORRECT_MOVE) {
 			int dirX = dx / jumpLength;
 			int dirY = dy / jumpLength;
-			for (int i = 1; i < killLen || i < dx + dy; i++) {
+			for (int i = 1; i < this.killLen || i < dx + dy; i++) {
 				int newXY = XY.addToIndex(from, dirX * i, dirY * i);
 				Figure temp = board[newXY];
-				if (temp != null && newXY != to)
+				if (temp != null && newXY != to) {
 					return OBSTACLE_ON_THE_WAY;
+				}
 			}
 		}
 		return output;
@@ -75,11 +79,11 @@ public abstract class Figure {
 	}
 
 	public Rank getRank() {
-		return rank;
+		return this.rank;
 	}
 
 	public int getXY() {
-		return xy;
+		return this.xy;
 	}
 
 	@Override
@@ -88,15 +92,15 @@ public abstract class Figure {
 	}
 
 	public boolean isEnemy(boolean currentOwner) {
-		return getRank().getOwner() != currentOwner;
+		return this.getRank().getOwner() != currentOwner;
 	}
 
 	public boolean isEnemy(Figure fig) {
-		return getRank().getOwner() != fig.getRank().getOwner();
+		return this.getRank().getOwner() != fig.getRank().getOwner();
 	}
 
 	public boolean isTouched() {
-		return touched;
+		return this.touched;
 	}
 
 	void setKillLen(int killLen) {
@@ -116,12 +120,12 @@ public abstract class Figure {
 	}
 
 	public String toLog() {
-		return getRank().toLog();
+		return this.getRank().toLog();
 	}
 
 	@Override
 	public String toString() {
-		return getRank().toString();
+		return this.getRank().toString();
 	}
 
 }

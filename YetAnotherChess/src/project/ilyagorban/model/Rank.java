@@ -18,10 +18,19 @@ public enum Rank {
 
 	// ♔♕♖♗♘♙♚♛♜♝♞♟
 
-	private String	index;
+	public static Rank getRank(String s, boolean owner) {
+		for (Rank r : Rank.values()) {
+			if (r.index.equals(s) && r.owner == owner) {
+				return r;
+			}
+		}
+		return null;
+	}
 
+	private String	index;
 	private int		importance;
 	private String	picture;
+
 	private boolean	owner;
 
 	private Rank(int i, String s, boolean o, String c) {
@@ -31,32 +40,24 @@ public enum Rank {
 		this.index = s;
 	}
 
-	public static Rank getRank(String s, boolean owner) {
-		for (Rank r : Rank.values()) {
-			if (r.index.equals(s) && r.owner == owner)
-				return r;
-		}
-		return null;
-	}
-
 	public int getImportance() {
-		return importance;
+		return this.importance;
 	}
 
 	public String getIndex() {
-		return index;
+		return this.index;
 	}
 
 	public boolean getOwner() {
-		return owner;
+		return this.owner;
 	}
 
 	public String toLog() {
-		return (owner ? "w" : "b") + index;
+		return (this.owner ? "w" : "b") + this.index;
 	}
 
 	@Override
 	public String toString() {
-		return picture;
+		return this.picture;
 	}
 }

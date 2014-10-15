@@ -47,24 +47,28 @@ public class ChessModel {
 	private ArrayList<String>						movesLog							= null;
 
 	public int assessPositions(int returnMessage, boolean currentOwner) {
-		int oppositeCheck = check(!currentOwner);
+		int oppositeCheck = this.check(!currentOwner);
 		if (oppositeCheck != CHECK) {
-			if (rule50Draw >= 50)
+			if (this.rule50Draw >= 50) {
 				returnMessage = DRAW_50_RULE;
-			if (movesCount - rule3FoldSet.size() >= 3)
+			}
+			if (this.movesCount - this.rule3FoldSet.size() >= 3) {
 				returnMessage = DRAW_3_FOLD_REPETITION;
-			int wCount = hmFigures.get(WHITE).size();
-			int bCount = hmFigures.get(BLACK).size();
+			}
+			int wCount = this.hmFigures.get(WHITE).size();
+			int bCount = this.hmFigures.get(BLACK).size();
 			if (wCount * bCount == 1) {
 				returnMessage = DRAW_IMPOSSIBILITY_OF_MATE;
 			} else if (wCount * bCount == 2) {
 				boolean side = wCount == 2 ? WHITE : BLACK;
-				for (Figure fig : hmFigures.get(side)) {
+				for (Figure fig : this.hmFigures.get(side)) {
 					int importance = fig.getRank().getImportance();
-					if (importance == 100)
+					if (importance == 100) {
 						continue;
-					if (importance == 1)
+					}
+					if (importance == 1) {
 						returnMessage = DRAW_IMPOSSIBILITY_OF_MATE;
+					}
 
 				}
 			} else {
@@ -73,16 +77,18 @@ public class ChessModel {
 				boolean correctness = true;
 				for (int i = 0; i < 2; i++) {
 					boolean side = i % 2 == 0 ? WHITE : BLACK;
-					for (Figure fig : hmFigures.get(side)) {
-						if (fig.equals(kings.get(side)) == true)
+					for (Figure fig : this.hmFigures.get(side)) {
+						if (fig.equals(this.kings.get(side)) == true) {
 							continue;
+						}
 						if (fig instanceof Bishop) {
 							if (oddnessOfBishop == -1) {
 								oddnessOfBishop = fig.getXY() % 2;
 								continue;
 							} else {
-								if (oddnessOfBishop == fig.getXY() % 2)
+								if (oddnessOfBishop == fig.getXY() % 2) {
 									continue;
+								}
 							}
 						}
 						correctness = false;
@@ -97,23 +103,25 @@ public class ChessModel {
 
 		}
 		if (returnMessage >= CORRECT_MOVE) {
-			Figure oppositeKing = kings.get(!currentOwner);
-			Figure ownKing = kings.get(currentOwner);
+			Figure oppositeKing = this.kings.get(!currentOwner);
+			Figure ownKing = this.kings.get(currentOwner);
 			int xyOppKing = oppositeKing.getXY();
 			int xyOwnKing = ownKing.getXY();
 			int[] difXY = XY.getDifferenceXY(xyOppKing, xyOwnKing);
-			if (Math.abs(difXY[0]) == 1 && Math.abs(difXY[1]) == 1 || Math.abs(difXY[0]) + Math.abs(difXY[1]) == 1)
+			if (Math.abs(difXY[0]) == 1 && Math.abs(difXY[1]) == 1 || Math.abs(difXY[0]) + Math.abs(difXY[1]) == 1) {
 				return INCORRECT_MOVE;
+			}
 			for (int[] coord : pool) {
 				int illegalMoveResult =
-						oppositeKing.checkIllegalMove(board,
+						oppositeKing.checkIllegalMove(this.board,
 								XY.addToIndex(xyOppKing, coord[0], coord[1]),
-								lastMoved,
-								lastFrom);
+								this.lastMoved,
+								this.lastFrom);
 				if (illegalMoveResult >= CORRECT_MOVE) {
-					int checkOnMove = check(!currentOwner);
-					if (checkOnMove != CHECK)
+					int checkOnMove = this.check(!currentOwner);
+					if (checkOnMove != CHECK) {
 						return CORRECT_MOVE;
+					}
 				}
 			}
 			if (oppositeCheck == CHECK) {
@@ -126,8 +134,8 @@ public class ChessModel {
 	}
 
 	public int check(boolean ownerUnderCheck) {
-		for (Figure fig : hmFigures.get(!ownerUnderCheck)) {
-			int result = fig.checkIllegalMove(board, kings.get(ownerUnderCheck).getXY(), lastMoved, lastFrom);
+		for (Figure fig : this.hmFigures.get(!ownerUnderCheck)) {
+			int result = fig.checkIllegalMove(this.board, this.kings.get(ownerUnderCheck).getXY(), this.lastMoved, this.lastFrom);
 			if (result == CORRECT_MOVE) {
 				return CHECK;
 			}
@@ -137,29 +145,30 @@ public class ChessModel {
 	}
 
 	public int check(int[] moves, int afterTryingToMove, boolean currentOwner) {
-		int output = check(currentOwner);
+		int output = this.check(currentOwner);
 		if (output >= CORRECT_MOVE && afterTryingToMove == CASTLING) {
-			move(moves[1], moves[0]);
-			output = check(currentOwner);
+			this.move(moves[1], moves[0]);
+			output = this.check(currentOwner);
 			if (output >= CORRECT_MOVE) {
-				move(moves[0], (moves[0] + moves[1]) / 2);
-				output = check(currentOwner);
+				this.move(moves[0], (moves[0] + moves[1]) / 2);
+				output = this.check(currentOwner);
 			}
-			move(kings.get(currentOwner).getXY(), moves[1]);
+			this.move(this.kings.get(currentOwner).getXY(), moves[1]);
 		}
 		return output;
 	}
 
 	public Figure[] getBoard() {
-		return board;
+		return this.board;
 	}
 
 	public boolean initializeGame() {
-		hmFigures.put(WHITE, new HashSet<Figure>());
-		hmFigures.put(BLACK, new HashSet<Figure>());
-		boolean result = Board.initializeGame(board, hmFigures, kings);
-		if (result == false)
+		this.hmFigures.put(WHITE, new HashSet<Figure>());
+		this.hmFigures.put(BLACK, new HashSet<Figure>());
+		boolean result = Board.initializeGame(this.board, this.hmFigures, this.kings);
+		if (result == false) {
 			return false;
+		}
 		return true;
 	}
 
@@ -171,77 +180,79 @@ public class ChessModel {
 		int rookXY = XY.getIndexFromXY(xFrom, yFrom);
 		int rookXYFrom = XY.addToIndex(rookXY, dx, 0);
 		int rookXYTo = XY.addToIndex(rookXY, dx, 0);
-		move(moves[0], moves[1]);
-		move(rookXYFrom, rookXYTo);
+		this.move(moves[0], moves[1]);
+		this.move(rookXYFrom, rookXYTo);
 
-		rule50Draw++;
+		this.rule50Draw++;
 
 	}
 
 	public void makeCorrectMove(int[] moves) {
 		// possible move + possible take
-		Figure figTo = board[moves[1]];
-		if (board[moves[0]] instanceof Pawn)
-			rule50Draw = 0;
-		if (figTo != null) {
-			hmFigures.get(figTo.getRank().getOwner()).remove(figTo);
-			rule50Draw = 0;
+		Figure figTo = this.board[moves[1]];
+		if (this.board[moves[0]] instanceof Pawn) {
+			this.rule50Draw = 0;
 		}
-		move(moves[0], moves[1]);
+		if (figTo != null) {
+			this.hmFigures.get(figTo.getRank().getOwner()).remove(figTo);
+			this.rule50Draw = 0;
+		}
+		this.move(moves[0], moves[1]);
 
 	}
 
 	public void makeEnpassant(int[] moves) {
 		int[] difXY = XY.getDifferenceXY(moves[0], moves[1]);
-		Figure figEP = board[XY.addToIndex(moves[0], difXY[0], 0)];
-		hmFigures.get(figEP.getRank().getOwner()).remove(figEP);
-		rule50Draw = 0;
-		move(moves[0], moves[1]);
+		Figure figEP = this.board[XY.addToIndex(moves[0], difXY[0], 0)];
+		this.hmFigures.get(figEP.getRank().getOwner()).remove(figEP);
+		this.rule50Draw = 0;
+		this.move(moves[0], moves[1]);
 
 	}
 
 	private void move(int from, int to) {
-		Figure fig = board[from];
+		Figure fig = this.board[from];
 		fig.setXY(to);
-		board[to] = board[from];
-		board[from] = null;
+		this.board[to] = this.board[from];
+		this.board[from] = null;
 
 	}
 
 	public boolean promotePawn(int[] moves, String promotion) {
-		Figure pawn = board[moves[1]];
+		Figure pawn = this.board[moves[1]];
 		Rank gotRank = Rank.getRank(promotion, pawn.getRank().getOwner());
-		if (gotRank == null)
+		if (gotRank == null) {
 			return false;
-		else {
+		} else {
 			pawn.setRank(gotRank);
 			return true;
 		}
 	}
 
 	public void restoreStateBeforeMove(int afterTryingToMove) {
-		ArrayList<Object> list = savedState.get(afterTryingToMove);
-		rule50Draw = (Integer) list.get(0);
+		ArrayList<Object> list = this.savedState.get(afterTryingToMove);
+		this.rule50Draw = (Integer) list.get(0);
 		int[] moves;
 		switch (afterTryingToMove) {
 		case CASTLING:
 			moves = (int[]) list.get(1);
-			move(moves[1], moves[0]);
+			this.move(moves[1], moves[0]);
 			moves = (int[]) list.get(2);
-			move(moves[1], moves[0]);
+			this.move(moves[1], moves[0]);
 			break;
 		case EN_PASSANT:
 			moves = (int[]) list.get(1);
-			move(moves[1], moves[0]);
+			this.move(moves[1], moves[0]);
 			Figure removedPawn = (Figure) list.get(2);
-			board[removedPawn.getXY()] = removedPawn;
+			this.board[removedPawn.getXY()] = removedPawn;
 			break;
 		case CORRECT_MOVE:
 			moves = (int[]) list.get(1);
-			move(moves[1], moves[0]);
+			this.move(moves[1], moves[0]);
 			Figure removedFigure = (Figure) list.get(2);
-			if (removedFigure != null)
-				board[removedFigure.getXY()] = removedFigure;
+			if (removedFigure != null) {
+				this.board[removedFigure.getXY()] = removedFigure;
+			}
 			break;
 		}
 
@@ -249,31 +260,33 @@ public class ChessModel {
 
 	public void saveMove(int from, int to) {
 		// add to log;
-		if (movesLog == null)
-			movesLog = new ArrayList<>();
-		String madeMove = board[to].toLog() + XY.xyToString(from) + XY.xyToString(to);
-		movesLog.add(madeMove);
+		if (this.movesLog == null) {
+			this.movesLog = new ArrayList<>();
+		}
+		String madeMove = this.board[to].toLog() + XY.xyToString(from) + XY.xyToString(to);
+		this.movesLog.add(madeMove);
 
 		// add to 3 fold set check
-		if (rule3FoldSet == null)
-			rule3FoldSet = new HashSet<>();
+		if (this.rule3FoldSet == null) {
+			this.rule3FoldSet = new HashSet<>();
+		}
 		HashSet<String> positions = new HashSet<>();
 		for (int i = 0; i < 2; i++) {
 			boolean color = i % 2 == 0;
-			for (Figure fig : hmFigures.get(color)) {
+			for (Figure fig : this.hmFigures.get(color)) {
 				positions.add(fig.toLog() + XY.xyToString(fig.getXY()));
 			}
 		}
-		rule3FoldSet.add(positions);
+		this.rule3FoldSet.add(positions);
 		// save lastmoved + its state
-		lastMoved = board[to];
-		lastFrom = from;
-		movesCount++;
+		this.lastMoved = this.board[to];
+		this.lastFrom = from;
+		this.movesCount++;
 	}
 
 	public void saveStateBeforeMove(int result, int[] moves) {
 		ArrayList<Object> list = new ArrayList<>(3);
-		list.add(rule50Draw);
+		list.add(this.rule50Draw);
 		switch (result) {
 		case CASTLING:
 			int yFrom = XY.getY(moves[0]);
@@ -284,19 +297,19 @@ public class ChessModel {
 			int[] rookXYmoves = new int[] { XY.addToIndex(rookXY, dx, 0), XY.addToIndex(rookXY, dx, 0) };
 			list.add(moves);
 			list.add(rookXYmoves);
-			savedState.put(CASTLING, list);
+			this.savedState.put(CASTLING, list);
 			break;
 		case EN_PASSANT:
 			int[] difXY = XY.getDifferenceXY(moves[0], moves[1]);
 			list.add(moves);
-			list.add(board[XY.addToIndex(moves[0], difXY[0], 0)]);
-			savedState.put(EN_PASSANT, list);
+			list.add(this.board[XY.addToIndex(moves[0], difXY[0], 0)]);
+			this.savedState.put(EN_PASSANT, list);
 			break;
 		case CORRECT_MOVE:
-			Figure figTo = board[moves[1]];
+			Figure figTo = this.board[moves[1]];
 			list.add(moves);
 			list.add(figTo);
-			savedState.put(CORRECT_MOVE, list);
+			this.savedState.put(CORRECT_MOVE, list);
 			break;
 		default:
 		}
@@ -306,23 +319,23 @@ public class ChessModel {
 	public int tryToMove(int[] moves, boolean currentOwner) {
 		int from = moves[0];
 		int to = moves[1];
-		Figure figFrom = board[from];
+		Figure figFrom = this.board[from];
 
 		if (figFrom != null && figFrom.isEnemy(currentOwner) == false) {
-			int checkMove = figFrom.checkIllegalMove(board, to, lastMoved, lastFrom);
+			int checkMove = figFrom.checkIllegalMove(this.board, to, this.lastMoved, this.lastFrom);
 
 			if (checkMove >= CORRECT_MOVE) {
-				saveStateBeforeMove(checkMove, moves);
+				this.saveStateBeforeMove(checkMove, moves);
 				switch (checkMove) {
 				case PAWN_PROMOTION:
 				case CORRECT_MOVE:
-					makeCorrectMove(moves);
+					this.makeCorrectMove(moves);
 					break;
 				case CASTLING:
-					makeCastling(moves);
+					this.makeCastling(moves);
 					break;
 				case EN_PASSANT:
-					makeEnpassant(moves);
+					this.makeEnpassant(moves);
 					break;
 				}
 

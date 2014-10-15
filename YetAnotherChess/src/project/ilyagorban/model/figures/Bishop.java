@@ -7,7 +7,7 @@ public class Bishop extends Figure implements MarkerBishop {
 
 	public Bishop(int p, Rank r) {
 		super(p, r);
-		setKillLen(8);
+		this.setKillLen(8);
 	}
 
 }
