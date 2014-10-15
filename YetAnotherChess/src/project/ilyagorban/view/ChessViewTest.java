@@ -41,7 +41,7 @@ public class ChessViewTest implements Visualizable {
 	}
 	
 	@Override
-	public String showBoard(Figure[] figures, boolean currentOwner) {
+	public String showBoard(Figure[] figures, String currentOwner) {
 		String output = this.moves.get(this.move);
 		this.move++;
 		return output;

@@ -45,7 +45,7 @@ public class Board {
 		startGamePositions.add("bph7");
 	}
 	
-	public static boolean initializeGame(Figure[] board,
+	public static boolean doGameInitialize(Figure[] board,
 			HashMap<Boolean, HashSet<Figure>> hmFigures,
 			HashMap<Boolean, Figure> kings) {
 		if (board == null || hmFigures == null || kings == null) {

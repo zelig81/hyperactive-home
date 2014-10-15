@@ -2,9 +2,6 @@ package project.ilyagorban.test;
 
 import static org.junit.Assert.*;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-
 import org.junit.Test;
 
 import project.ilyagorban.model.XY;
@@ -106,11 +103,11 @@ public class TestXY {
 	}
 	
 	@Test
-	public void testXyToString() {
-		assertEquals("0/0 == a1", "a1", XY.xyToString(XY.getIndexFromXY(0, 0)));
-		assertEquals("3/4 == d5", "d5", XY.xyToString(XY.getIndexFromXY(3, 4)));
-		assertEquals("4/3 == e4", "e4", XY.xyToString(XY.getIndexFromXY(4, 3)));
-		assertEquals("7/7 == h8", "h8", XY.xyToString(XY.getIndexFromXY(7, 7)));
+	public void testToLog() {
+		assertEquals("0/0 == a1", "a1", XY.toLog(XY.getIndexFromXY(0, 0)));
+		assertEquals("3/4 == d5", "d5", XY.toLog(XY.getIndexFromXY(3, 4)));
+		assertEquals("4/3 == e4", "e4", XY.toLog(XY.getIndexFromXY(4, 3)));
+		assertEquals("7/7 == h8", "h8", XY.toLog(XY.getIndexFromXY(7, 7)));
 		
 	}
 	

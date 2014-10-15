@@ -10,6 +10,11 @@ import project.ilyagorban.model.XY;
 // ♘♞ figures
 public class Knight extends Figure {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7422622042398213694L;
+	
 	public Knight(int p, Rank r) {
 		super(p, r);
 		this.setKillLen(1);

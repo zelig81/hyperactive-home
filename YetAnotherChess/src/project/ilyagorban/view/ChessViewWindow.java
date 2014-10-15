@@ -20,7 +20,7 @@ public class ChessViewWindow implements Visualizable {
 	}
 	
 	@Override
-	public String showBoard(Figure[] figures, boolean currentOwner) {
+	public String showBoard(Figure[] figures, String currentOwner) {
 		return null;
 	}
 	

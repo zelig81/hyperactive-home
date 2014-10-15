@@ -1,13 +1,17 @@
 package project.ilyagorban.model;
 
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+
+import com.sun.org.apache.bcel.internal.generic.CASTORE;
 
 import project.ilyagorban.model.figures.*;
 
@@ -15,7 +19,7 @@ public class ChessModel implements Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 2L;
+	private static final long serialVersionUID = -9209278938654016535L;
 	public static final int CHECK = -7;
 	public static final int OBSTACLE_ON_THE_WAY = -6;
 	public static final int DONT_TOUCH_NOT_YOUR_FIGURE_TO_MOVE = -5;
@@ -41,19 +45,19 @@ public class ChessModel implements Serializable {
 		mColors.put(WHITE, "Whites");
 		mColors.put(BLACK, "Blacks");
 	}
+	private final static int[][] pool = new int[][] { { 0, 1 }, { 1, 1 }, { 1, 0 }, { -1, 1 },
+		{ -1, 0 }, { -1, -1 }, { 0, -1 }, { 1, -1 } };
 	
-	private final Figure[] board = new Figure[64];
-	private final HashMap<Boolean, HashSet<Figure>> hmFigures = new HashMap<>();
-	private final HashMap<Boolean, Figure> kings = new HashMap<>();
+	private Figure[] board = new Figure[64];
+	private HashMap<Boolean, HashSet<Figure>> hmFigures = new HashMap<>();
+	private HashMap<Boolean, Figure> kings = new HashMap<>();
 	private Figure lastMoved = null;
 	private int lastFrom = 0;
-	private HashMap<Integer, ArrayList<Object>> savedState = new HashMap<>(3);
 	private int rule50Draw = 0;
 	private int movesCount = 0;
-	private final static int[][] pool = new int[][] { { 0, 1 }, { 1, 1 }, { 1, 0 }, { -1, 1 },
-			{ -1, 0 }, { -1, -1 }, { 0, -1 }, { 1, -1 } };
 	private HashSet<HashSet<String>> rule3FoldSet = null;
 	private ArrayList<String> movesLog = null;
+	transient private HashMap<Integer, ArrayList<Object>> savedState = new HashMap<>(3);
 	
 	public int assessPositions(int returnMessage, boolean currentOwner) {
 		int oppositeCheck = this.check(!currentOwner);
@@ -61,7 +65,7 @@ public class ChessModel implements Serializable {
 			if (this.rule50Draw >= 50) {
 				returnMessage = DRAW_50_RULE;
 			}
-			if (this.movesCount - this.rule3FoldSet.size() >= 3) {
+			if (this.rule3FoldSet != null && this.movesCount - this.rule3FoldSet.size() >= 3) {
 				returnMessage = DRAW_3_FOLD_REPETITION;
 			}
 			int wCount = this.hmFigures.get(WHITE).size();
@@ -81,9 +85,8 @@ public class ChessModel implements Serializable {
 					
 				}
 			} else {
-				// TODO unsufficient material for mate k+b/k+b on same color
 				int oddnessOfBishop = -1;
-				boolean correctness = true;
+				boolean suiteToUnsufficientMaterialForMate = true;
 				for (int i = 0; i < 2; i++) {
 					boolean side = i % 2 == 0 ? WHITE : BLACK;
 					for (Figure fig : this.hmFigures.get(side)) {
@@ -100,14 +103,16 @@ public class ChessModel implements Serializable {
 								}
 							}
 						}
-						correctness = false;
+						suiteToUnsufficientMaterialForMate = false;
 						break;
 					}
-					if (correctness == false) {
+					if (suiteToUnsufficientMaterialForMate == false) {
 						break;
 					}
 				}
-				
+				if (suiteToUnsufficientMaterialForMate == true) {
+					returnMessage = DRAW_IMPOSSIBILITY_OF_MATE;
+				}
 			}
 			
 		}
@@ -136,9 +141,7 @@ public class ChessModel implements Serializable {
 			}
 			if (oppositeCheck == CHECK) {
 				returnMessage = currentOwner == WHITE ? CHECKMATE_TO_BLACK : CHECKMATE_TO_WHITE;
-			} else {
-				returnMessage = DRAW_STALEMATE;
-			}
+			} // TODO DRAW_STALEMATE check
 		}
 		return returnMessage;
 	}
@@ -154,8 +157,7 @@ public class ChessModel implements Serializable {
 				return CHECK;
 			}
 		}
-		
-		return 0;
+		return CORRECT_MOVE;
 	}
 	
 	public int check(int[] moves, int afterTryingToMove, boolean currentOwner) {
@@ -169,21 +171,103 @@ public class ChessModel implements Serializable {
 			}
 			this.move(this.kings.get(currentOwner).getXY(), moves[1]);
 		}
+		if (output >= CORRECT_MOVE) {
+			output = afterTryingToMove;
+		}
+		return output;
+	}
+	
+	public boolean doGameInitialize() {
+		this.hmFigures.put(WHITE, new HashSet<Figure>());
+		this.hmFigures.put(BLACK, new HashSet<Figure>());
+		boolean result = Board.doGameInitialize(this.board, this.hmFigures, this.kings);
+		if (result == false) {
+			return false;
+		}
+		return true;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public int doGameLoad(String fileName) {
+		FileInputStream fis = null;
+		ObjectInputStream ois = null;
+		int output = -1;
+		try {
+			fis = new FileInputStream("d:\\!Ilya\\programming\\" + fileName + ".ser");
+			ois = new ObjectInputStream(fis);
+			Object temp;
+			boolean currentOwner = ois.readBoolean();
+			System.out.println(currentOwner);
+			this.board = (Figure[]) ois.readObject();
+			temp = ois.readObject();
+			this.hmFigures = (temp != null) ? (HashMap<Boolean, HashSet<Figure>>) temp : null;
+			temp = ois.readObject();
+			this.kings = (temp != null) ? (HashMap<Boolean, Figure>) temp : null;
+			temp = ois.readObject();
+			this.lastMoved = (temp != null) ? (Figure) temp : null;
+			this.lastFrom = ois.readInt();
+			this.rule50Draw = ois.readInt();
+			this.movesCount = ois.readInt();
+			temp = ois.readObject();
+			this.rule3FoldSet = (temp != null) ? (HashSet<HashSet<String>>) temp : null;
+			temp = ois.readObject();
+			this.movesLog = (temp != null) ? (ArrayList<String>) temp : null;
+			output = (currentOwner == WHITE) ? 1 : 0;
+			
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ClassCastException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (ois != null) {
+					ois.close();
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		return output;
+	}
+	
+	public boolean doGameSave(boolean currentOwner, String fileName) {
+		FileOutputStream fos = null;
+		ObjectOutputStream oos = null;
+		boolean output = false;
+		try {
+			fos = new FileOutputStream("d:\\!Ilya\\programming\\" + fileName + ".ser");
+			oos = new ObjectOutputStream(fos);
+			oos.writeBoolean(currentOwner);
+			oos.writeObject(this.board);
+			oos.writeObject(this.hmFigures);
+			oos.writeObject(this.kings);
+			oos.writeObject(this.lastMoved);
+			oos.writeInt(this.lastFrom);
+			oos.writeInt(this.rule50Draw);
+			oos.writeInt(this.movesCount);
+			oos.writeObject(this.rule3FoldSet);
+			oos.writeObject(this.movesLog);
+			output = true;
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				oos.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
 		return output;
 	}
 	
 	public Figure[] getBoard() {
 		return this.board;
-	}
-	
-	public boolean initializeGame() {
-		this.hmFigures.put(WHITE, new HashSet<Figure>());
-		this.hmFigures.put(BLACK, new HashSet<Figure>());
-		boolean result = Board.initializeGame(this.board, this.hmFigures, this.kings);
-		if (result == false) {
-			return false;
-		}
-		return true;
 	}
 	
 	public void makeCastling(int[] moves) {
@@ -213,26 +297,6 @@ public class ChessModel implements Serializable {
 		}
 		this.move(moves[0], moves[1]);
 		
-	}
-	
-	public boolean makeDump(boolean currentOwner) {
-		FileOutputStream fos;
-		ObjectOutputStream oos;
-		boolean output = true;
-		try {
-			fos = new FileOutputStream("d:\\!Ilya\\programming\\dump.ser");
-			oos = new ObjectOutputStream(fos);
-			oos.writeBoolean(currentOwner);
-			oos.writeObject(this);
-			oos.close();
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-			output = false;
-		} catch (IOException e) {
-			e.printStackTrace();
-			output = false;
-		}
-		return output;
 	}
 	
 	public void makeEnpassant(int[] moves) {
@@ -297,7 +361,7 @@ public class ChessModel implements Serializable {
 		if (this.movesLog == null) {
 			this.movesLog = new ArrayList<>();
 		}
-		String madeMove = this.board[to].toLog() + XY.xyToString(from) + XY.xyToString(to);
+		String madeMove = this.board[to].toLog() + XY.toLog(from) + XY.toLog(to);
 		this.movesLog.add(madeMove);
 		
 		// add to 3 fold set check
@@ -308,7 +372,7 @@ public class ChessModel implements Serializable {
 		for (int i = 0; i < 2; i++) {
 			boolean color = i % 2 == 0;
 			for (Figure fig : this.hmFigures.get(color)) {
-				positions.add(fig.toLog() + XY.xyToString(fig.getXY()));
+				positions.add(fig.toLog() + XY.toLog(fig.getXY()));
 			}
 		}
 		this.rule3FoldSet.add(positions);

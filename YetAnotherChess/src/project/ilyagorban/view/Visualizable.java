@@ -10,6 +10,6 @@ public interface Visualizable {
 	
 	void setMessage(String message);
 	
-	String showBoard(Figure[] figures, boolean currentOwner);
+	String showBoard(Figure[] board, String string);
 	
 }

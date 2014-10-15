@@ -16,16 +16,17 @@ public class ChessController {
 	}
 	
 	public void start() {
-		boolean isStarted = this.cm.initializeGame();
+		boolean isStarted = this.cm.doGameInitialize();
 		if (isStarted == false) {
 			System.out.println("the game is not started");
 			return;
 		}
 		boolean currentOwner = WHITE;
 		while (true) {
-			String input = this.cv.showBoard(this.cm.getBoard(), currentOwner);
+			String input = this.cv.showBoard(this.cm.getBoard(), mColors.get(currentOwner));
 			
 			if ("exit".equals(input)) {
+				this.cv.getMessageToView("bye!!");
 				break; // end of game
 			} else if ("draw".equals(input)) {
 				String color = mColors.get(currentOwner);
@@ -34,14 +35,23 @@ public class ChessController {
 						this.cv.getInput(color
 								+ " want a draw. Are you agree?(type 'yes' to agree, other answer is equals to no):");
 				if (answer != null && answer.toLowerCase().equals("yes")) {
+					this.cv.getMessageToView("Draw by agreement");
 					break;
 				}
-			} else if ("dump".equals(input)) {
-				boolean result = this.cm.makeDump(currentOwner);
+			} else if ("save".equals(input.split(" ")[0])) {
+				boolean result = this.cm.doGameSave(currentOwner, input.split(" ")[1]);
 				if (result == false) {
-					this.cv.setMessage("could not make dump");
+					this.cv.getMessageToView("could not make dump");
 				} else {
-					this.cv.setMessage("dump has been made correctly");
+					this.cv.getMessageToView("dump has been made correctly");
+				}
+			} else if ("load".equals(input.split(" ")[0])) {
+				int result = this.cm.doGameLoad(input.split(" ")[1]);
+				if (result == -1) {
+					this.cv.getMessageToView("could not load this dump");
+				} else {
+					this.cv.getMessageToView("dump has been made correctly");
+					currentOwner = (result == 1) ? WHITE : BLACK;
 				}
 			} else {
 				
@@ -81,7 +91,8 @@ public class ChessController {
 							
 						} else if (afterAssessPositions > GAME_ENDINGS) {
 							if (afterAssessPositions > DRAW) {
-								this.cv.getMessageToView("There is possibility for draw!!!!");
+								this.cv.getMessageToView("There is possibility for draw with code "
+										+ afterAssessPositions); // TODO make draw reaction
 								break; // end of game
 							} else if (afterAssessPositions == CHECKMATE_TO_WHITE) {
 								this.cv.getMessageToView("Black wins!!!!!");

@@ -83,7 +83,7 @@ public class XY {
 		return getXYFromIndex(index)[1];
 	}
 	
-	public static String xyToString(int index) {
+	public static String toLog(int index) {
 		if (index < 0 || index > 63) {
 			return null;
 		} else {

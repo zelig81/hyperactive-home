@@ -56,7 +56,7 @@ public abstract class Figure implements Serializable {
 		if (this instanceof MarkerRook) {
 			if (dx * dy == 0) {
 				output = CORRECT_MOVE;
-				jumpLength = dx + dy;
+				jumpLength = Math.abs(dx + dy);
 			}
 		}
 		
@@ -70,7 +70,7 @@ public abstract class Figure implements Serializable {
 		if (output == CORRECT_MOVE) {
 			int dirX = dx / jumpLength;
 			int dirY = dy / jumpLength;
-			for (int i = 1; i < this.killLen || i < dx + dy; i++) {
+			for (int i = 1; i <= this.getKillLen() || i < jumpLength; i++) {
 				int newXY = XY.addToIndex(from, dirX * i, dirY * i);
 				Figure temp = board[newXY];
 				if (temp != null && newXY != to) {
@@ -84,6 +84,10 @@ public abstract class Figure implements Serializable {
 	@Override
 	public boolean equals(Object obj) {
 		return this.xy == ((Figure) obj).xy;
+	}
+	
+	public int getKillLen() {
+		return this.killLen;
 	}
 	
 	public Rank getRank() {

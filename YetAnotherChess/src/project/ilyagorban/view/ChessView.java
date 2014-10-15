@@ -50,7 +50,7 @@ public class ChessView implements Visualizable {
 	}
 	
 	@Override
-	public String showBoard(Figure[] figures, boolean currentOwner) {
+	public String showBoard(Figure[] figures, String currentOwner) {
 		return this.view.showBoard(figures, currentOwner);
 	}
 	

@@ -7,6 +7,11 @@ import static project.ilyagorban.model.ChessModel.*;
 // ♚♔ figures
 public class King extends Figure implements MarkerRook, MarkerBishop {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -85033431322851245L;
+	
 	public King(int p, Rank r) {
 		super(p, r);
 		this.setKillLen(1);
@@ -17,7 +22,7 @@ public class King extends Figure implements MarkerRook, MarkerBishop {
 		int output = super.checkIllegalMove(board, to, f, lf);
 		if (output != INCORRECT_MOVE) {
 			return output; // correct_move || obstacle_on_the_way ||
-						   // incorrect_input
+			// incorrect_input
 		}
 		
 		int from = this.getXY();

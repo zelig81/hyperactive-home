@@ -32,12 +32,8 @@ public class ChessViewConsole implements Visualizable {
 	// 2501 horizontal
 	// 2503 vertical
 	@Override
-	public String showBoard(Figure[] figures, boolean currentOwner) {
+	public String showBoard(Figure[] figures, String currentOwner) {
 		System.out.println("\n\n\n\n\n\n\n\n\n\n");
-		if (this.message != null) {
-			System.out.println(this.message);
-			this.message = null;
-		}
 		System.out.println("░|░A░| ░B░| ░C░| ░D░|░E░| ░F░| ░G░| ░H░|░");
 		// 8|▓♜▓|░♞░|▓♝▓|░♛░|▓♚▓|░♝░|▓♞▓|░♜░|
 		for (int y = 7; y >= 0; y--) {
@@ -55,6 +51,10 @@ public class ChessViewConsole implements Visualizable {
 			System.out.println(output);
 		}
 		System.out.println("░|░A░| ░B░| ░C░| ░D░|░E░| ░F░| ░G░| ░H░|░");
+		if (this.message != null) {
+			System.out.println(this.message);
+			this.message = null;
+		}
 		System.out.println(currentOwner
 				+ " your move (for example [e2e4]) or enter [exit] to quit the game:");
 		String input = this.sc.nextLine();
