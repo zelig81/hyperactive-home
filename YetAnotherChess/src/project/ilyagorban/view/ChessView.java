@@ -3,13 +3,13 @@ package project.ilyagorban.view;
 import project.ilyagorban.model.figures.Figure;
 
 public class ChessView implements Visualizable {
-
-	private Visualizable	view;
-
+	
+	private Visualizable view;
+	
 	public ChessView() {
 		this("console");
 	}
-
+	
 	public ChessView(String typeOfView) {
 		if (typeOfView == null) {
 			throw new IllegalArgumentException("Wrong argument for ChessView constructor");
@@ -28,30 +28,30 @@ public class ChessView implements Visualizable {
 			break;
 		}
 	}
-
+	
 	@Override
 	public String getInput(String string) {
 		return this.view.getInput(string);
 	}
-
+	
 	@Override
 	public void getMessageToView(String string) {
 		this.view.getMessageToView(string);
 	}
-
+	
 	public Visualizable getView() {
 		return this.view;
 	}
-
+	
 	@Override
 	public void setMessage(String message) {
 		this.view.setMessage(message);
-
+		
 	}
-
+	
 	@Override
 	public String showBoard(Figure[] figures, boolean currentOwner) {
 		return this.view.showBoard(figures, currentOwner);
 	}
-
+	
 }

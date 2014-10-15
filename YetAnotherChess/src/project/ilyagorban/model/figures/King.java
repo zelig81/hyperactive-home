@@ -6,21 +6,20 @@ import static project.ilyagorban.model.ChessModel.*;
 
 // ♚♔ figures
 public class King extends Figure implements MarkerRook, MarkerBishop {
-
+	
 	public King(int p, Rank r) {
 		super(p, r);
 		this.setKillLen(1);
 	}
-
+	
 	@Override
 	public int checkIllegalMove(Figure[] board, int to, Figure f, int lf) {
 		int output = super.checkIllegalMove(board, to, f, lf);
-		if (output != INCORRECT_MOVE)
-		 {
+		if (output != INCORRECT_MOVE) {
 			return output; // correct_move || obstacle_on_the_way ||
-							// incorrect_input
+						   // incorrect_input
 		}
-
+		
 		int from = this.getXY();
 		boolean isAbleToCastle = false;
 		if (this.isTouched() == false) {
@@ -41,7 +40,7 @@ public class King extends Figure implements MarkerRook, MarkerBishop {
 				}
 			}
 		}
-
+		
 		output = isAbleToCastle == true ? CASTLING : INCORRECT_MOVE;
 		return output;
 	}

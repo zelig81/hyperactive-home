@@ -6,28 +6,28 @@ import project.ilyagorban.model.XY;
 import project.ilyagorban.model.figures.Figure;
 
 public class ChessViewConsole implements Visualizable {
-	private final Scanner	sc	= new Scanner(System.in);
-	private String			message;
-
+	private final Scanner sc = new Scanner(System.in);
+	private String message;
+	
 	@Override
 	public String getInput(String string) {
 		System.out.println(string);
 		String result = this.sc.nextLine();
 		return result;
 	}
-
+	
 	@Override
 	public void getMessageToView(String string) {
 		System.out.println(string);
-
+		
 	}
-
+	
 	@Override
 	public void setMessage(String message) {
 		this.message = message;
-
+		
 	}
-
+	
 	// 254B cross
 	// 2501 horizontal
 	// 2503 vertical
@@ -55,9 +55,10 @@ public class ChessViewConsole implements Visualizable {
 			System.out.println(output);
 		}
 		System.out.println("░|░A░| ░B░| ░C░| ░D░|░E░| ░F░| ░G░| ░H░|░");
-		System.out.println(currentOwner + " your move (for example [e2e4]) or enter [exit] to quit the game:");
+		System.out.println(currentOwner
+				+ " your move (for example [e2e4]) or enter [exit] to quit the game:");
 		String input = this.sc.nextLine();
 		return input;
 	}
-
+	
 }

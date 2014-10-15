@@ -17,19 +17,19 @@ public class TestFigures extends Main {
 		System.out.println(3.5 + 0.5 * (-1));
 		System.out.println(3.5 + 0.5 * (1));
 	}
-
-	ChessViewTest	cvt;
-	Board			b;
-	Figure			fig;
-
-	ArrayList<XY>	pm;
-
+	
+	ChessViewTest cvt;
+	Board b;
+	Figure fig;
+	
+	ArrayList<XY> pm;
+	
 	@Before
 	public void setUp() throws Exception {
 		prepareGame("test");
 		this.cvt = (ChessViewTest) Main.cv.getView();
 	}
-
+	
 	@After
 	public void tearDown() throws Exception {
 		this.cvt = null;
@@ -37,7 +37,7 @@ public class TestFigures extends Main {
 		this.fig = null;
 		this.pm = null;
 	}
-
+	
 	@Test
 	public void testBishop() throws Exception {
 		this.setUp();
@@ -67,9 +67,9 @@ public class TestFigures extends Main {
 		// + b.getPossibleMoves(fig), b.getPossibleMoves(fig)
 		// .size(), 8);
 		this.tearDown();
-
+		
 	}
-
+	
 	@Test
 	public void testKing() throws Exception {
 		this.setUp();
@@ -94,7 +94,7 @@ public class TestFigures extends Main {
 		// + "] should be able to move for 3 squares. its get " + pm,
 		// pm.size(), 3);
 		this.tearDown();
-
+		
 		this.setUp();
 		this.cvt.addMove("e2e4");
 		this.cvt.addMove("e7e5");
@@ -138,7 +138,7 @@ public class TestFigures extends Main {
 		// + pm, pm.size(), 4);
 		this.tearDown();
 	}
-
+	
 	@Test
 	public void testKnight() throws Exception {
 		this.setUp();
@@ -160,7 +160,7 @@ public class TestFigures extends Main {
 		// + b.getPossibleMoves(fig), b.getPossibleMoves(fig)
 		// .size(), 2);
 		this.tearDown();
-
+		
 		this.setUp();
 		this.cvt.addMove("e2e4");
 		this.cvt.addMove("b8c6");
@@ -174,7 +174,7 @@ public class TestFigures extends Main {
 		// pm.size(), 5);
 		this.tearDown();
 	}
-
+	
 	@Test
 	public void testPawn() throws Exception {
 		this.setUp();
@@ -234,9 +234,9 @@ public class TestFigures extends Main {
 		// pm.size(), 3);
 		//
 		this.tearDown();
-
+		
 	}
-
+	
 	@Test
 	public void testQueen() throws Exception {
 		this.setUp();
@@ -259,9 +259,9 @@ public class TestFigures extends Main {
 		// + "] should be able to move for 14 squares. its get " + pm,
 		// pm.size(), 14);
 		this.tearDown();
-
+		
 	}
-
+	
 	@Test
 	public void testRook() throws Exception {
 		this.setUp();
@@ -301,7 +301,7 @@ public class TestFigures extends Main {
 		// pm.size(), 2);
 		//
 		this.tearDown();
-
+		
 	}
-
+	
 }

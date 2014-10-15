@@ -30,7 +30,7 @@ public class Figures {
 		default:
 			return null;
 		}
-
+		
 		Rank rank = Rank.getRank(aChar[1], owner);
 		if (rank == null) {
 			return null;
@@ -52,5 +52,5 @@ public class Figures {
 			return null;
 		}
 	}
-
+	
 }

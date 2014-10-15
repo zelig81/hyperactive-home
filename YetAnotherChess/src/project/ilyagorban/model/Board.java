@@ -7,8 +7,8 @@ import java.util.HashSet;
 import project.ilyagorban.model.figures.*;
 
 public class Board {
-	private static final ArrayList<String>	startGamePositions	= new ArrayList<>();
-
+	private static final ArrayList<String> startGamePositions = new ArrayList<>();
+	
 	static {
 		startGamePositions.add("wra1");
 		startGamePositions.add("wnb1");
@@ -26,7 +26,7 @@ public class Board {
 		startGamePositions.add("wpf2");
 		startGamePositions.add("wpg2");
 		startGamePositions.add("wph2");
-
+		
 		startGamePositions.add("bra8");
 		startGamePositions.add("bnb8");
 		startGamePositions.add("bbc8");
@@ -44,7 +44,7 @@ public class Board {
 		startGamePositions.add("bpg7");
 		startGamePositions.add("bph7");
 	}
-
+	
 	public static boolean initializeGame(Figure[] board,
 			HashMap<Boolean, HashSet<Figure>> hmFigures,
 			HashMap<Boolean, Figure> kings) {

@@ -9,12 +9,12 @@ import project.ilyagorban.model.XY;
 
 // ♘♞ figures
 public class Knight extends Figure {
-
+	
 	public Knight(int p, Rank r) {
 		super(p, r);
 		this.setKillLen(1);
 	}
-
+	
 	@Override
 	public int checkIllegalMove(Figure[] board, int to, Figure f, int lf) {
 		int from = this.getXY();
@@ -31,5 +31,5 @@ public class Knight extends Figure {
 		int output = Math.abs(dx) * Math.abs(dy) == 2 ? CORRECT_MOVE : INCORRECT_MOVE;
 		return output;
 	}
-
+	
 }
