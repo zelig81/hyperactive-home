@@ -6,15 +6,15 @@ import project.ilyagorban.view.Visualizable;
 import static project.ilyagorban.model.ChessModel.*;
 
 public class ChessController {
-
-	private final ChessModel	cm;
-	private final Visualizable	cv;
-
+	
+	private final ChessModel   cm;
+	private final Visualizable cv;
+	
 	public ChessController(ChessModel cm, Visualizable cv) {
 		this.cm = cm;
 		this.cv = cv;
 	}
-
+	
 	public void start() {
 		boolean isStarted = this.cm.initializeGame();
 		if (isStarted == false) {
@@ -24,12 +24,10 @@ public class ChessController {
 		boolean currentOwner = WHITE;
 		while (true) {
 			String input = this.cv.showBoard(this.cm.getBoard(), currentOwner);
-
-			if ("exit".equals(input))
-			 {
+			
+			if ("exit".equals(input)) {
 				break; // end of game
-			}
-			if ("draw".equals(input)) {
+			} else if ("draw".equals(input)) {
 				String color = mColors.get(currentOwner);
 				// draw by agreement
 				String answer =
@@ -39,13 +37,13 @@ public class ChessController {
 					break;
 				}
 			}
-
+			
 			int[] moves = XY.getIndicesfromInput(input);
 			if (moves == null) {
 				this.cv.setMessage("incorrect input string");
 				continue;
 			}
-
+			
 			int afterTryingToMove = this.cm.tryToMove(moves, currentOwner);
 			if (afterTryingToMove >= CORRECT_MOVE) {
 				int afterCheck = this.cm.check(moves, afterTryingToMove, currentOwner);
@@ -68,10 +66,10 @@ public class ChessController {
 					}
 					int afterAssessPositions = this.cm.assessPositions(afterCheck, currentOwner);
 					if (afterAssessPositions >= CORRECT_MOVE && afterAssessPositions < GAME_ENDINGS) {
-
+						
 						this.cm.saveMove(moves[0], moves[1]);
 						currentOwner = !currentOwner;
-
+						
 					} else if (afterAssessPositions > GAME_ENDINGS) {
 						if (afterAssessPositions > DRAW) {
 							this.cv.getMessageToView("There is possibility for draw!!!!");
@@ -84,22 +82,24 @@ public class ChessController {
 							break; // end of game
 						}
 					} else {
-						System.out.println("should not get here afterAssessPositions=" + afterAssessPositions);
+						System.out.println("should not get here afterAssessPositions="
+								+ afterAssessPositions);
 						break;
 					}
-
+					
 				} else if (afterCheck == CHECK) {
 					this.cv.getMessageToView("Incorrect move - you are under check");
 					this.cm.restoreStateBeforeMove(afterTryingToMove);
 				}
-
+				
 			} else if (afterTryingToMove < CORRECT_MOVE) {
 				switch (afterTryingToMove) {
 				case INCORRECT_INPUT:
 					this.cv.setMessage("switch: incorrect input string (should not get here)");
 					break;
 				case DONT_TOUCH_NOT_YOUR_FIGURE_TO_MOVE:
-					this.cv.setMessage("there is no " + mColors.get(currentOwner) + "'s figure on the start coordinate");
+					this.cv.setMessage("there is no " + mColors.get(currentOwner)
+							+ "'s figure on the start coordinate");
 					break;
 				case INCORRECT_MOVE:
 					this.cv.setMessage("incorrect move for this figure");
@@ -108,9 +108,10 @@ public class ChessController {
 					this.cv.setMessage("there is an unpassable obstacle on the end point of your move");
 					break;
 				default:
-					System.out.println("should not get here: afterTryingToMove=" + afterTryingToMove);
+					System.out.println("should not get here: afterTryingToMove="
+							+ afterTryingToMove);
 				}
-
+				
 			}
 		}
 	}
