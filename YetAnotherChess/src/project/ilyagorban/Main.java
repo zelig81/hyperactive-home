@@ -15,9 +15,9 @@ import project.ilyagorban.view.ChessView;
  */
 public class Main {
 
-	protected static ChessModel cm;
-	protected static ChessView cv;
-	protected static ChessController cc;
+	protected static ChessModel			cm;
+	protected static ChessView			cv;
+	protected static ChessController	cc;
 
 	public static void main(String[] args) {
 		prepareGame("console");

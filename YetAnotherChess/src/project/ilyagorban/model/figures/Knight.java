@@ -27,8 +27,7 @@ public class Knight extends Figure {
 		int[] difXY = XY.getDifferenceXY(from, to);
 		int dx = difXY[0];
 		int dy = difXY[1];
-		int output = Math.abs(dx) * Math.abs(dy) == 2 ? CORRECT_MOVE
-				: INCORRECT_MOVE;
+		int output = Math.abs(dx) * Math.abs(dy) == 2 ? CORRECT_MOVE : INCORRECT_MOVE;
 		return output;
 	}
 

@@ -7,7 +7,7 @@ import java.util.HashSet;
 import project.ilyagorban.model.figures.*;
 
 public class Board {
-	private static final ArrayList<String> startGamePositions = new ArrayList<>();
+	private static final ArrayList<String>	startGamePositions	= new ArrayList<>();
 
 	static {
 		startGamePositions.add("wra1");

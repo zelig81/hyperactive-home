@@ -5,9 +5,9 @@ import java.util.ArrayList;
 import project.ilyagorban.model.figures.Figure;
 
 public class ChessViewTest implements Visualizable {
-	private ArrayList<String> moves = new ArrayList<>();
+	private ArrayList<String>	moves	= new ArrayList<>();
 
-	private int move;
+	private int					move;
 
 	public ArrayList<String> getMoves() {
 		return moves;

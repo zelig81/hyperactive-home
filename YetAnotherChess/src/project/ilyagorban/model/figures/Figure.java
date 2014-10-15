@@ -13,29 +13,24 @@ import project.ilyagorban.model.XY;
  * 
  */
 public abstract class Figure {
-	private int xy;
-	private boolean touched;
-	private Rank rank;
-	private int killLen;
+	private int					xy;
+	private boolean				touched;
+	private Rank				rank;
+	private int					killLen;
 
-	public static final int[][] moveDirectionsOfBishop = new int[][] {
-			{ 1, 1 }, { 1, -1 }, { -1, -1 }, { -1, 1 } };
-	public static final int[][] moveDirectionsOfRook = new int[][] { { 0, 1 },
-			{ 0, -1 }, { 1, 0 }, { -1, 0 } };
-	public static final int[][] moveDirectionsOfQueen = new int[][] { { 1, 0 },
-			{ 1, 1 }, { 0, 1 }, { -1, 1 }, { -1, 0 }, { -1, -1 }, { 0, -1 },
-			{ 1, -1 } };
-	public static final int[][] moveDirectionsOfKnight = new int[][] {
-			{ 2, 1 }, { 2, -1 }, { -2, 1 }, { -2, -1 }, { 1, 2 }, { -1, 2 },
-			{ 1, -2 }, { -1, -2 } };
+	public static final int[][]	moveDirectionsOfBishop	= new int[][] { { 1, 1 }, { 1, -1 }, { -1, -1 }, { -1, 1 } };
+	public static final int[][]	moveDirectionsOfRook	= new int[][] { { 0, 1 }, { 0, -1 }, { 1, 0 }, { -1, 0 } };
+	public static final int[][]	moveDirectionsOfQueen	= new int[][] { { 1, 0 }, { 1, 1 }, { 0, 1 }, { -1, 1 },
+			{ -1, 0 }, { -1, -1 }, { 0, -1 }, { 1, -1 } };
+	public static final int[][]	moveDirectionsOfKnight	= new int[][] { { 2, 1 }, { 2, -1 }, { -2, 1 }, { -2, -1 },
+			{ 1, 2 }, { -1, 2 }, { 1, -2 }, { -1, -2 }	};
 
 	protected Figure(int xy, Rank r) {
 		this.xy = xy;
 		setRank(r);
 	}
 
-	public int checkIllegalMove(Figure[] board, int to, Figure lastMoved,
-			int lastFrom) {
+	public int checkIllegalMove(Figure[] board, int to, Figure lastMoved, int lastFrom) {
 		int from = getXY();
 		if (to > 63 || to < 0 || from == to)
 			return INCORRECT_INPUT;

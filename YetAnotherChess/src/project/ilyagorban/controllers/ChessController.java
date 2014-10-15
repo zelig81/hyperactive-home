@@ -7,8 +7,8 @@ import static project.ilyagorban.model.ChessModel.*;
 
 public class ChessController {
 
-	private final ChessModel cm;
-	private final Visualizable cv;
+	private final ChessModel	cm;
+	private final Visualizable	cv;
 
 	public ChessController(ChessModel cm, Visualizable cv) {
 		this.cm = cm;
@@ -30,8 +30,8 @@ public class ChessController {
 			if ("draw".equals(input)) {
 				String color = mColors.get(currentOwner);
 				// draw by agreement
-				String answer = cv
-						.getInput(color
+				String answer =
+						cv.getInput(color
 								+ " want a draw. Are you agree?(type 'yes' to agree, other answer is equals to no):");
 				if (answer != null && answer.toLowerCase().equals("yes"))
 					break;
@@ -45,31 +45,26 @@ public class ChessController {
 
 			int afterTryingToMove = cm.tryToMove(moves, currentOwner);
 			if (afterTryingToMove >= CORRECT_MOVE) {
-				int afterCheck = cm.check(moves, afterTryingToMove,
-						currentOwner);
+				int afterCheck = cm.check(moves, afterTryingToMove, currentOwner);
 				if (afterCheck >= CORRECT_MOVE) {
 					switch (afterCheck) {
 					case CASTLING:
-						cv.getMessageToView(mColors.get(currentOwner)
-								+ " made castling");
+						cv.getMessageToView(mColors.get(currentOwner) + " made castling");
 						break;
 					case EN_PASSANT:
-						cv.getMessageToView(mColors.get(currentOwner)
-								+ " made en passant");
+						cv.getMessageToView(mColors.get(currentOwner) + " made en passant");
 						break;
 					case PAWN_PROMOTION:
 						boolean success = false;
 						while (success == false) {
-							String promotion = cv
-									.getInput("Your pawn is ready to be promoted. To which figure you want to promote it (r)ook/k(n)ight/(b)ishop/(q)ueen?");
+							String promotion =
+									cv.getInput("Your pawn is ready to be promoted. To which figure you want to promote it (r)ook/k(n)ight/(b)ishop/(q)ueen?");
 							success = cm.promotePawn(moves, promotion);
 						}
 						break;
 					}
-					int afterAssessPositions = cm.assessPositions(afterCheck,
-							currentOwner);
-					if (afterAssessPositions >= CORRECT_MOVE
-							&& afterAssessPositions < GAME_ENDINGS) {
+					int afterAssessPositions = cm.assessPositions(afterCheck, currentOwner);
+					if (afterAssessPositions >= CORRECT_MOVE && afterAssessPositions < GAME_ENDINGS) {
 
 						cm.saveMove(moves[0], moves[1]);
 						currentOwner = !currentOwner;
@@ -86,9 +81,7 @@ public class ChessController {
 							break; // end of game
 						}
 					} else {
-						System.out
-								.println("should not get here afterAssessPositions="
-										+ afterAssessPositions);
+						System.out.println("should not get here afterAssessPositions=" + afterAssessPositions);
 						break;
 					}
 
@@ -103,8 +96,7 @@ public class ChessController {
 					cv.setMessage("switch: incorrect input string (should not get here)");
 					break;
 				case DONT_TOUCH_NOT_YOUR_FIGURE_TO_MOVE:
-					cv.setMessage("there is no " + mColors.get(currentOwner)
-							+ "'s figure on the start coordinate");
+					cv.setMessage("there is no " + mColors.get(currentOwner) + "'s figure on the start coordinate");
 					break;
 				case INCORRECT_MOVE:
 					cv.setMessage("incorrect move for this figure");
@@ -113,9 +105,7 @@ public class ChessController {
 					cv.setMessage("there is an unpassable obstacle on the end point of your move");
 					break;
 				default:
-					System.out
-							.println("should not get here: afterTryingToMove="
-									+ afterTryingToMove);
+					System.out.println("should not get here: afterTryingToMove=" + afterTryingToMove);
 				}
 
 			}

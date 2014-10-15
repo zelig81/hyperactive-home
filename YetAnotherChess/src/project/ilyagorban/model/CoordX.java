@@ -13,7 +13,7 @@ public enum CoordX {
 		return map.get(x);
 	}
 
-	private static HashMap<Integer, CoordX> map = new HashMap<>();
+	private static HashMap<Integer, CoordX>	map	= new HashMap<>();
 
 	static {
 		for (CoordX cX : CoordX.values()) {

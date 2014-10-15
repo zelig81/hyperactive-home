@@ -5,10 +5,10 @@ import static project.ilyagorban.model.ChessModel.*;
 import java.util.List;
 
 public class XY {
-	private static List<String> xRepresentations = Arrays.asList(new String[] {
-			"a", "b", "c", "d", "e", "f", "g", "h" });
-	private static List<String> yRepresentations = Arrays.asList(new String[] {
-			"1", "2", "3", "4", "5", "6", "7", "8" });
+	private static List<String>	xRepresentations	= Arrays.asList(new String[] { "a", "b", "c", "d", "e", "f", "g",
+			"h"									});
+	private static List<String>	yRepresentations	= Arrays.asList(new String[] { "1", "2", "3", "4", "5", "6", "7",
+			"8"									});
 
 	private XY() {
 	}
