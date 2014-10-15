@@ -25,13 +25,13 @@ public abstract class Figure implements Serializable {
 	private int killLen;
 	
 	public static final int[][] moveDirectionsOfBishop = new int[][] { { 1, 1 }, { 1, -1 },
-			{ -1, -1 }, { -1, 1 } };
+		{ -1, -1 }, { -1, 1 } };
 	public static final int[][] moveDirectionsOfRook = new int[][] { { 0, 1 }, { 0, -1 }, { 1, 0 },
-			{ -1, 0 } };
+		{ -1, 0 } };
 	public static final int[][] moveDirectionsOfQueen = new int[][] { { 1, 0 }, { 1, 1 }, { 0, 1 },
-			{ -1, 1 }, { -1, 0 }, { -1, -1 }, { 0, -1 }, { 1, -1 } };
+		{ -1, 1 }, { -1, 0 }, { -1, -1 }, { 0, -1 }, { 1, -1 } };
 	public static final int[][] moveDirectionsOfKnight = new int[][] { { 2, 1 }, { 2, -1 },
-			{ -2, 1 }, { -2, -1 }, { 1, 2 }, { -1, 2 }, { 1, -2 }, { -1, -2 } };
+		{ -2, 1 }, { -2, -1 }, { 1, 2 }, { -1, 2 }, { 1, -2 }, { -1, -2 } };
 	
 	protected Figure(int xy, Rank r) {
 		this.xy = xy;
@@ -72,6 +72,9 @@ public abstract class Figure implements Serializable {
 			int dirY = dy / jumpLength;
 			for (int i = 1; i <= this.getKillLen() || i < jumpLength; i++) {
 				int newXY = XY.addToIndex(from, dirX * i, dirY * i);
+				if (newXY == -1) {
+					continue;
+				}
 				Figure temp = board[newXY];
 				if (temp != null && newXY != to) {
 					return OBSTACLE_ON_THE_WAY;
