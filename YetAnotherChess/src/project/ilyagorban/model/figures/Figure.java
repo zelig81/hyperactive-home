@@ -5,6 +5,8 @@ package project.ilyagorban.model.figures;
 
 import static project.ilyagorban.model.ChessModel.*;
 
+import java.io.Serializable;
+
 import project.ilyagorban.model.Rank;
 import project.ilyagorban.model.XY;
 
@@ -12,24 +14,30 @@ import project.ilyagorban.model.XY;
  * @author ilya gorban
  * 
  */
-public abstract class Figure {
-	private int					xy;
-	private boolean				touched;
-	private Rank				rank;
-	private int					killLen;
-
-	public static final int[][]	moveDirectionsOfBishop	= new int[][] { { 1, 1 }, { 1, -1 }, { -1, -1 }, { -1, 1 } };
-	public static final int[][]	moveDirectionsOfRook	= new int[][] { { 0, 1 }, { 0, -1 }, { 1, 0 }, { -1, 0 } };
-	public static final int[][]	moveDirectionsOfQueen	= new int[][] { { 1, 0 }, { 1, 1 }, { 0, 1 }, { -1, 1 },
-			{ -1, 0 }, { -1, -1 }, { 0, -1 }, { 1, -1 } };
-	public static final int[][]	moveDirectionsOfKnight	= new int[][] { { 2, 1 }, { 2, -1 }, { -2, 1 }, { -2, -1 },
-			{ 1, 2 }, { -1, 2 }, { 1, -2 }, { -1, -2 }	};
-
+public abstract class Figure implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private int xy;
+	private boolean touched;
+	private Rank rank;
+	private int killLen;
+	
+	public static final int[][] moveDirectionsOfBishop = new int[][] { { 1, 1 }, { 1, -1 },
+			{ -1, -1 }, { -1, 1 } };
+	public static final int[][] moveDirectionsOfRook = new int[][] { { 0, 1 }, { 0, -1 }, { 1, 0 },
+			{ -1, 0 } };
+	public static final int[][] moveDirectionsOfQueen = new int[][] { { 1, 0 }, { 1, 1 }, { 0, 1 },
+			{ -1, 1 }, { -1, 0 }, { -1, -1 }, { 0, -1 }, { 1, -1 } };
+	public static final int[][] moveDirectionsOfKnight = new int[][] { { 2, 1 }, { 2, -1 },
+			{ -2, 1 }, { -2, -1 }, { 1, 2 }, { -1, 2 }, { 1, -2 }, { -1, -2 } };
+	
 	protected Figure(int xy, Rank r) {
 		this.xy = xy;
 		this.setRank(r);
 	}
-
+	
 	public int checkIllegalMove(Figure[] board, int to, Figure lastMoved, int lastFrom) {
 		int from = this.getXY();
 		if (to > 63 || to < 0 || from == to) {
@@ -44,21 +52,21 @@ public abstract class Figure {
 		int dy = difXY[1];
 		int output = INCORRECT_MOVE;
 		int jumpLength = 0;
-
+		
 		if (this instanceof MarkerRook) {
 			if (dx * dy == 0) {
 				output = CORRECT_MOVE;
 				jumpLength = dx + dy;
 			}
 		}
-
+		
 		if (this instanceof MarkerBishop && output == INCORRECT_MOVE) {
 			if (Math.abs(dx) == Math.abs(dy)) {
 				output = CORRECT_MOVE;
 				jumpLength = Math.abs(dx);
 			}
 		}
-
+		
 		if (output == CORRECT_MOVE) {
 			int dirX = dx / jumpLength;
 			int dirY = dy / jumpLength;
@@ -72,60 +80,60 @@ public abstract class Figure {
 		}
 		return output;
 	}
-
+	
 	@Override
 	public boolean equals(Object obj) {
 		return this.xy == ((Figure) obj).xy;
 	}
-
+	
 	public Rank getRank() {
 		return this.rank;
 	}
-
+	
 	public int getXY() {
 		return this.xy;
 	}
-
+	
 	@Override
 	public int hashCode() {
 		return this.xy;
 	}
-
+	
 	public boolean isEnemy(boolean currentOwner) {
 		return this.getRank().getOwner() != currentOwner;
 	}
-
+	
 	public boolean isEnemy(Figure fig) {
 		return this.getRank().getOwner() != fig.getRank().getOwner();
 	}
-
+	
 	public boolean isTouched() {
 		return this.touched;
 	}
-
+	
 	void setKillLen(int killLen) {
 		this.killLen = killLen;
 	}
-
+	
 	public void setRank(Rank rank) {
 		this.rank = rank;
 	}
-
+	
 	public void setTouched(boolean touched) {
 		this.touched = touched;
 	}
-
+	
 	public void setXY(int xy) {
 		this.xy = xy;
 	}
-
+	
 	public String toLog() {
 		return this.getRank().toLog();
 	}
-
+	
 	@Override
 	public String toString() {
 		return this.getRank().toString();
 	}
-
+	
 }
