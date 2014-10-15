@@ -4,13 +4,18 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 
 import project.ilyagorban.model.figures.*;
 
-public class ChessModel {
+public class ChessModel implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2L;
 	public static final int CHECK = -7;
 	public static final int OBSTACLE_ON_THE_WAY = -6;
 	public static final int DONT_TOUCH_NOT_YOUR_FIGURE_TO_MOVE = -5;
@@ -210,13 +215,14 @@ public class ChessModel {
 		
 	}
 	
-	public boolean makeDump() {
+	public boolean makeDump(boolean currentOwner) {
 		FileOutputStream fos;
 		ObjectOutputStream oos;
 		boolean output = true;
 		try {
 			fos = new FileOutputStream("d:\\!Ilya\\programming\\dump.ser");
 			oos = new ObjectOutputStream(fos);
+			oos.writeBoolean(currentOwner);
 			oos.writeObject(this);
 			oos.close();
 		} catch (FileNotFoundException e) {
