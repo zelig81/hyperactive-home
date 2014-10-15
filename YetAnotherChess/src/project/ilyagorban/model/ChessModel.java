@@ -11,15 +11,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 
-import com.sun.org.apache.bcel.internal.generic.CASTORE;
-
 import project.ilyagorban.model.figures.*;
 
 public class ChessModel implements Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -9209278938654016535L;
+	private static final long serialVersionUID = 2L;
 	public static final int CHECK = -7;
 	public static final int OBSTACLE_ON_THE_WAY = -6;
 	public static final int DONT_TOUCH_NOT_YOUR_FIGURE_TO_MOVE = -5;
@@ -46,7 +44,7 @@ public class ChessModel implements Serializable {
 		mColors.put(BLACK, "Blacks");
 	}
 	private final static int[][] pool = new int[][] { { 0, 1 }, { 1, 1 }, { 1, 0 }, { -1, 1 },
-		{ -1, 0 }, { -1, -1 }, { 0, -1 }, { 1, -1 } };
+			{ -1, 0 }, { -1, -1 }, { 0, -1 }, { 1, -1 } };
 	
 	private Figure[] board = new Figure[64];
 	private HashMap<Boolean, HashSet<Figure>> hmFigures = new HashMap<>();
@@ -271,6 +269,7 @@ public class ChessModel implements Serializable {
 	}
 	
 	public void makeCastling(int[] moves) {
+		// check for correctness of action has been made before
 		int yFrom = XY.getY(moves[0]);
 		boolean rightCastling = XY.getDifferenceXY(moves[0], moves[1])[0] > 0;
 		int xFrom = rightCastling == true ? 7 : 0;
@@ -301,8 +300,11 @@ public class ChessModel implements Serializable {
 	
 	public void makeEnpassant(int[] moves) {
 		int[] difXY = XY.getDifferenceXY(moves[0], moves[1]);
-		Figure figEP = this.board[XY.addToIndex(moves[0], difXY[0], 0)];
+		int xyOfRemoved = XY.addToIndex(moves[0], difXY[0], 0);
+		Figure figEP = this.board[xyOfRemoved];
+		System.out.println(figEP.toLog() + XY.toLog(xyOfRemoved)); // XXX remove
 		this.hmFigures.get(figEP.getRank().getOwner()).remove(figEP);
+		this.board[xyOfRemoved] = null;
 		this.rule50Draw = 0;
 		this.move(moves[0], moves[1]);
 		
@@ -392,6 +394,7 @@ public class ChessModel implements Serializable {
 			int xFrom = rightCastling == true ? 7 : 0;
 			int dx = rightCastling == true ? -2 : 3;
 			int rookXY = XY.getIndexFromXY(xFrom, yFrom);
+			// check for castling move correctness has been made before but not checking for been under check
 			int[] rookXYmoves =
 					new int[] { XY.addToIndex(rookXY, dx, 0), XY.addToIndex(rookXY, dx, 0) };
 			list.add(moves);
