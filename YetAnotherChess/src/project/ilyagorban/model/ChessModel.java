@@ -195,7 +195,6 @@ public class ChessModel implements Serializable {
 			ois = new ObjectInputStream(fis);
 			Object temp;
 			boolean currentOwner = ois.readBoolean();
-			System.out.println(currentOwner);
 			this.board = (Figure[]) ois.readObject();
 			temp = ois.readObject();
 			this.hmFigures = (temp != null) ? (HashMap<Boolean, HashSet<Figure>>) temp : null;
@@ -302,7 +301,6 @@ public class ChessModel implements Serializable {
 		int[] difXY = XY.getDifferenceXY(moves[0], moves[1]);
 		int xyOfRemoved = XY.addToIndex(moves[0], difXY[0], 0);
 		Figure figEP = this.board[xyOfRemoved];
-		System.out.println(figEP.toLog() + XY.toLog(xyOfRemoved)); // XXX remove
 		this.hmFigures.get(figEP.getRank().getOwner()).remove(figEP);
 		this.board[xyOfRemoved] = null;
 		this.rule50Draw = 0;

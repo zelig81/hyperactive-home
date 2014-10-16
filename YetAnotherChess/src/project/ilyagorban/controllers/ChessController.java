@@ -103,7 +103,7 @@ public class ChessController {
 							}
 						} else {
 							System.out.println("should not get here afterAssessPositions="
-									+ afterAssessPositions);
+									+ afterAssessPositions); // XXX remove
 							break;
 						}
 						
@@ -129,7 +129,7 @@ public class ChessController {
 						break;
 					default:
 						System.out.println("should not get here: afterTryingToMove="
-								+ afterTryingToMove);
+								+ afterTryingToMove); // XXX remove
 					}
 					
 				}
