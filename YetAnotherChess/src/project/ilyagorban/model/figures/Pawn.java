@@ -12,8 +12,8 @@ public class Pawn extends Figure {
 	 */
 	private static final long serialVersionUID = -8229158180905631041L;
 	
-	public Pawn(int xy, Rank r) {
-		super(xy, r);
+	public Pawn(int moveCount, int xy, Rank r) {
+		super(moveCount, xy, r);
 	}
 	
 	@Override
@@ -37,7 +37,7 @@ public class Pawn extends Figure {
 			// check in XY.addToIndex should not make problem because isTouched checking
 			boolean isMovingTwoSquare =
 					output != CORRECT_MOVE && this.isTouched() == false && difXY[1] * dirY == 2
-							&& figTo == null && board[XY.addToIndex(this.getXY(), 0, dirY)] == null;
+					&& figTo == null && board[XY.addToIndex(this.getXY(), 0, dirY)] == null;
 			if (isMovingTwoSquare) {
 				output = CORRECT_MOVE;
 			}

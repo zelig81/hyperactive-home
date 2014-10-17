@@ -23,19 +23,21 @@ public abstract class Figure implements Serializable {
 	private boolean touched;
 	private Rank rank;
 	private int killLen;
+	private int hashCode;
 	
 	public static final int[][] moveDirectionsOfBishop = new int[][] { { 1, 1 }, { 1, -1 },
-		{ -1, -1 }, { -1, 1 } };
+			{ -1, -1 }, { -1, 1 } };
 	public static final int[][] moveDirectionsOfRook = new int[][] { { 0, 1 }, { 0, -1 }, { 1, 0 },
-		{ -1, 0 } };
+			{ -1, 0 } };
 	public static final int[][] moveDirectionsOfQueen = new int[][] { { 1, 0 }, { 1, 1 }, { 0, 1 },
-		{ -1, 1 }, { -1, 0 }, { -1, -1 }, { 0, -1 }, { 1, -1 } };
+			{ -1, 1 }, { -1, 0 }, { -1, -1 }, { 0, -1 }, { 1, -1 } };
 	public static final int[][] moveDirectionsOfKnight = new int[][] { { 2, 1 }, { 2, -1 },
-		{ -2, 1 }, { -2, -1 }, { 1, 2 }, { -1, 2 }, { 1, -2 }, { -1, -2 } };
+			{ -2, 1 }, { -2, -1 }, { 1, 2 }, { -1, 2 }, { 1, -2 }, { -1, -2 } };
 	
-	protected Figure(int xy, Rank r) {
+	protected Figure(int moveCount, int xy, Rank r) {
 		this.xy = xy;
 		this.setRank(r);
+		this.hashCode = moveCount * 10000 + xy * 100 + r.getImportance();
 	}
 	
 	public int checkIllegalMove(Figure[] board, int to, Figure lastMoved, int lastFrom) {
@@ -90,7 +92,7 @@ public abstract class Figure implements Serializable {
 	
 	@Override
 	public boolean equals(Object obj) {
-		return this.xy == ((Figure) obj).xy;
+		return this.hashCode == ((Figure) obj).hashCode;
 	}
 	
 	public int getKillLen() {
@@ -107,7 +109,7 @@ public abstract class Figure implements Serializable {
 	
 	@Override
 	public int hashCode() {
-		return this.xy;
+		return this.hashCode;
 	}
 	
 	public boolean isEnemy(boolean currentOwner) {

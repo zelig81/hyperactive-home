@@ -10,7 +10,7 @@ import project.ilyagorban.model.figures.Rook;
 import static project.ilyagorban.model.ChessModel.*;
 
 public class Figures {
-	public static Figure newInstance(String startGamePosition) {
+	public static Figure newInstance(int moveCount, String startGamePosition) {
 		if (startGamePosition.length() != 4) {
 			return null;
 		}
@@ -37,17 +37,17 @@ public class Figures {
 		}
 		switch (aChar[1]) {
 		case "p":
-			return new Pawn(index, rank);
+			return new Pawn(moveCount, index, rank);
 		case "n":
-			return new Knight(index, rank);
+			return new Knight(moveCount, index, rank);
 		case "b":
-			return new Bishop(index, rank);
+			return new Bishop(moveCount, index, rank);
 		case "r":
-			return new Rook(index, rank);
+			return new Rook(moveCount, index, rank);
 		case "q":
-			return new Queen(index, rank);
+			return new Queen(moveCount, index, rank);
 		case "k":
-			return new King(index, rank);
+			return new King(moveCount, index, rank);
 		default:
 			return null;
 		}

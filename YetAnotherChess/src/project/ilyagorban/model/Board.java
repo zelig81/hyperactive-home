@@ -7,6 +7,33 @@ import java.util.HashSet;
 import project.ilyagorban.model.figures.*;
 
 public class Board {
+	public static boolean doGameInitialize(Figure[] board,
+			HashMap<Boolean, HashSet<Figure>> hmFigures,
+			HashMap<Boolean, Figure> kings) {
+		if (board == null || hmFigures == null || kings == null) {
+			return false;
+		}
+		for (String position : startGamePositions) {
+			Figure fig = Figures.newInstance(0, position);
+			if (fig == null) {
+				return false;
+			}
+			board[fig.getXY()] = fig;
+			boolean color = fig.getRank().getOwner();
+			hmFigures.get(color).add(fig);
+			if (fig instanceof King) {
+				if (kings.get(color) != null) {
+					return false;
+				}
+				kings.put(color, fig);
+			}
+		}
+		if (kings.size() != 2) {
+			return false;
+		}
+		return true;
+	}
+	
 	private static final ArrayList<String> startGamePositions = new ArrayList<>();
 	
 	static {
@@ -43,32 +70,5 @@ public class Board {
 		startGamePositions.add("bpf7");
 		startGamePositions.add("bpg7");
 		startGamePositions.add("bph7");
-	}
-	
-	public static boolean doGameInitialize(Figure[] board,
-			HashMap<Boolean, HashSet<Figure>> hmFigures,
-			HashMap<Boolean, Figure> kings) {
-		if (board == null || hmFigures == null || kings == null) {
-			return false;
-		}
-		for (String position : startGamePositions) {
-			Figure fig = Figures.newInstance(position);
-			if (fig == null) {
-				return false;
-			}
-			board[fig.getXY()] = fig;
-			boolean color = fig.getRank().getOwner();
-			hmFigures.get(color).add(fig);
-			if (fig instanceof King) {
-				if (kings.get(color) != null) {
-					return false;
-				}
-				kings.put(color, fig);
-			}
-		}
-		if (kings.size() != 2) {
-			return false;
-		}
-		return true;
 	}
 }

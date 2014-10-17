@@ -10,8 +10,8 @@ public class Bishop extends Figure implements MarkerBishop {
 	 */
 	private static final long serialVersionUID = -8943852294700306607L;
 	
-	public Bishop(int p, Rank r) {
-		super(p, r);
+	public Bishop(int moveCount, int p, Rank r) {
+		super(moveCount, p, r);
 		this.setKillLen(8);
 	}
 	

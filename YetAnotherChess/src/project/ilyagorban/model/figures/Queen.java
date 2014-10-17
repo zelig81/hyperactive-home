@@ -10,8 +10,8 @@ public class Queen extends Figure implements MarkerRook, MarkerBishop {
 	 */
 	private static final long serialVersionUID = 7510481219645793029L;
 	
-	public Queen(int p, Rank r) {
-		super(p, r);
+	public Queen(int moveCount, int p, Rank r) {
+		super(moveCount, p, r);
 		this.setKillLen(8);
 	}
 	

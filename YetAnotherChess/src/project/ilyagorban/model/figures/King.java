@@ -12,8 +12,8 @@ public class King extends Figure implements MarkerRook, MarkerBishop {
 	 */
 	private static final long serialVersionUID = -85033431322851245L;
 	
-	public King(int p, Rank r) {
-		super(p, r);
+	public King(int moveCount, int p, Rank r) {
+		super(moveCount, p, r);
 		this.setKillLen(1);
 	}
 	
