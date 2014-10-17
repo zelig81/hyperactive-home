@@ -14,6 +14,7 @@ public class Pawn extends Figure {
 	
 	public Pawn(int moveCount, int xy, Rank r) {
 		super(moveCount, xy, r);
+		this.setKillLen(1);
 	}
 	
 	@Override
@@ -37,7 +38,7 @@ public class Pawn extends Figure {
 			// check in XY.addToIndex should not make problem because isTouched checking
 			boolean isMovingTwoSquare =
 					output != CORRECT_MOVE && this.isTouched() == false && difXY[1] * dirY == 2
-					&& figTo == null && board[XY.addToIndex(this.getXY(), 0, dirY)] == null;
+							&& figTo == null && board[XY.addToIndex(this.getXY(), 0, dirY)] == null;
 			if (isMovingTwoSquare) {
 				output = CORRECT_MOVE;
 			}
