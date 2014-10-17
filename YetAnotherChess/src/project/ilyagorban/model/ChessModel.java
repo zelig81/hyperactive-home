@@ -44,7 +44,7 @@ public class ChessModel implements Serializable {
 		mColors.put(BLACK, "Blacks");
 	}
 	private final static int[][] pool = new int[][] { { 0, 1 }, { 1, 1 }, { 1, 0 }, { -1, 1 },
-			{ -1, 0 }, { -1, -1 }, { 0, -1 }, { 1, -1 } };
+		{ -1, 0 }, { -1, -1 }, { 0, -1 }, { 1, -1 } };
 	
 	private Figure[] board = new Figure[64];
 	private HashMap<Boolean, HashSet<Figure>> hmFigures = new HashMap<>();
@@ -55,7 +55,6 @@ public class ChessModel implements Serializable {
 	private int movesCount = 0;
 	private HashSet<HashSet<String>> rule3FoldSet = null;
 	private ArrayList<String> movesLog = null;
-	transient private HashMap<Integer, ArrayList<Object>> savedState = new HashMap<>(3);
 	
 	public ArrayList<Figure> assessCheckPossibilityAfterMoveTo(Figure fig, int to) {
 		int from = fig.getXY();
@@ -66,11 +65,11 @@ public class ChessModel implements Serializable {
 			int victimXY = this.lastMoved.getXY();
 			boolean isKillerPosition =
 					XY.getY(from) == killerEnpassantStartY
-					&& Math.abs(XY.getDifferenceXY(from, to)[0]) == 1
-					&& XY.getDifferenceXY(to, this.lastFrom)[0] == 0;
+							&& Math.abs(XY.getDifferenceXY(from, to)[0]) == 1
+							&& XY.getDifferenceXY(to, this.lastFrom)[0] == 0;
 			boolean isEnpassant =
 					isKillerPosition && XY.getY(this.lastFrom) == victimEnpassantStartY
-					&& XY.getDifferenceXY(this.lastFrom, victimXY)[0] == 0;
+							&& XY.getDifferenceXY(this.lastFrom, victimXY)[0] == 0;
 			if (isEnpassant == true) {
 				this.board[victimXY] = null;
 				this.move(from, to);
@@ -149,33 +148,27 @@ public class ChessModel implements Serializable {
 				}
 			}
 			
-		}
-		if (returnMessage >= CORRECT_MOVE) {
-			// checking condition if kings are on neighbor squares
-			Figure oppositeKing = this.kings.get(!currentOwner);
-			Figure ownKing = this.kings.get(currentOwner);
-			int xyOppKing = oppositeKing.getXY();
-			int xyOwnKing = ownKing.getXY();
-			int[] difXY = XY.getDifferenceXY(xyOppKing, xyOwnKing);
-			if (Math.abs(difXY[0]) == 1 && Math.abs(difXY[1]) == 1
-					|| Math.abs(difXY[0]) + Math.abs(difXY[1]) == 1) {
-				return INCORRECT_MOVE;
-			}
-			for (int[] coord : pool) {
-				int illegalMoveResult =
-						oppositeKing.checkIllegalMove(this.board,
-								XY.addToIndex(xyOppKing, coord[0], coord[1]),
-								this.lastMoved,
-								this.lastFrom);
-				if (illegalMoveResult >= CORRECT_MOVE) {
-					ArrayList<Figure> checkingFigures = this.check(!currentOwner);
-					if (checkingFigures.size() == 0) {
-						return CORRECT_MOVE;
+		} else { // case of check on other side
+			// TODO get check breaking squares
+			if (returnMessage >= CORRECT_MOVE) {
+				Figure oppositeKing = this.kings.get(!currentOwner);
+				int xyOppKing = oppositeKing.getXY();
+				for (int[] coord : pool) {
+					int illegalMoveResult =
+							oppositeKing.checkIllegalMove(this.board,
+									XY.addToIndex(xyOppKing, coord[0], coord[1]),
+									this.lastMoved,
+									this.lastFrom);
+					if (illegalMoveResult >= CORRECT_MOVE) {
+						checkingFigures = this.check(!currentOwner);
+						if (checkingFigures.size() == 0) {
+							return CORRECT_MOVE;
+						}
 					}
 				}
-			}
-			if (oppositeCheck == CHECK) {
-				returnMessage = currentOwner == WHITE ? CHECKMATE_TO_BLACK : CHECKMATE_TO_WHITE;
+				if (oppositeCheck == CHECK) {
+					returnMessage = currentOwner == WHITE ? CHECKMATE_TO_BLACK : CHECKMATE_TO_WHITE;
+				}
 			}
 		}
 		return returnMessage;
@@ -211,7 +204,7 @@ public class ChessModel implements Serializable {
 					if (checkingFigures.size() > 0) {
 						return CHECK;
 					} else {
-						return CORRECT_MOVE;
+						return CASTLING;
 					}
 				}
 			} else {
@@ -380,11 +373,16 @@ public class ChessModel implements Serializable {
 	
 	public boolean promotePawn(int[] moves, String promotion) {
 		Figure pawn = this.board[moves[1]];
-		Rank gotRank = Rank.getRank(promotion, pawn.getRank().getOwner());
+		boolean owner = pawn.getRank().getOwner();
+		Rank gotRank = Rank.getRank(promotion, owner);
 		if (gotRank == null) {
 			return false;
 		} else {
-			pawn.setRank(gotRank);
+			Figure promotedPawn =
+					Figures.newInstance(this.movesCount, gotRank.toLog() + XY.toLog(moves[1]));
+			this.hmFigures.get(owner).remove(pawn);
+			this.hmFigures.get(owner).add(promotedPawn);
+			this.board[moves[1]] = promotedPawn;
 			return true;
 		}
 	}
