@@ -64,7 +64,7 @@ public class ChessController {
 				int afterTryingToMove = this.cm.tryToMove(moves, currentOwner);
 				if (afterTryingToMove >= CORRECT_MOVE) {
 					// assess check possibility for current side after move
-					int afterCheck = this.cm.check(moves, afterTryingToMove);
+					int afterCheck = this.cm.assessCheckPossibility(moves, afterTryingToMove);
 					if (afterCheck >= CORRECT_MOVE) {
 						// make move
 						this.cm.makeMove(moves, afterCheck);
