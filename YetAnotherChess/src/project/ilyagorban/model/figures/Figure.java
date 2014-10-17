@@ -68,17 +68,21 @@ public abstract class Figure implements Serializable {
 		}
 		
 		if (output == CORRECT_MOVE) {
-			int dirX = dx / jumpLength;
-			int dirY = dy / jumpLength;
-			for (int i = 1; i <= this.getKillLen() || i < jumpLength; i++) {
-				int newXY = XY.addToIndex(from, dirX * i, dirY * i);
-				if (newXY == -1) {
-					continue;
+			if (jumpLength <= this.getKillLen()) {
+				int dirX = dx / jumpLength;
+				int dirY = dy / jumpLength;
+				for (int i = 1; i < jumpLength; i++) {
+					int newXY = XY.addToIndex(from, dirX * i, dirY * i);
+					if (newXY == -1) {
+						continue;
+					}
+					Figure temp = board[newXY];
+					if (temp != null && newXY != to) {
+						return OBSTACLE_ON_THE_WAY;
+					}
 				}
-				Figure temp = board[newXY];
-				if (temp != null && newXY != to) {
-					return OBSTACLE_ON_THE_WAY;
-				}
+			} else {
+				output = INCORRECT_MOVE;
 			}
 		}
 		return output;
