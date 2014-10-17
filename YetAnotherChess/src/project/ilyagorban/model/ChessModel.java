@@ -57,9 +57,45 @@ public class ChessModel implements Serializable {
 	private ArrayList<String> movesLog = null;
 	transient private HashMap<Integer, ArrayList<Object>> savedState = new HashMap<>(3);
 	
+	public ArrayList<Figure> assessCheckPossibilityAfterMoveTo(Figure fig, int to) {
+		int from = fig.getXY();
+		boolean figOwner = fig.getRank().getOwner();
+		if (fig instanceof Pawn && this.lastMoved instanceof Pawn) {
+			int killerEnpassantStartY = (figOwner == WHITE) ? 4 : 3;
+			int victimEnpassantStartY = (figOwner == WHITE) ? 6 : 1;
+			int victimXY = this.lastMoved.getXY();
+			boolean isKillerPosition =
+					XY.getY(from) == killerEnpassantStartY
+					&& Math.abs(XY.getDifferenceXY(from, to)[0]) == 1
+					&& XY.getDifferenceXY(to, this.lastFrom)[0] == 0;
+			boolean isEnpassant =
+					isKillerPosition && XY.getY(this.lastFrom) == victimEnpassantStartY
+					&& XY.getDifferenceXY(this.lastFrom, victimXY)[0] == 0;
+			if (isEnpassant == true) {
+				this.board[victimXY] = null;
+				this.move(from, to);
+				ArrayList<Figure> output = this.check(figOwner);
+				this.move(to, from);
+				this.board[victimXY] = this.lastMoved;
+				return output;
+			}
+			
+		}
+		
+		Figure figTo = this.board[to];
+		boolean wasFigTouched = fig.isTouched();
+		this.move(from, to);
+		ArrayList<Figure> output = this.check(figOwner);
+		this.move(to, from);
+		fig.setTouched(wasFigTouched);
+		this.board[to] = figTo;
+		return output;
+		
+	}
+	
 	public int assessPositions(int returnMessage, boolean currentOwner) {
-		int oppositeCheck = this.check(!currentOwner);
-		if (oppositeCheck != CHECK) {
+		ArrayList<Figure> checkingFigures = this.check(!currentOwner);
+		if (checkingFigures.size() == 0) {
 			if (this.rule50Draw >= 50) {
 				returnMessage = DRAW_50_RULE;
 			}
@@ -115,6 +151,7 @@ public class ChessModel implements Serializable {
 			
 		}
 		if (returnMessage >= CORRECT_MOVE) {
+			// checking condition if kings are on neighbor squares
 			Figure oppositeKing = this.kings.get(!currentOwner);
 			Figure ownKing = this.kings.get(currentOwner);
 			int xyOppKing = oppositeKing.getXY();
@@ -131,48 +168,56 @@ public class ChessModel implements Serializable {
 								this.lastMoved,
 								this.lastFrom);
 				if (illegalMoveResult >= CORRECT_MOVE) {
-					int checkOnMove = this.check(!currentOwner);
-					if (checkOnMove != CHECK) {
+					ArrayList<Figure> checkingFigures = this.check(!currentOwner);
+					if (checkingFigures.size() == 0) {
 						return CORRECT_MOVE;
 					}
 				}
 			}
 			if (oppositeCheck == CHECK) {
 				returnMessage = currentOwner == WHITE ? CHECKMATE_TO_BLACK : CHECKMATE_TO_WHITE;
-			} // TODO DRAW_STALEMATE check
+			}
 		}
 		return returnMessage;
 	}
 	
-	public int check(boolean ownerUnderCheck) {
+	public ArrayList<Figure> check(boolean ownerUnderCheck) {
+		ArrayList<Figure> output = new ArrayList<>();
+		int kingXY = this.kings.get(ownerUnderCheck).getXY();
 		for (Figure fig : this.hmFigures.get(!ownerUnderCheck)) {
-			int result =
-					fig.checkIllegalMove(this.board,
-							this.kings.get(ownerUnderCheck).getXY(),
-							this.lastMoved,
-							this.lastFrom);
+			int result = fig.checkIllegalMove(this.board, kingXY, this.lastMoved, this.lastFrom);
 			if (result == CORRECT_MOVE) {
-				return CHECK;
+				output.add(fig);
 			}
-		}
-		return CORRECT_MOVE;
-	}
-	
-	public int check(int[] moves, int afterTryingToMove, boolean currentOwner) {
-		int output = this.check(currentOwner);
-		if (output >= CORRECT_MOVE && afterTryingToMove == CASTLING) {
-			this.move(moves[1], moves[0]);
-			output = this.check(currentOwner);
-			if (output >= CORRECT_MOVE) {
-				this.move(moves[0], (moves[0] + moves[1]) / 2);
-				output = this.check(currentOwner);
-			}
-			this.move(this.kings.get(currentOwner).getXY(), moves[1]);
-		}
-		if (output >= CORRECT_MOVE) {
-			output = afterTryingToMove;
 		}
 		return output;
+	}
+	
+	public int check(int[] moves, int afterTryingToMove) {
+		Figure figFrom = this.board[moves[0]];
+		ArrayList<Figure> checkingFigures =
+				this.assessCheckPossibilityAfterMoveTo(figFrom, moves[1]);
+		if (checkingFigures.size() > 0) {
+			return CHECK;
+		} else {
+			if (afterTryingToMove == CASTLING) {
+				checkingFigures = this.assessCheckPossibilityAfterMoveTo(figFrom, moves[0]);
+				if (checkingFigures.size() > 0) {
+					return CHECK;
+				} else {
+					checkingFigures =
+							this.assessCheckPossibilityAfterMoveTo(figFrom,
+									(moves[0] + moves[1]) / 2);
+					if (checkingFigures.size() > 0) {
+						return CHECK;
+					} else {
+						return CORRECT_MOVE;
+					}
+				}
+			} else {
+				return afterTryingToMove;
+			}
+		}
 	}
 	
 	public boolean doGameInitialize() {
@@ -308,6 +353,23 @@ public class ChessModel implements Serializable {
 		
 	}
 	
+	public void makeMove(int[] moves, int afterCheck) {
+		if (afterCheck >= CORRECT_MOVE) {
+			switch (afterCheck) {
+			case PAWN_PROMOTION:
+			case CORRECT_MOVE:
+				this.makeCorrectMove(moves);
+				break;
+			case CASTLING:
+				this.makeCastling(moves);
+				break;
+			case EN_PASSANT:
+				this.makeEnpassant(moves);
+				break;
+			}
+		}
+	}
+	
 	private void move(int from, int to) {
 		Figure fig = this.board[from];
 		fig.setXY(to);
@@ -325,35 +387,6 @@ public class ChessModel implements Serializable {
 			pawn.setRank(gotRank);
 			return true;
 		}
-	}
-	
-	public void restoreStateBeforeMove(int afterTryingToMove) {
-		ArrayList<Object> list = this.savedState.get(afterTryingToMove);
-		this.rule50Draw = (Integer) list.get(0);
-		int[] moves;
-		switch (afterTryingToMove) {
-		case CASTLING:
-			moves = (int[]) list.get(1);
-			this.move(moves[1], moves[0]);
-			moves = (int[]) list.get(2);
-			this.move(moves[1], moves[0]);
-			break;
-		case EN_PASSANT:
-			moves = (int[]) list.get(1);
-			this.move(moves[1], moves[0]);
-			Figure removedPawn = (Figure) list.get(2);
-			this.board[removedPawn.getXY()] = removedPawn;
-			break;
-		case CORRECT_MOVE:
-			moves = (int[]) list.get(1);
-			this.move(moves[1], moves[0]);
-			Figure removedFigure = (Figure) list.get(2);
-			if (removedFigure != null) {
-				this.board[removedFigure.getXY()] = removedFigure;
-			}
-			break;
-		}
-		
 	}
 	
 	public void saveMove(int from, int to) {
@@ -382,69 +415,14 @@ public class ChessModel implements Serializable {
 		this.movesCount++;
 	}
 	
-	public void saveStateBeforeMove(int result, int[] moves) {
-		ArrayList<Object> list = new ArrayList<>(3);
-		list.add(this.rule50Draw);
-		switch (result) {
-		case CASTLING:
-			int yFrom = XY.getY(moves[0]);
-			boolean rightCastling = XY.getDifferenceXY(moves[0], moves[1])[0] > 0;
-			int xFrom = rightCastling == true ? 7 : 0;
-			int dx = rightCastling == true ? -2 : 3;
-			int rookXY = XY.getIndexFromXY(xFrom, yFrom);
-			// check for castling move correctness has been made before but not checking for been under check
-			int[] rookXYmoves =
-					new int[] { XY.addToIndex(rookXY, dx, 0), XY.addToIndex(rookXY, dx, 0) };
-			list.add(moves);
-			list.add(rookXYmoves);
-			this.savedState.put(CASTLING, list);
-			break;
-		case EN_PASSANT:
-			int[] difXY = XY.getDifferenceXY(moves[0], moves[1]);
-			list.add(moves);
-			list.add(this.board[XY.addToIndex(moves[0], difXY[0], 0)]);
-			this.savedState.put(EN_PASSANT, list);
-			break;
-		case CORRECT_MOVE:
-			Figure figTo = this.board[moves[1]];
-			list.add(moves);
-			list.add(figTo);
-			this.savedState.put(CORRECT_MOVE, list);
-			break;
-		default:
-		}
-		
-	}
-	
 	public int tryToMove(int[] moves, boolean currentOwner) {
-		int from = moves[0];
-		int to = moves[1];
-		Figure figFrom = this.board[from];
-		
+		Figure figFrom = this.board[moves[0]];
 		if (figFrom != null && figFrom.isEnemy(currentOwner) == false) {
-			int checkMove = figFrom.checkIllegalMove(this.board, to, this.lastMoved, this.lastFrom);
-			
-			if (checkMove >= CORRECT_MOVE) {
-				this.saveStateBeforeMove(checkMove, moves);
-				switch (checkMove) {
-				case PAWN_PROMOTION:
-				case CORRECT_MOVE:
-					this.makeCorrectMove(moves);
-					break;
-				case CASTLING:
-					this.makeCastling(moves);
-					break;
-				case EN_PASSANT:
-					this.makeEnpassant(moves);
-					break;
-				}
-				
-			}
+			int checkMove =
+					figFrom.checkIllegalMove(this.board, moves[1], this.lastMoved, this.lastFrom);
 			return checkMove;
-			
 		} else {
 			return DONT_TOUCH_NOT_YOUR_FIGURE_TO_MOVE;
 		}
-		
 	}
 }

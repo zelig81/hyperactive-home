@@ -50,7 +50,7 @@ public class ChessController {
 				if (result == -1) {
 					this.cv.getMessageToView("could not load this dump");
 				} else {
-					this.cv.getMessageToView("dump has been made correctly");
+					this.cv.getMessageToView("dump has been loaded correctly");
 					currentOwner = (result == 1) ? WHITE : BLACK;
 				}
 			} else {
@@ -60,11 +60,14 @@ public class ChessController {
 					this.cv.setMessage("incorrect input string");
 					continue;
 				}
-				
+				// assess if ongoing move is illegal
 				int afterTryingToMove = this.cm.tryToMove(moves, currentOwner);
 				if (afterTryingToMove >= CORRECT_MOVE) {
-					int afterCheck = this.cm.check(moves, afterTryingToMove, currentOwner);
+					// assess check possibility for current side after move
+					int afterCheck = this.cm.check(moves, afterTryingToMove);
 					if (afterCheck >= CORRECT_MOVE) {
+						// make move
+						this.cm.makeMove(moves, afterCheck);
 						switch (afterCheck) {
 						case CASTLING:
 							this.cv.getMessageToView(mColors.get(currentOwner) + " made castling");
@@ -81,6 +84,7 @@ public class ChessController {
 							}
 							break;
 						}
+						// assess positions on check/checkmate/draw to waiting side after correct move
 						int afterAssessPositions =
 								this.cm.assessPositions(afterCheck, currentOwner);
 						if (afterAssessPositions >= CORRECT_MOVE
@@ -109,7 +113,6 @@ public class ChessController {
 						
 					} else if (afterCheck == CHECK) {
 						this.cv.getMessageToView("Incorrect move - you are under check");
-						this.cm.restoreStateBeforeMove(afterTryingToMove);
 					}
 					
 				} else if (afterTryingToMove < CORRECT_MOVE) {
