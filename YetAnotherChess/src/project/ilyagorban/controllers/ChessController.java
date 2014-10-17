@@ -60,7 +60,7 @@ public class ChessController {
 					this.cv.setMessage("incorrect input string");
 					continue;
 				}
-				// assess if ongoing move is illegal
+				// assess if ongoing move is illegal without actual move
 				int afterTryingToMove = this.cm.tryToMove(moves, currentOwner);
 				if (afterTryingToMove >= CORRECT_MOVE) {
 					// assess check possibility for current side after move
