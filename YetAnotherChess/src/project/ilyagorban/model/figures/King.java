@@ -34,7 +34,7 @@ public class King extends Figure implements MarkerRook, MarkerBishop {
 				int y = XY.getY(from);
 				int rookX = dx < 0 ? 0 : 7;
 				Figure rook = board[XY.getIndexFromXY(rookX, y)];
-				if (rook.isTouched() == false) {
+				if (rook != null && rook.isTouched() == false) {
 					for (int i = xFrom + dx / 2; i != rookX; i = i + dx / 2) {
 						Figure temp = board[XY.getIndexFromXY(i, y)];
 						if (temp != null) {

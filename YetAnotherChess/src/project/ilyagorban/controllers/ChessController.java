@@ -70,10 +70,10 @@ public class ChessController {
 						this.cm.makeMove(moves, afterCheck);
 						switch (afterCheck) {
 						case CASTLING:
-							this.cv.getMessageToView(mColors.get(currentOwner) + " made castling");
+							this.cv.setMessage(mColors.get(currentOwner) + " made castling");
 							break;
 						case EN_PASSANT:
-							this.cv.getMessageToView(mColors.get(currentOwner) + " made en passant");
+							this.cv.setMessage(mColors.get(currentOwner) + " made en passant");
 							break;
 						case PAWN_PROMOTION:
 							boolean success = false;
@@ -112,7 +112,7 @@ public class ChessController {
 						}
 						
 					} else if (afterCheck == CHECK) {
-						this.cv.getMessageToView("Incorrect move - you are under check");
+						this.cv.setMessage("Incorrect move - you are under check");
 					}
 					
 				} else if (afterTryingToMove < CORRECT_MOVE) {

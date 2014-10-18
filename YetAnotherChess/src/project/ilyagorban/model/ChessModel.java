@@ -3,6 +3,7 @@ package project.ilyagorban.model;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -24,6 +25,7 @@ public class ChessModel implements Serializable {
 	public static final int INCORRECT_MOVE = -2;
 	public static final int INCORRECT_INPUT = -1;
 	public static final int CORRECT_MOVE = 0;
+	public static final int HAS_MOVES_OUT_OF_CHECK = 0;
 	public static final int PAWN_PROMOTION = 1;
 	public static final int CASTLING = 2;
 	public static final int EN_PASSANT = 3;
@@ -44,7 +46,7 @@ public class ChessModel implements Serializable {
 		mColors.put(BLACK, "Blacks");
 	}
 	private final static int[][] pool = new int[][] { { 0, 1 }, { 1, 1 }, { 1, 0 }, { -1, 1 },
-			{ -1, 0 }, { -1, -1 }, { 0, -1 }, { 1, -1 } };
+		{ -1, 0 }, { -1, -1 }, { 0, -1 }, { 1, -1 } };
 	
 	private Figure[] board = new Figure[64];
 	private HashMap<Boolean, HashSet<Figure>> hmFigures = new HashMap<>();
@@ -64,7 +66,7 @@ public class ChessModel implements Serializable {
 			return CHECK;
 		} else {
 			if (afterTryingToMove == CASTLING) {
-				checkingFigures = this.assessCheckPossibilityAfterMoveTo(figFrom, moves[0]);
+				checkingFigures = this.getCheckingFigures(figFrom.getRank().getOwner());
 				if (checkingFigures.size() > 0) {
 					return CHECK;
 				} else {
@@ -92,11 +94,11 @@ public class ChessModel implements Serializable {
 			int victimXY = this.lastMoved.getXY();
 			boolean isKillerPosition =
 					XY.getY(from) == killerEnpassantStartY
-					&& Math.abs(XY.getDifferenceXY(from, to)[0]) == 1
-					&& XY.getDifferenceXY(to, this.lastFrom)[0] == 0;
+							&& Math.abs(XY.getDifferenceXY(from, to)[0]) == 1
+							&& XY.getDifferenceXY(to, this.lastFrom)[0] == 0;
 			boolean isEnpassant =
 					isKillerPosition && XY.getY(this.lastFrom) == victimEnpassantStartY
-					&& XY.getDifferenceXY(this.lastFrom, victimXY)[0] == 0;
+							&& XY.getDifferenceXY(this.lastFrom, victimXY)[0] == 0;
 			if (isEnpassant == true) {
 				this.board[victimXY] = null;
 				this.move(from, to);
@@ -120,78 +122,138 @@ public class ChessModel implements Serializable {
 	}
 	
 	public int assessPositions(int returnMessage, boolean currentOwner) {
-		ArrayList<Figure> checkingFigures = this.getCheckingFigures(!currentOwner);
-		if (checkingFigures.size() == 0) {
-			if (this.rule50Draw >= 50) {
-				returnMessage = DRAW_50_RULE;
+		if (returnMessage < CORRECT_MOVE) {
+			return returnMessage;
+		}
+		// assessment of draw
+		if (this.rule50Draw >= 50) {
+			returnMessage = DRAW_50_RULE;
+		}
+		if (this.rule3FoldSet != null && this.movesCount - this.rule3FoldSet.size() >= 3) {
+			returnMessage = DRAW_3_FOLD_REPETITION;
+		}
+		int wCount = this.hmFigures.get(WHITE).size();
+		int bCount = this.hmFigures.get(BLACK).size();
+		if (wCount * bCount == 1) {
+			return DRAW_IMPOSSIBILITY_OF_MATE;
+		} else if (wCount * bCount == 2) {
+			boolean side = wCount == 2 ? WHITE : BLACK;
+			for (Figure fig : this.hmFigures.get(side)) {
+				int importance = fig.getRank().getImportance();
+				if (importance == 100) {
+					continue;
+				}
+				if (importance == 1) {
+					return DRAW_IMPOSSIBILITY_OF_MATE;
+				}
+				
 			}
-			if (this.rule3FoldSet != null && this.movesCount - this.rule3FoldSet.size() >= 3) {
-				returnMessage = DRAW_3_FOLD_REPETITION;
-			}
-			int wCount = this.hmFigures.get(WHITE).size();
-			int bCount = this.hmFigures.get(BLACK).size();
-			if (wCount * bCount == 1) {
-				returnMessage = DRAW_IMPOSSIBILITY_OF_MATE;
-			} else if (wCount * bCount == 2) {
-				boolean side = wCount == 2 ? WHITE : BLACK;
+		} else {
+			int oddnessOfBishop = -1;
+			boolean suiteToUnsufficientMaterialForMate = true;
+			for (int i = 0; i < 2; i++) {
+				boolean side = i % 2 == 0 ? WHITE : BLACK;
 				for (Figure fig : this.hmFigures.get(side)) {
-					int importance = fig.getRank().getImportance();
-					if (importance == 100) {
+					if (fig.equals(this.kings.get(side)) == true) {
 						continue;
 					}
-					if (importance == 1) {
-						returnMessage = DRAW_IMPOSSIBILITY_OF_MATE;
-					}
-					
-				}
-			} else {
-				int oddnessOfBishop = -1;
-				boolean suiteToUnsufficientMaterialForMate = true;
-				for (int i = 0; i < 2; i++) {
-					boolean side = i % 2 == 0 ? WHITE : BLACK;
-					for (Figure fig : this.hmFigures.get(side)) {
-						if (fig.equals(this.kings.get(side)) == true) {
+					if (fig instanceof Bishop) {
+						if (oddnessOfBishop == -1) {
+							oddnessOfBishop = fig.getXY() % 2;
 							continue;
-						}
-						if (fig instanceof Bishop) {
-							if (oddnessOfBishop == -1) {
-								oddnessOfBishop = fig.getXY() % 2;
+						} else {
+							if (oddnessOfBishop == fig.getXY() % 2) {
 								continue;
-							} else {
-								if (oddnessOfBishop == fig.getXY() % 2) {
-									continue;
-								}
 							}
 						}
-						suiteToUnsufficientMaterialForMate = false;
-						break;
 					}
-					if (suiteToUnsufficientMaterialForMate == false) {
-						break;
+					suiteToUnsufficientMaterialForMate = false;
+					break;
+				}
+				if (suiteToUnsufficientMaterialForMate == false) {
+					break;
+				}
+			}
+			if (suiteToUnsufficientMaterialForMate == true) {
+				return DRAW_IMPOSSIBILITY_OF_MATE;
+			}
+		}
+		
+		// assessment of mate
+		ArrayList<Figure> checkingFigures = this.getCheckingFigures(!currentOwner);
+		if (checkingFigures.size() > 0) {
+			// case of check on other side
+			ArrayList<Integer> checkBreakingSquares = null;
+			Figure oppositeKing = this.kings.get(!currentOwner);
+			int xyOppKing = oppositeKing.getXY();
+			int attackerXY = checkingFigures.get(0).getXY();
+			if (checkingFigures.size() == 1) {
+				checkBreakingSquares = this.getCheckBreakingSquares(checkingFigures.get(0));
+				int illegalMoveResult =
+						oppositeKing.checkIllegalMove(this.board,
+								attackerXY,
+								this.lastMoved,
+								this.lastFrom);
+				if (illegalMoveResult == CORRECT_MOVE) {
+					ArrayList<Figure> checkingFiguresAfterMove =
+							this.assessCheckPossibilityAfterMoveTo(oppositeKing, attackerXY);
+					if (checkingFiguresAfterMove.size() == 0) {
+						return HAS_MOVES_OUT_OF_CHECK;
 					}
 				}
-				if (suiteToUnsufficientMaterialForMate == true) {
-					returnMessage = DRAW_IMPOSSIBILITY_OF_MATE;
+			} else {
+				checkBreakingSquares = new ArrayList<>();
+				for (Figure fig : checkingFigures) {
+					ArrayList<Integer> temp = this.getCheckBreakingSquares(fig);
+					checkBreakingSquares.addAll(temp);
 				}
 			}
 			
-		} else { // case of check on other side
-			// TODO get check breaking squares
-			if (returnMessage >= CORRECT_MOVE) {
-				Figure oppositeKing = this.kings.get(!currentOwner);
-				int xyOppKing = oppositeKing.getXY();
-				for (int[] coord : pool) {
-					int illegalMoveResult =
-							oppositeKing.checkIllegalMove(this.board,
-									XY.addToIndex(xyOppKing, coord[0], coord[1]),
-									this.lastMoved,
-									this.lastFrom);
-					if (illegalMoveResult >= CORRECT_MOVE) {
-						checkingFigures = this.getCheckingFigures(!currentOwner);
+			for (int[] coord : pool) {
+				int to = XY.addToIndex(xyOppKing, coord[0], coord[1]);
+				int illegalMoveResult =
+						oppositeKing.checkIllegalMove(this.board, to, this.lastMoved, this.lastFrom);
+				if (illegalMoveResult >= CORRECT_MOVE) {
+					if (checkBreakingSquares.contains(to) == false) {
+						ArrayList<Figure> checkingFiguresAfterMove =
+								this.assessCheckPossibilityAfterMoveTo(oppositeKing, to);
+						if (checkingFiguresAfterMove.size() == 0) {
+							return HAS_MOVES_OUT_OF_CHECK;
+						}
 					}
 				}
-				returnMessage = currentOwner == WHITE ? CHECKMATE_TO_BLACK : CHECKMATE_TO_WHITE;
 			}
+			
+			if (checkingFigures.size() == 1) {
+				for (Figure fig : this.hmFigures.get(!currentOwner)) {
+					int illegalMoveResult =
+							fig.checkIllegalMove(this.board,
+									attackerXY,
+									this.lastMoved,
+									this.lastFrom);
+					if (illegalMoveResult == CORRECT_MOVE) {
+						ArrayList<Figure> checkingFiguresAfterMove =
+								this.assessCheckPossibilityAfterMoveTo(fig, attackerXY);
+						if (checkingFiguresAfterMove.size() == 0) {
+							return HAS_MOVES_OUT_OF_CHECK;
+						}
+					}
+					for (int xy : checkBreakingSquares) {
+						illegalMoveResult =
+								fig.checkIllegalMove(this.board, xy, this.lastMoved, this.lastFrom);
+						if (illegalMoveResult == CORRECT_MOVE) {
+							ArrayList<Figure> checkingFiguresAfterMove =
+									this.assessCheckPossibilityAfterMoveTo(fig, xy);
+							if (checkingFiguresAfterMove.size() == 0) {
+								return HAS_MOVES_OUT_OF_CHECK;
+							}
+						}
+					}
+				}
+			}
+			returnMessage = currentOwner == WHITE ? CHECKMATE_TO_BLACK : CHECKMATE_TO_WHITE;
+		} else {
+			// TODO tie check
 		}
 		return returnMessage;
 	}
@@ -255,6 +317,7 @@ public class ChessModel implements Serializable {
 	public boolean doGameSave(boolean currentOwner, String fileName) {
 		FileOutputStream fos = null;
 		ObjectOutputStream oos = null;
+		FileWriter fw = null;
 		boolean output = false;
 		try {
 			fos = new FileOutputStream("d:\\!Ilya\\programming\\" + fileName + ".ser");
@@ -269,6 +332,10 @@ public class ChessModel implements Serializable {
 			oos.writeInt(this.movesCount);
 			oos.writeObject(this.rule3FoldSet);
 			oos.writeObject(this.movesLog);
+			fw = new FileWriter("d:\\!Ilya\\programming\\" + fileName + ".log");
+			for (String move : this.movesLog) {
+				fw.write(move + "\n");
+			}
 			output = true;
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -277,6 +344,7 @@ public class ChessModel implements Serializable {
 		} finally {
 			try {
 				oos.close();
+				fw.close();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -291,7 +359,6 @@ public class ChessModel implements Serializable {
 	public ArrayList<Integer> getCheckBreakingSquares(Figure attackFig) {
 		ArrayList<Integer> output = new ArrayList<>();
 		int from = attackFig.getXY();
-		output.add(from);
 		if (attackFig.getKillLen() > 1) {
 			int kingXY = this.kings.get(!attackFig.getRank().getOwner()).getXY();
 			int[] difXY = XY.getDifferenceXY(from, kingXY);
@@ -324,7 +391,7 @@ public class ChessModel implements Serializable {
 		int kingXY = this.kings.get(ownerUnderCheck).getXY();
 		for (Figure fig : this.hmFigures.get(!ownerUnderCheck)) {
 			int result = fig.checkIllegalMove(this.board, kingXY, this.lastMoved, this.lastFrom);
-			if (result == CORRECT_MOVE) {
+			if (result >= CORRECT_MOVE) {
 				output.add(fig);
 			}
 		}
@@ -335,13 +402,16 @@ public class ChessModel implements Serializable {
 		// check for correctness of action has been made before
 		int yFrom = XY.getY(moves[0]);
 		boolean rightCastling = XY.getDifferenceXY(moves[0], moves[1])[0] > 0;
-		int xFrom = rightCastling == true ? 7 : 0;
+		int xRookFrom = rightCastling == true ? 7 : 0;
 		int dx = rightCastling == true ? -2 : 3;
-		int rookXY = XY.getIndexFromXY(xFrom, yFrom);
-		int rookXYFrom = XY.addToIndex(rookXY, dx, 0);
+		int rookXY = XY.getIndexFromXY(xRookFrom, yFrom);
+		Figure king = this.board[moves[0]];
+		king.setTouched(true);
+		Figure rook = this.board[rookXY];
+		rook.setTouched(true);
 		int rookXYTo = XY.addToIndex(rookXY, dx, 0);
 		this.move(moves[0], moves[1]);
-		this.move(rookXYFrom, rookXYTo);
+		this.move(rookXY, rookXYTo);
 		
 		this.rule50Draw++;
 		
@@ -350,11 +420,13 @@ public class ChessModel implements Serializable {
 	public void makeCorrectMove(int[] moves) {
 		// possible move + possible take
 		Figure figTo = this.board[moves[1]];
-		if (this.board[moves[0]] instanceof Pawn) {
+		Figure figFrom = this.board[moves[0]];
+		figFrom.setTouched(true);
+		if (figFrom instanceof Pawn) {
 			this.rule50Draw = 0;
 		}
 		if (figTo != null) {
-			this.hmFigures.get(figTo.getRank().getOwner()).remove(figTo);
+			(this.hmFigures.get(figTo.getRank().getOwner())).remove(figTo);
 			this.rule50Draw = 0;
 		}
 		this.move(moves[0], moves[1]);
