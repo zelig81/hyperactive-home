@@ -46,7 +46,7 @@ public class ChessModel implements Serializable {
 		mColors.put(BLACK, "Blacks");
 	}
 	private final static int[][] pool = new int[][] { { 0, 1 }, { 1, 1 }, { 1, 0 }, { -1, 1 },
-		{ -1, 0 }, { -1, -1 }, { 0, -1 }, { 1, -1 } };
+			{ -1, 0 }, { -1, -1 }, { 0, -1 }, { 1, -1 } };
 	
 	private Figure[] board = new Figure[64];
 	private HashMap<Boolean, HashSet<Figure>> hmFigures = new HashMap<>();
@@ -94,11 +94,11 @@ public class ChessModel implements Serializable {
 			int victimXY = this.lastMoved.getXY();
 			boolean isKillerPosition =
 					XY.getY(from) == killerEnpassantStartY
-							&& Math.abs(XY.getDifferenceXY(from, to)[0]) == 1
-							&& XY.getDifferenceXY(to, this.lastFrom)[0] == 0;
+					&& Math.abs(XY.getDifferenceXY(from, to)[0]) == 1
+					&& XY.getDifferenceXY(to, this.lastFrom)[0] == 0;
 			boolean isEnpassant =
 					isKillerPosition && XY.getY(this.lastFrom) == victimEnpassantStartY
-							&& XY.getDifferenceXY(this.lastFrom, victimXY)[0] == 0;
+					&& XY.getDifferenceXY(this.lastFrom, victimXY)[0] == 0;
 			if (isEnpassant == true) {
 				this.board[victimXY] = null;
 				this.move(from, to);
@@ -111,12 +111,16 @@ public class ChessModel implements Serializable {
 		}
 		
 		Figure figTo = this.board[to];
-		boolean wasFigTouched = fig.isTouched();
 		this.move(from, to);
+		if (figTo != null) {
+			this.hmFigures.get(!figOwner).remove(figTo);
+		}
 		ArrayList<Figure> output = this.getCheckingFigures(figOwner);
 		this.move(to, from);
-		fig.setTouched(wasFigTouched);
-		this.board[to] = figTo;
+		if (figTo != null) {
+			this.hmFigures.get(!figOwner).add(figTo);
+			this.board[to] = figTo;
+		}
 		return output;
 		
 	}
@@ -370,7 +374,7 @@ public class ChessModel implements Serializable {
 				}
 			}
 			if (jumpLen == 0 && attackFig instanceof MarkerRook) {
-				if (difXY[0] == 0 || difXY[1] == 1) {
+				if (difXY[0] == 0 || difXY[1] == 0) {
 					jumpLen = Math.abs(difXY[0] + difXY[1]);
 				}
 			}
