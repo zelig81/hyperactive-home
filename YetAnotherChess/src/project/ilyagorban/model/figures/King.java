@@ -29,14 +29,15 @@ public class King extends Figure implements MarkerRook, MarkerBishop {
 		boolean isAbleToCastle = false;
 		if (this.isTouched() == false) {
 			int xFrom = XY.getX(from);
+			int yFrom = XY.getY(from);
 			int dx = XY.getX(to) - xFrom;
-			if (Math.abs(dx) == 2) {
-				int y = XY.getY(from);
+			int dy = XY.getY(to) - yFrom;
+			if (Math.abs(dx) == 2 && dy == 0) {
 				int rookX = dx < 0 ? 0 : 7;
-				Figure rook = board[XY.getIndexFromXY(rookX, y)];
+				Figure rook = board[XY.getIndexFromXY(rookX, yFrom)];
 				if (rook != null && rook.isTouched() == false) {
 					for (int i = xFrom + dx / 2; i != rookX; i = i + dx / 2) {
-						Figure temp = board[XY.getIndexFromXY(i, y)];
+						Figure temp = board[XY.getIndexFromXY(i, yFrom)];
 						if (temp != null) {
 							return INCORRECT_MOVE;
 						}
