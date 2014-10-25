@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">A32</string>
-    <string name="hello_world">Hello world!</string>
-
+    <string name="app_name">A32 List of Purchases</string>
+    <string name="string_buttonA">Add to Purchases</string>
+    <string name="string_buttonS">Show Purchases</string>
+    <string name="string_buttonR">Reset List</string>
+    <string name="sAddButton">Add</string>
+    <string name="product_name_hint">Type product name</string>
+    <string name="count_hint">Type count (decimal number)</string>
 </resources>
