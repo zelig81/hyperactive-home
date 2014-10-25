@@ -56,15 +56,18 @@ public class MainActivity extends Activity {
 	protected void onPause() {
 		super.onPause();
 		this.sp = this.getApplicationContext().getSharedPreferences(pref_name, MODE_PRIVATE);
+		SharedPreferences.Editor editor = this.sp.edit();
 		if (this.passed == true) {
-			MainActivity.this.sp.edit().putBoolean("passed", true);
-			MainActivity.this.sp.edit().putString("nickname", this.sNickname);
-			MainActivity.this.sp.edit().putString("user", this.sUser);
-			MainActivity.this.sp.edit().putString("password", this.sPassword);
-			MainActivity.this.sp.edit().commit();
+			editor.putBoolean("passed", true);
+			editor.putString("nickname", this.sNickname);
+			editor.putString("user", this.sUser);
+			editor.putString("password", this.sPassword);
+			editor.commit();
+			Log.e("onPause passed", "test");
 		} else {
-			this.sp.edit().putBoolean("passed", false);
-			this.sp.edit().commit();
+			editor.putBoolean("passed", false);
+			editor.commit();
+			Log.e("onPause not passed", "test");
 		}
 
 	}
@@ -78,15 +81,21 @@ public class MainActivity extends Activity {
 			Log.e("onResume user", this.sp.getString("user", ""));
 		}
 
-		if (this.sp.contains("passed") && this.sp.getBoolean("passed", false) == true) {
-			Log.e("onResume after check", "test");
-			this.user = (EditText) this.findViewById(R.id.username);
-			this.user.setText(this.sp.getString("user", ""));
-			this.nickname = (EditText) this.findViewById(R.id.nickname);
-			this.nickname.setText(this.sp.getString("nickname", ""));
-			this.password = (EditText) this.findViewById(R.id.password);
-			this.password.setText(this.sp.getString("password", ""));
-			this.passed = true;
+		if (this.sp.contains("passed")) {
+			Log.e("onResume passed first check", "test");
+			if (this.sp.getBoolean("passed", false) == true) {
+				Log.e("onResume passed second check", "test");
+				this.user = (EditText) this.findViewById(R.id.username);
+				this.user.setText(this.sp.getString("user", ""));
+				this.nickname = (EditText) this.findViewById(R.id.nickname);
+				this.nickname.setText(this.sp.getString("nickname", ""));
+				this.password = (EditText) this.findViewById(R.id.password);
+				this.password.setText(this.sp.getString("password", ""));
+				this.passed = true;
+			}
+
+		} else {
+			Log.e("onResume not passed check", "test");
 
 		}
 	}
