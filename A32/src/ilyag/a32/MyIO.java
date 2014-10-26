@@ -11,11 +11,11 @@ import android.app.Activity;
 import android.util.Log;
 
 public class MyIO {
-
+	
 	@SuppressWarnings("unchecked")
 	public static HashMap<String, Integer> load(Activity act) {
 		HashMap<String, Integer> map = null;
-
+		
 		FileInputStream fis;
 		ObjectInputStream ois = null;
 		boolean success = false;
@@ -37,18 +37,20 @@ public class MyIO {
 				Log.e("troubles in closing stream in deserialization", e.getMessage());
 			}
 		}
-		if (success == false) {
+		if (success == false || map == null) {
 			map = new HashMap<>();
 		}
-
+		
 		return map;
 	}
-
+	
 	public static void save(Activity act, HashMap<String, Integer> map) {
 		FileOutputStream fos;
 		ObjectOutputStream oos = null;
 		try {
-			fos = act.getApplicationContext().openFileOutput("my_filename.ser", Activity.MODE_PRIVATE);
+			fos =
+					act.getApplicationContext().openFileOutput("my_filename.ser",
+							Activity.MODE_PRIVATE);
 			oos = new ObjectOutputStream(fos);
 			oos.writeObject(map);
 		} catch (IOException e) {
@@ -62,5 +64,5 @@ public class MyIO {
 			}
 		}
 	}
-
+	
 }

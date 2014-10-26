@@ -11,12 +11,12 @@ import android.app.Activity;
 import android.os.Bundle;
 
 public class MainActivity extends Activity {
-	EditText			nickname, user, password;
-	static String		pref_name	= "my_pref_name";
-	SharedPreferences	sp;
-	boolean				passed		= false;
-	String				sUser, sPassword, sNickname;
-
+	EditText nickname, user, password;
+	static String pref_name = "my_pref_name";
+	SharedPreferences sp;
+	boolean passed = false;
+	String sUser, sPassword, sNickname;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -26,13 +26,14 @@ public class MainActivity extends Activity {
 		this.password = (EditText) this.findViewById(R.id.password);
 		this.nickname = (EditText) this.findViewById(R.id.nickname);
 		b.setOnClickListener(new View.OnClickListener() {
-
+			
 			@Override
 			public void onClick(View v) {
 				MainActivity.this.sUser = MainActivity.this.user.getText().toString();
 				MainActivity.this.sPassword = MainActivity.this.password.getText().toString();
 				MainActivity.this.sNickname = MainActivity.this.nickname.getText().toString();
-				if ("AdminLior".equals(MainActivity.this.sUser) && "AdminLior".equals(MainActivity.this.sPassword)) {
+				if ("AdminLior".equals(MainActivity.this.sUser)
+						&& "AdminLior".equals(MainActivity.this.sPassword)) {
 					MainActivity.this.passed = true;
 					Intent intent = new Intent(MainActivity.this, HelloKittyActivity.class);
 					intent.putExtra("nickname", MainActivity.this.sNickname);
@@ -41,17 +42,18 @@ public class MainActivity extends Activity {
 					MainActivity.this.passed = false;
 					Toast t =
 							Toast.makeText(MainActivity.this.getApplicationContext(),
-									"You typed wrong username/password my dear " + MainActivity.this.sNickname
-											+ ". its were " + MainActivity.this.sUser + "/"
+									"You typed wrong username/password my dear "
+											+ MainActivity.this.sNickname + ". its were "
+											+ MainActivity.this.sUser + "/"
 											+ MainActivity.this.sPassword,
 									Toast.LENGTH_LONG);
 					t.show();
 				}
-
+				
 			}
 		});
 	}
-
+	
 	@Override
 	protected void onPause() {
 		super.onPause();
@@ -69,9 +71,9 @@ public class MainActivity extends Activity {
 			editor.commit();
 			Log.e("onPause not passed", "test");
 		}
-
+		
 	}
-
+	
 	@Override
 	protected void onResume() {
 		super.onResume();
@@ -80,7 +82,7 @@ public class MainActivity extends Activity {
 		if (this.sp.contains("user")) {
 			Log.e("onResume user", this.sp.getString("user", ""));
 		}
-
+		
 		if (this.sp.contains("passed")) {
 			Log.e("onResume passed first check", "test");
 			if (this.sp.getBoolean("passed", false) == true) {
@@ -93,11 +95,11 @@ public class MainActivity extends Activity {
 				this.password.setText(this.sp.getString("password", ""));
 				this.passed = true;
 			}
-
+			
 		} else {
 			Log.e("onResume not passed check", "test");
-
+			
 		}
 	}
-
+	
 }
