@@ -8,6 +8,8 @@ import java.io.ObjectOutputStream;
 import java.util.HashMap;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.util.Log;
 
 public class MyIO {
@@ -15,6 +17,13 @@ public class MyIO {
 	@SuppressWarnings("unchecked")
 	public static HashMap<String, Integer> load(Activity act) {
 		HashMap<String, Integer> map = null;
+		
+		SharedPreferences sp = act.getSharedPreferences("my_prefs", Context.MODE_PRIVATE);
+		if (!sp.contains("initialized")) {
+			map = new HashMap<>();
+			save(act, map);
+			return map;
+		}
 		
 		FileInputStream fis;
 		ObjectInputStream ois = null;
@@ -48,11 +57,13 @@ public class MyIO {
 		FileOutputStream fos;
 		ObjectOutputStream oos = null;
 		try {
-			fos =
-					act.getApplicationContext().openFileOutput("my_filename.ser",
-							Activity.MODE_PRIVATE);
+			fos = act.getApplicationContext().openFileOutput("my_filename.ser", Activity.MODE_PRIVATE);
 			oos = new ObjectOutputStream(fos);
 			oos.writeObject(map);
+			SharedPreferences sp = act.getSharedPreferences("my_prefs", Context.MODE_PRIVATE);
+			SharedPreferences.Editor editor = sp.edit();
+			editor.putBoolean("initialized", true);
+			editor.commit();
 		} catch (IOException e) {
 			Log.e("onPause in AddActivity happens IOException on saving ArrayList", e.getMessage());
 		} finally {
