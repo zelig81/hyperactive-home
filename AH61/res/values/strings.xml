@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">AH61</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="etHint">put your name just not "bugs bunny"</string>
+    <string name="tbMale">male</string>
+    <string name="tbFemale">female</string>
+    <string name="buttonText">push me</string>
+    <string name="atvHint">put name of school</string>
+    <string-array name="courses">
+        <item >First</item>
+        <item >Second</item>
+        <item >Third</item>
+        <item >Fourth</item>
+        <item >Fiveth</item>
+    </string-array>
+    
+</resources>
