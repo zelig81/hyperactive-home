@@ -23,7 +23,6 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:hint="@string/atvHint"
-        android:
         android:layout_below="@+id/toggleButton1"
         android:text="" />
 
