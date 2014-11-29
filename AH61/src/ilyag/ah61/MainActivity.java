@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.ToggleButton;
 import android.widget.Spinner;
 import android.widget.AutoCompleteTextView;
+import android.text.InputFilter;
 
 public class MainActivity extends Activity {
 	EditText				et;
@@ -32,6 +33,9 @@ public class MainActivity extends Activity {
 		final String[] list = new String[] { "Fsdfsdf", "Asdfsdf", "Bsdfsdf" };
 		ArrayAdapter<String> a = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, list);
 		actv.setAdapter(a);
+		InputFilter inFi = new BugsBunnyFilter();
+		actv.setFilters(new InputFilter[] { inFi });
+		
 		b.setOnClickListener(new View.OnClickListener() {
 			
 			@Override

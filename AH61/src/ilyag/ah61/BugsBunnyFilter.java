@@ -17,6 +17,14 @@ public class BugsBunnyFilter implements InputFilter {
 			textToBe.replace(dstart, dend, addedText);
 		}
 		
+		if (textToBe.toString().toLowerCase().contains("bugs bunny")) {
+			if (append) {
+				return "";
+			} else {
+				return dest.subSequence(dstart, dend);
+			}
+		}
+		
 		return null;
 	}
 	
