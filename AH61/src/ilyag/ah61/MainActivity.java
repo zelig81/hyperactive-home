@@ -10,7 +10,6 @@ import android.widget.Button;
 import android.widget.ToggleButton;
 import android.widget.Spinner;
 import android.widget.AutoCompleteTextView;
-import android.widget.Adapter;
 
 public class MainActivity extends Activity {
 	EditText				et;
@@ -31,17 +30,14 @@ public class MainActivity extends Activity {
 		s = (Spinner) findViewById(R.id.spinner1);
 		actv = (AutoCompleteTextView) findViewById(R.id.autoCompleteTextView1);
 		final String[] list = new String[] { "Fsdfsdf", "Asdfsdf", "Bsdfsdf" };
-		ArrayAdapter<String> a =
-				new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, list);
+		ArrayAdapter<String> a = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, list);
 		actv.setAdapter(a);
 		b.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
-				tv.setText("Info: " + et.getText().toString() + "/"
-						+ (tb.isChecked() ? "male/" : "female/") + "from "
-						+ actv.getText().toString() + " school/learn "
-						+ s.getSelectedItem().toString() + " course");
+				tv.setText("Info: " + et.getText().toString() + "/" + (tb.isChecked() ? "male/" : "female/") + "from "
+						+ actv.getText().toString() + " school/learn " + s.getSelectedItem().toString() + " course");
 			}
 		});
 	}

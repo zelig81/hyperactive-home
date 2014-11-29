@@ -1,17 +1,23 @@
 package ilyag.ah61;
 
-import android.widget.Filter;
+import android.text.InputFilter;
+import android.text.Spanned;
 
-public class BugsBunnyFilter extends Filter {
+public class BugsBunnyFilter implements InputFilter {
 	
 	@Override
-	protected FilterResults performFiltering(CharSequence constraint) {
-		return null;
-	}
-	
-	@Override
-	protected void publishResults(CharSequence constraint, FilterResults results) {
+	public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
+		String addedText = source.toString().substring(dstart, end);
+		boolean append = false;
+		StringBuilder textToBe = new StringBuilder(dest.toString());
+		if (dstart == dest.length()) {
+			append = true;
+			textToBe.append(addedText);
+		} else {
+			textToBe.replace(dstart, dend, addedText);
+		}
 		
+		return null;
 	}
 	
 }
