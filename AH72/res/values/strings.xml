@@ -2,6 +2,8 @@
 <resources>
 
     <string name="app_name">AH72</string>
-    <string name="hello_world">Hello world!</string>
-
+    <string name="bText">Close</string>
+    <string name="eHint">Type delay before closing</string>
+    <string name="tCancel">Cancel</string>
+    
 </resources>
