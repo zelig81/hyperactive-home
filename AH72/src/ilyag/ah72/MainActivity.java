@@ -4,7 +4,9 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -41,16 +43,10 @@ public class MainActivity extends Activity {
 	@Override
 	protected Dialog onCreateDialog(int id) {
 		if (id == dialog_id) {
-			Builder builder = new AlertDialog.Builder(getApplication());
-			builder.setTitle("The application will be closed after " + timer + ":");
-			builder.setCancelable(false);
-			builder.setNegativeButton(R.string.tCancel, new DialogInterface.OnClickListener() {
-				
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					dialog.dismiss();
-				}
-			});
+			ProgressDialog pd = new ProgressDialog(getApplication());
+			pd.setTitle("The application will be closed after " + timer + ":");
+			pd.setCancelable(false);
+			
 			return builder.create();
 			
 		}
