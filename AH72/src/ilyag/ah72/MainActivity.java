@@ -16,7 +16,7 @@ public class MainActivity extends Activity {
 	EditText					et;
 	private final static int	dialog_id	= 234234;
 	private int					timer;
-	private Handler				handler		= new Handler();
+	Handler						handler		= new Handler();
 	private boolean				isPDShown;
 	Button						b;
 	
@@ -54,14 +54,13 @@ public class MainActivity extends Activity {
 	
 	@Override
 	protected Dialog onCreateDialog(int id) {
-		Log.i("ilyag", "1");
 		if (id == dialog_id) {
-			ProgressDialog pd = new ProgressDialog(getApplication());
+			ProgressDialog pd = new ProgressDialog(this);
 			pd.setTitle("The application will be closed after " + timer + ":");
+			pd.setMessage("closing in progress");
 			pd.setCancelable(false);
 			pd.setIndeterminate(true);
 			pd.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-			Log.i("ilyag", "2");
 			pd.setButton("Cancel closing", new DialogInterface.OnClickListener() {
 				
 				@Override
@@ -70,7 +69,6 @@ public class MainActivity extends Activity {
 					isPDShown = false;
 				}
 			});
-			Log.i("ilyag", "3");
 			return pd;
 			
 		}
@@ -82,14 +80,17 @@ public class MainActivity extends Activity {
 	protected void onPrepareDialog(int id, Dialog dialog) {
 		if (id == dialog_id) {
 			final ProgressDialog pd = (ProgressDialog) dialog;
-			pd.setMax(timer * 10);
-			pd.setProgress(timer * 10);
+			pd.setProgress(0);
+			final int total = pd.getMax();
 			new Thread() {
 				@Override
 				public void run() {
-					for (int i = timer * 10; i > 0.1; i--) {
+					for (int i = 0; i < total; i++) {
+						if (isPDShown == false) {
+							break;
+						}
 						try {
-							Thread.sleep(100);
+							Thread.sleep(timer * 1000 / total);
 						} catch (InterruptedException e) {
 							Log.e("ilyag", e.getMessage());
 						}
@@ -97,17 +98,20 @@ public class MainActivity extends Activity {
 							
 							@Override
 							public void run() {
-								pd.incrementProgressBy(-1);
+								pd.incrementProgressBy(1);
+								
 							}
 						});
 					}
-					handler.post(new Runnable() {
-						
-						@Override
-						public void run() {
-							MainActivity.this.finish();
-						}
-					});
+					if (isPDShown == true) {
+						handler.post(new Runnable() {
+							
+							@Override
+							public void run() {
+								MainActivity.this.finish();
+							}
+						});
+					}
 				}
 			}.start();
 		}
