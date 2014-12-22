@@ -80,13 +80,31 @@ public class MainActivity extends Activity {
 	protected void onPrepareDialog(int id, Dialog dialog) {
 		if (id == dialog_id) {
 			final ProgressDialog pd = (ProgressDialog) dialog;
-			pd.setMax(timer);
-			pd.setProgress(0);
+			handler.post(new Runnable() {
+				
+				@Override
+				public void run() {
+					pd.setMax(timer);
+					pd.setProgress(0);
+					
+				}
+				
+			});
 			new Thread() {
 				@Override
 				public void run() {
 					for (int i = 0; i < timer; i++) {
 						if (isPDShown == false) {
+							handler.post(new Runnable() {
+								
+								@Override
+								public void run() {
+									pd.setMax(timer);
+									pd.setProgress(0);
+									
+								}
+								
+							});
 							break;
 						}
 						try {
