@@ -59,7 +59,7 @@ public class MainActivity extends Activity {
 			pd.setTitle("The application will be closed after " + timer + ":");
 			pd.setMessage("closing in progress");
 			pd.setCancelable(false);
-			pd.setIndeterminate(true);
+			pd.setIndeterminate(false);
 			pd.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
 			pd.setButton("Cancel closing", new DialogInterface.OnClickListener() {
 				
@@ -80,17 +80,17 @@ public class MainActivity extends Activity {
 	protected void onPrepareDialog(int id, Dialog dialog) {
 		if (id == dialog_id) {
 			final ProgressDialog pd = (ProgressDialog) dialog;
+			pd.setMax(timer);
 			pd.setProgress(0);
-			final int total = pd.getMax();
 			new Thread() {
 				@Override
 				public void run() {
-					for (int i = 0; i < total; i++) {
+					for (int i = 0; i < timer; i++) {
 						if (isPDShown == false) {
 							break;
 						}
 						try {
-							Thread.sleep(timer * 1000 / total);
+							Thread.sleep(1000);
 						} catch (InterruptedException e) {
 							Log.e("ilyag", e.getMessage());
 						}
