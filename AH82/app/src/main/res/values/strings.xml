@@ -4,5 +4,7 @@
     <string name="app_name">AH82</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="tRun">Run</string>
+    <string name="tCancel">Cancel fetching</string>
 
 </resources>
