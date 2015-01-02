@@ -6,7 +6,7 @@
     <Button
         android:id="@+id/bAdd"
         android:layout_width="fill_parent"
-        android:layout_height="match_parent"
+        android:layout_height="fill_parent"
         android:layout_weight="1"
         android:text="@string/tAddButton"
         />
@@ -14,9 +14,22 @@
     <Button
         android:id="@+id/bShow"
         android:layout_width="fill_parent"
-        android:layout_height="match_parent"
+        android:layout_height="fill_parent"
         android:layout_weight="1"
         android:text="@string/tShowButton"
+        />
+    <Button
+        android:id="@+id/bReset"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+        android:text="@string/tResetButton"
+        />
+    <TextView
+        android:id="@+id/tvOutput"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="0"
         />
 
 </LinearLayout>

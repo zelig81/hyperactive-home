@@ -8,5 +8,10 @@
     <string name="tAddButton">Add products</string>
     <string name="tShowButton">Show list of products</string>
     <string name="title_activity_add">AddActivity</string>
+    <string name="tResetButton">Reset the list</string>
+    <string name="hintProductName">type product name to add</string>
+    <string name="hintCount">type count of the product</string>
+    <string name="tAddButtonAddActivity">Add the product</string>
+    <string name="tReturn">Return</string>
 
 </resources>

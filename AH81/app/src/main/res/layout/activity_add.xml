@@ -8,9 +8,39 @@
                 android:paddingBottom="@dimen/activity_vertical_margin"
                 tools:context="ilyag.ah81.AddActivity">
 
-    <TextView
-        android:text="@string/hello_world"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+    <EditText
+        android:id="@+id/etProductName"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/hintProductName"
+        android:gravity="center_horizontal"
+        />
 
+    <EditText
+        android:id="@+id/etCount"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/etProductName"
+        android:inputType="numberDecimal"
+        android:hint="@string/hintCount"
+        android:gravity="center_horizontal"
+        />
+
+    <Button
+        android:id="@+id/bAddButtonAA"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tAddButtonAddActivity"
+        android:layout_below="@+id/etCount"
+        android:layout_alignParentLeft="true"
+        />
+
+    <Button
+        android:id="@+id/bReturnAA"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/etCount"
+        android:layout_alignParentRight="true"
+        android:text="@string/tReturn"
+        />
 </RelativeLayout>
