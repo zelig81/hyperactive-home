@@ -38,16 +38,6 @@ public class MainActivity extends Activity {
 				timer = Integer.parseInt(s);
 				isPDShown = true;
 				showDialog(dialog_id);
-				Log.i("ilyag", "0");
-				/*
-				 * new Thread() {
-				 * 
-				 * @Override public void run() { while (true) { if (isPDShown == false) { break; } if (timer < 0) {
-				 * handler.post(new Runnable() {
-				 * 
-				 * @Override public void run() { MainActivity.this.finish(); } }); } try { Thread.sleep(100); } catch
-				 * (InterruptedException e) { Log.e("ilyag", e.getMessage()); } } } }.start();
-				 */
 			}
 		});
 	}

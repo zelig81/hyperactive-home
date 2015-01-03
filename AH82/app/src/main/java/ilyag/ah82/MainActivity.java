@@ -37,37 +37,12 @@ public class MainActivity extends ActionBarActivity {
                     ft.remove(prev);
                 }
                 ft.addToBackStack(null);
-                DialogFragment df = MyDialog.newInstance();
+                DialogFragment df = MyDialog.newInstance("http://www.ynet.co.il/Integration/StoryRss2.xml");
                 df.show(ft, "dialog");
             }
         });
     }
 
-    public static class MyDialog extends DialogFragment{
-        static MyDialog newInstance(){
-            return new MyDialog();
-        }
-
-        @Override
-        public void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-            setStyle(DialogFragment.STYLE_NORMAL, android.R.style.Theme_Holo_Dialog);
-        }
-
-        @Nullable
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-            View v = inflater.inflate(R.layout.fragment_dialog, container, false);
-            View bCancel = v.findViewById(R.id.bCancel);
-            ((Button)bCancel).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    MyDialog.this.dismiss();
-                }
-            });
-            return v;
-        }
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
