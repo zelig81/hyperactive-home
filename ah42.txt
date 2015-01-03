@@ -1,0 +1,6 @@
+﻿העזר בחומר הלימוד, באינטרנט וב api כדי לפתור שאלה זאת.
+צור קובץ layout שמכיל 2 LinearLayout כאשר המסך מחולק לשניהם באופן שווה.(vertical)
+צבע ה LinearLayout הראשון יהיה אדום ובאמצע ה LinearLayout יופיע TextView כחול
+בצע ה LinearLayout השני יהיה צהוב ובפינה הימנית התחתונה שלו יופיע Textview ירוק.
+
+ 
