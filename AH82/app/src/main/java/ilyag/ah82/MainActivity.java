@@ -118,6 +118,12 @@ public class MainActivity extends ActionBarActivity {
             ((Button) bCancel).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    handler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            
+                        }
+                    })
                     MyDialog.this.dismiss();
                 }
             });
@@ -131,10 +137,10 @@ public class MainActivity extends ActionBarActivity {
                 @Override
                 public void run() {
                     try {
+                        number = 0;
                         handler.post(new Runnable() {
                             @Override
                             public void run() {
-                                number = 0;
                                 aa.clear();
                                 aa.notifyDataSetChanged();
                             }
@@ -168,11 +174,11 @@ public class MainActivity extends ActionBarActivity {
                             if (et == XmlPullParser.TEXT) {
                                 if (status == 2) {
                                     final String x = xpp.getText();
+                                    number++;
+                                    tv.setText("fetched " + number);
                                     handler.post(new Runnable() {
                                         @Override
                                         public void run() {
-                                            number++;
-                                            tv.setText("fetched " + number);
                                             aa.add(x);
                                             aa.notifyDataSetChanged();
                                         }
