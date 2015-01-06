@@ -33,6 +33,7 @@ public class MainActivity extends ActionBarActivity {
     static ArrayAdapter<String> aa;
     static int number;
     static String sToAdd;
+    static boolean isStopped = true;
     static MainActivity activity;
     Handler handler = new Handler();
     ListView lv;
@@ -43,6 +44,7 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
         activity = this;
         Button bRun = (Button) findViewById(R.id.bRun);
+        Button bRunBackup = (Button)findViewById(R.id.bRunBackup);
         aa = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1);
         lv = (ListView) findViewById(R.id.listView);
         lv.setAdapter(aa);
@@ -56,6 +58,22 @@ public class MainActivity extends ActionBarActivity {
                 }
                 ft.addToBackStack(null);
                 DialogFragment df = MyDialog.newInstance("http://www.ynet.co.il/Integration/StoryRss2.xml", handler, MainActivity.this);
+                isStopped = false;
+                df.show(ft, "dialog");
+            }
+        });
+
+        bRunBackup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentTransaction ft = getFragmentManager().beginTransaction();
+                Fragment prev = getFragmentManager().findFragmentByTag("dialog");
+                if (prev != null) {
+                    ft.remove(prev);
+                }
+                ft.addToBackStack(null);
+                DialogFragment df = MyDialog.newInstance("http://www.nytimes.com/roomfordebate/index.rss?category=science", handler, MainActivity.this);
+                isStopped = false;
                 df.show(ft, "dialog");
             }
         });
@@ -118,12 +136,7 @@ public class MainActivity extends ActionBarActivity {
             ((Button) bCancel).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    handler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            
-                        }
-                    })
+                    isStopped = true;
                     MyDialog.this.dismiss();
                 }
             });
@@ -137,10 +150,10 @@ public class MainActivity extends ActionBarActivity {
                 @Override
                 public void run() {
                     try {
-                        number = 0;
                         handler.post(new Runnable() {
                             @Override
                             public void run() {
+                                number = 0;
                                 aa.clear();
                                 aa.notifyDataSetChanged();
                             }
@@ -174,15 +187,19 @@ public class MainActivity extends ActionBarActivity {
                             if (et == XmlPullParser.TEXT) {
                                 if (status == 2) {
                                     final String x = xpp.getText();
-                                    number++;
-                                    tv.setText("fetched " + number);
                                     handler.post(new Runnable() {
                                         @Override
                                         public void run() {
+                                            number++;
+                                            tv.setText("fetched " + number);
                                             aa.add(x);
                                             aa.notifyDataSetChanged();
                                         }
                                     });
+                                    if (isStopped == true) {
+                                        break;
+                                    }
+
                                 }
                             }
                             et = xpp.next();
@@ -193,6 +210,7 @@ public class MainActivity extends ActionBarActivity {
                                 Toast.makeText(activity, "was fetched " + number + " articles", Toast.LENGTH_LONG).show();
                             }
                         });
+                        isStopped = false;
                         dismiss();
                     } catch (MalformedURLException e) {
                         Log.e("ilyag1", e.getMessage());
