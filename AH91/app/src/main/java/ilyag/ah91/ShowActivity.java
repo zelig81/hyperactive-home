@@ -5,7 +5,12 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
+import android.widget.Toast;
+
+import java.util.ArrayList;
 
 
 public class ShowActivity extends ActionBarActivity {
@@ -14,6 +19,10 @@ public class ShowActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show);
+        ArrayAdapter<String> aa = new ArrayAdapter<String>(ShowActivity.this, android.R.layout.simple_dropdown_item_1line,(ArrayList <String>)getIntent().getSerializableExtra("users"));
+        Toast.makeText(this, "" + (ArrayList <String>)getIntent().getSerializableExtra("users"), Toast.LENGTH_LONG).show();
+        ListView lv = (ListView)findViewById(R.id.lvUserListSA);
+        lv.setAdapter(aa);
         bReturn = (Button)findViewById(R.id.bReturnSA);
         bReturn.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -1,24 +1,47 @@
 package ilyag.ah91;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
 
 public class AddActivity extends ActionBarActivity {
     Button bAdd, bReturn;
+    EditText etUser, etPassword;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add);
+        etUser = (EditText)findViewById(R.id.etUsernameAA);
+        etPassword = (EditText)findViewById(R.id.etPasswordAA);
         bAdd = (Button)findViewById(R.id.bAddAA);
         bReturn = (Button)findViewById(R.id.bReturnAA);
         bReturn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                finish();
+            }
+        });
+
+        bAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                String sUser = etUser.getText().toString();
+                String sPassword = etPassword.getText().toString();
+                if (sUser != null && sPassword != null && !"".equals(sUser) && !"".equals(sPassword)) {
+                    intent.putExtra("user", sUser);
+                    intent.putExtra("password", sPassword);
+                    setResult(0, intent);
+                }else {
+                    Toast.makeText(getApplication(), "don't forget to type something in both fields", Toast.LENGTH_LONG).show();
+                }
                 finish();
             }
         });
