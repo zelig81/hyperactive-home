@@ -1,10 +1,13 @@
 package ilyag.ah91;
 
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.internal.view.menu.ListMenuItemView;
+import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -15,15 +18,16 @@ import java.util.ArrayList;
 
 public class ShowActivity extends ActionBarActivity {
     Button bReturn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show);
-        ArrayAdapter<String> aa = new ArrayAdapter<String>(ShowActivity.this, android.R.layout.simple_dropdown_item_1line,(ArrayList <String>)getIntent().getSerializableExtra("zusers"));
-        Toast.makeText(this, "" + (ArrayList <String>)getIntent().getSerializableExtra("zusers"), Toast.LENGTH_LONG).show();
-        ListView lv = (ListView)findViewById(R.id.lvUserListSA);
+        ArrayAdapter<String> aa = new ArrayAdapter<String>(ShowActivity.this, android.R.layout.simple_dropdown_item_1line, (ArrayList<String>) getIntent().getSerializableExtra("zusers"));
+        Toast.makeText(this, "" + (ArrayList<String>) getIntent().getSerializableExtra("zusers"), Toast.LENGTH_LONG).show();
+        ListView lv = (ListView) findViewById(R.id.lvUserListSA);
         lv.setAdapter(aa);
-        bReturn = (Button)findViewById(R.id.bReturnSA);
+        bReturn = (Button) findViewById(R.id.bReturnSA);
         bReturn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -31,7 +35,6 @@ public class ShowActivity extends ActionBarActivity {
             }
         });
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
