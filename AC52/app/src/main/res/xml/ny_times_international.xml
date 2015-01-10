@@ -1,0 +1,1361 @@
+<rss xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd"
+    xmlns:dc="http://purl.org/dc/elements/1.1/"
+    xmlns:taxo="http://purl.org/rss/1.0/modules/taxonomy/"
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:atom="http://www.w3.org/2005/Atom"
+    xmlns:media="http://search.yahoo.com/mrss/"
+    version="2.0" >
+
+    <channel>
+        <atom:link
+            href="http://www.nytimes.com/services/xml/rss/nyt/InternationalHome.xml"
+            rel="self"
+            type="application/rss+xml" />
+
+        <title>
+NYT &gt; International Home
+        </title>
+
+        <link>
+http://www.nytimes.com/pages/international/index.html?partner=rss&amp;emc=rss
+        </link>
+
+        <description />
+
+        <language>
+en-us
+        </language>
+
+        <copyright>
+Copyright 2014 The New York Times Company
+        </copyright>
+
+        <pubDate>
+Fri, 07 Nov 2014 17:31:23 GMT
+        </pubDate>
+
+        <lastBuildDate>
+Fri, 07 Nov 2014 17:31:23 GMT
+        </lastBuildDate>
+
+        <ttl>
+5
+        </ttl>
+
+        <image>
+            <title>
+NYT &gt; International Home
+            </title>
+
+            <url>
+http://graphics8.nytimes.com/images/misc/NYT_logo_rss_250x40.png
+            </url>
+
+            <link>
+http://www.nytimes.com/pages/international/index.html?partner=rss&amp;emc=rss
+            </link>
+        </image>
+
+        <item>
+            <atom:link
+                href="http://www.nytimes.com/2014/11/08/us/robin-raphel-fbi-state-department-search.html?partner=rss&amp;emc=rss"
+                rel="standout" />
+
+            <title>
+Counterintelligence Agents Search State Department Pakistan Expert’s Home and Office
+            </title>
+
+            <link>
+http://rss.nytimes.com/c/34625/f/667200/s/40441262/sc/36/l/0L0Snytimes0N0C20A140C110C0A80Cus0Crobin0Eraphel0Efbi0Estate0Edepartment0Esearch0Bhtml0Dpartner0Frss0Gemc0Frss/story01.htm
+            </link>
+
+            <description>
+After the F.B.I. searches, the diplomat, Robin L. Raphel, was put on leave. Her spokesman said, “I’m confident this will be resolved.”&lt;img width='1' height='1' src='http://rss.nytimes.com/c/34625/f/667200/s/40441262/sc/36/mf.gif' border='0'/&gt;&lt;br clear='all'/&gt;&lt;br/&gt;&lt;br/&gt;&lt;a href="http://da.feedsportal.com/r/211597301463/u/421/f/667200/c/34625/s/40441262/sc/36/rc/1/rc.htm" rel="nofollow"&gt;&lt;img src="http://da.feedsportal.com/r/211597301463/u/421/f/667200/c/34625/s/40441262/sc/36/rc/1/rc.img" border="0"/&gt;&lt;/a&gt;&lt;br/&gt;&lt;a href="http://da.feedsportal.com/r/211597301463/u/421/f/667200/c/34625/s/40441262/sc/36/rc/2/rc.htm" rel="nofollow"&gt;&lt;img src="http://da.feedsportal.com/r/211597301463/u/421/f/667200/c/34625/s/40441262/sc/36/rc/2/rc.img" border="0"/&gt;&lt;/a&gt;&lt;br/&gt;&lt;a href="http://da.feedsportal.com/r/211597301463/u/421/f/667200/c/34625/s/40441262/sc/36/rc/3/rc.htm" rel="nofollow"&gt;&lt;img src="http://da.feedsportal.com/r/211597301463/u/421/f/667200/c/34625/s/40441262/sc/36/rc/3/rc.img" border="0"/&gt;&lt;/a&gt;&lt;br/&gt;&lt;br/&gt;&lt;a href="http://da.feedsportal.com/r/211597301463/u/421/f/667200/c/34625/s/40441262/sc/36/a2.htm"&gt;&lt;img src="http://da.feedsportal.com/r/211597301463/u/421/f/667200/c/34625/s/40441262/sc/36/a2.img" border="0"/&gt;&lt;/a&gt;&lt;img width="1" height="1" src="http://pi.feedsportal.com/r/211597301463/u/421/f/667200/c/34625/s/40441262/sc/36/a2t.img" border="0"/&gt;
+            </description>
+
+            <category domain="http://www.nytimes.com/namespaces/keywords/des" >
+Diplomatic Service, Embassies and Consulates
+            </category>
+            <category domain="http://www.nytimes.com/namespaces/keywords/nyt_geo" >
+Pakistan
+            </category>
+            <category domain="http://www.nytimes.com/namespaces/keywords/nyt_org_all" >
+State Department
+            </category>
+            <category domain="http://www.nytimes.com/namespaces/keywords/nyt_org_all" >
+Federal Bureau of Investigation
+            </category>
+
+            <pubDate>
+Fri, 07 Nov 2014 17:07:29 GMT
+            </pubDate>
+
+            <guid isPermaLink="false" >
+http://www.nytimes.com/2014/11/08/us/robin-raphel-fbi-state-department-search.html
+            </guid>
+
+            <dc:creator>
+By MATT APUZZO and MARK MAZZETTI
+            </dc:creator>
+        </item>
+        <item>
+            <atom:link
+                href="http://www.nytimes.com/2014/11/07/giving/relief-work-in-ebola-zone-is-fraught-with-risk.html?partner=rss&amp;emc=rss"
+                rel="standout" />
+
+            <title>
+Special Section: Relief Work in Ebola Zone Is Fraught With Risk
+            </title>
+
+            <link>
+http://rss.nytimes.com/c/34625/f/667200/s/4040e2e9/sc/36/l/0L0Snytimes0N0C20A140C110C0A70Cgiving0Crelief0Ework0Ein0Eebola0Ezone0Eis0Efraught0Ewith0Erisk0Bhtml0Dpartner0Frss0Gemc0Frss/story01.htm
+            </link>
+
+            <description>
+Those who go abroad to scenes of disaster or conflict already take considerable personal risks — and those who go where Ebola is prevalent can face misunderstanding at home as well.&lt;img width='1' height='1' src='http://rss.nytimes.com/c/34625/f/667200/s/4040e2e9/sc/36/mf.gif' border='0'/&gt;&lt;br clear='all'/&gt;&lt;br/&gt;&lt;br/&gt;&lt;a href="http://da.feedsportal.com/r/211597301462/u/421/f/667200/c/34625/s/4040e2e9/sc/36/rc/1/rc.htm" rel="nofollow"&gt;&lt;img src="http://da.feedsportal.com/r/211597301462/u/421/f/667200/c/34625/s/4040e2e9/sc/36/rc/1/rc.img" border="0"/&gt;&lt;/a&gt;&lt;br/&gt;&lt;a href="http://da.feedsportal.com/r/211597301462/u/421/f/667200/c/34625/s/4040e2e9/sc/36/rc/2/rc.htm" rel="nofollow"&gt;&lt;img src="http://da.feedsportal.com/r/211597301462/u/421/f/667200/c/34625/s/4040e2e9/sc/36/rc/2/rc.img" border="0"/&gt;&lt;/a&gt;&lt;br/&gt;&lt;a href="http://da.feedsportal.com/r/211597301462/u/421/f/667200/c/34625/s/4040e2e9/sc/36/rc/3/rc.htm" rel="nofollow"&gt;&lt;img src="http://da.feedsportal.com/r/211597301462/u/421/f/667200/c/34625/s/4040e2e9/sc/36/rc/3/rc.img" border="0"/&gt;&lt;/a&gt;&lt;br/&gt;&lt;br/&gt;&lt;a href="http://da.feedsportal.com/r/211597301462/u/421/f/667200/c/34625/s/4040e2e9/sc/36/a2.htm"&gt;&lt;img src="http://da.feedsportal.com/r/211597301462/u/421/f/667200/c/34625/s/4040e2e9/sc/36/a2.img" border="0"/&gt;&lt;/a&gt;&lt;img width="1" height="1" src="http://pi.feedsportal.com/r/211597301462/u/421/f/667200/c/34625/s/4040e2e9/sc/36/a2t.img" border="0"/&gt;
+            </description>
+
+            <category domain="http://www.nytimes.com/namespaces/keywords/nyt_per" >
+Writebol, Nancy
+            </category>
+            <category domain="http://www.nytimes.com/namespaces/keywords/des" >
+Volunteers and Community Service
+            </category>
+            <category domain="http://www.nytimes.com/namespaces/keywords/des" >
+Ebola Virus
+            </category>
+            <category domain="http://www.nytimes.com/namespaces/keywords/nyt_geo" >
+Syria
+            </category>
+            <category domain="http://www.nytimes.com/namespaces/keywords/mdes" >
+Humanitarian Aid
+            </category>
+            <category domain="http://www.nytimes.com/namespaces/keywords/nyt_per" >
+Sacra, Richard A
+            </category>
+            <category domain="http://www.nytimes.com/namespaces/keywords/nyt_org_all" >
+Serving in Mission (SIM)
+            </category>
+            <category domain="http://www.nytimes.com/namespaces/keywords/nyt_geo" >
+Africa
+            </category>
+
+            <pubDate>
+Fri, 07 Nov 2014 17:01:34 GMT
+            </pubDate>
+
+            <guid isPermaLink="false" >
+http://www.nytimes.com/2014/11/07/giving/relief-work-in-ebola-zone-is-fraught-with-risk.html
+            </guid>
+
+            <dc:creator>
+By JOHN SCHWARTZ
+            </dc:creator>
+
+            <media:credit scheme="urn:ebu" >
+Taylor Wilson
+            </media:credit>
+
+            <media:description>
+Dr. Rick Sacra, who contracted Ebola in Liberia, left isolation at Nebraska Medical Center in September and was reunited with his wife, Debbie, and son Jared.
+            </media:description>
+
+            <media:content
+                height="151"
+                lang=""
+                url="http://graphics8.nytimes.com/images/2014/11/07/giving/07AID1/07AID1-moth.jpg"
+                width="151" />
+        </item>
+        <item>
+            <atom:link
+                href="http://www.nytimes.com/2014/11/08/world/europe/dark-market-websites-operation-onymous.html?partner=rss&amp;emc=rss"
+                rel="standout" />
+
+            <title>
+‘Dark’ Network of Illegal Websites Targeted by U.S. and European Police
+            </title>
+
+            <link>
+http://rss.nytimes.com/c/34625/f/667200/s/40434849/sc/24/l/0L0Snytimes0N0C20A140C110C0A80Cworld0Ceurope0Cdark0Emarket0Ewebsites0Eoperation0Eonymous0Bhtml0Dpartner0Frss0Gemc0Frss/story01.htm
+            </link>
+
+            <description>
+A series of raids and arrests by American agencies working with Europol shut down more than 50 black market sites selling illicit goods and information.&lt;img width='1' height='1' src='http://rss.nytimes.com/c/34625/f/667200/s/40434849/sc/24/mf.gif' border='0'/&gt;&lt;br clear='all'/&gt;&lt;br/&gt;&lt;br/&gt;&lt;a href="http://da.feedsportal.com/r/211597341315/u/421/f/667200/c/34625/s/40434849/sc/24/rc/1/rc.htm" rel="nofollow"&gt;&lt;img src="http://da.feedsportal.com/r/211597341315/u/421/f/667200/c/34625/s/40434849/sc/24/rc/1/rc.img" border="0"/&gt;&lt;/a&gt;&lt;br/&gt;&lt;a href="http://da.feedsportal.com/r/211597341315/u/421/f/667200/c/34625/s/40434849/sc/24/rc/2/rc.htm" rel="nofollow"&gt;&lt;img src="http://da.feedsportal.com/r/211597341315/u/421/f/667200/c/34625/s/40434849/sc/24/rc/2/rc.img" border="0"/&gt;&lt;/a&gt;&lt;br/&gt;&lt;a href="http://da.feedsportal.com/r/211597341315/u/421/f/667200/c/34625/s/40434849/sc/24/rc/3/rc.htm" rel="nofollow"&gt;&lt;img src="http://da.feedsportal.com/r/211597341315/u/421/f/667200/c/34625/s/40434849/sc/24/rc/3/rc.img" border="0"/&gt;&lt;/a&gt;&lt;br/&gt;&lt;br/&gt;&lt;a href="http://da.feedsportal.com/r/211597341315/u/421/f/667200/c/34625/s/40434849/sc/24/a2.htm"&gt;&lt;img src="http://da.feedsportal.com/r/211597341315/u/421/f/667200/c/34625/s/40434849/sc/24/a2.img" border="0"/&gt;&lt;/a&gt;&lt;img width="1" height="1" src="http://pi.feedsportal.com/r/211597341315/u/421/f/667200/c/34625/s/40434849/sc/24/a2t.img" border="0"/&gt;
+            </description>
+
+            <category domain="http://www.nytimes.com/namespaces/keywords/nyt_org_all" >
+Homeland Security Department
+            </category>
+            <category domain="http://www.nytimes.com/namespaces/keywords/nyt_org_all" >
+Federal Bureau of Investigation
+            </category>
+            <category domain="http://www.nytimes.com/namespaces/keywords/des" >
+Black Markets
+            </category>
+            <category domain="http://www.nytimes.com/namespaces/keywords/nyt_org_all" >
+Europol
+            </category>
+            <category domain="http://www.nytimes.com/namespaces/keywords/des" >
+Computers and the Internet
+            </category>
+
+            <pubDate>
+Fri, 07 Nov 2014 16:40:28 GMT
+            </pubDate>
+
+            <guid isPermaLink="false" >
+http://www.nytimes.com/2014/11/08/world/europe/dark-market-websites-operation-onymous.html
+            </guid>
+
+            <dc:creator>
+By DOREEN CARVAJAL
+            </dc:creator>
+        </item>
+        <item>
+            <atom:link
+                href="http://www.nytimes.com/2014/11/08/business/jobs-numbers-for-october-2014-reported-by-labor-department.html?partner=rss&amp;emc=rss"
+                rel="standout" />
+
+            <title>
+Jobs Data Show Steady Gains Even as Voters Signal Anxiety
+            </title>
+
+            <link>
+http://rss.nytimes.com/c/34625/f/667200/s/404205ac/sc/2/l/0L0Snytimes0N0C20A140C110C0A80Cbusiness0Cjobs0Enumbers0Efor0Eoctober0E20A140Ereported0Eby0Elabor0Edepartment0Bhtml0Dpartner0Frss0Gemc0Frss/story01.htm
+            </link>
+
+            <description>
+While the report was upbeat, with a survey finding a big increase in the number of people who found a job last month, wage growth continued to drag.&lt;img width='1' height='1' src='http://rss.nytimes.com/c/34625/f/667200/s/404205ac/sc/2/mf.gif' border='0'/&gt;&lt;br clear='all'/&gt;&lt;br/&gt;&lt;br/&gt;&lt;a href="http://da.feedsportal.com/r/211597294077/u/421/f/667200/c/34625/s/404205ac/sc/2/rc/1/rc.htm" rel="nofollow"&gt;&lt;img src="http://da.feedsportal.com/r/211597294077/u/421/f/667200/c/34625/s/404205ac/sc/2/rc/1/rc.img" border="0"/&gt;&lt;/a&gt;&lt;br/&gt;&lt;a href="http://da.feedsportal.com/r/211597294077/u/421/f/667200/c/34625/s/404205ac/sc/2/rc/2/rc.htm" rel="nofollow"&gt;&lt;img src="http://da.feedsportal.com/r/211597294077/u/421/f/667200/c/34625/s/404205ac/sc/2/rc/2/rc.img" border="0"/&gt;&lt;/a&gt;&lt;br/&gt;&lt;a href="http://da.feedsportal.com/r/211597294077/u/421/f/667200/c/34625/s/404205ac/sc/2/rc/3/rc.htm" rel="nofollow"&gt;&lt;img src="http://da.feedsportal.com/r/211597294077/u/421/f/667200/c/34625/s/404205ac/sc/2/rc/3/rc.img" border="0"/&gt;&lt;/a&gt;&lt;br/&gt;&lt;br/&gt;&lt;a href="http://da.feedsportal.com/r/211597294077/u/421/f/667200/c/34625/s/404205ac/sc/2/a2.htm"&gt;&lt;img src="http://da.feedsportal.com/r/211597294077/u/421/f/667200/c/34625/s/404205ac/sc/2/a2.img" border="0"/&gt;&lt;/a&gt;&lt;img width="1" height="1" src="http://pi.feedsportal.com/r/211597294077/u/421/f/667200/c/34625/s/404205ac/sc/2/a2t.img" border="0"/&gt;
+            </description>
+
+            <category domain="http://www.nytimes.com/namespaces/keywords/mdes" >
+Unemployment
+            </category>
+            <category domain="http://www.nytimes.com/namespaces/keywords/des" >
+United States Economy
+            </category>
+            <category domain="http://www.nytimes.com/namespaces/keywords/des" >
+Labor and Jobs
+            </category>
+
+            <pubDate>
+Fri, 07 Nov 2014 16:28:30 GMT
+            </pubDate>
+
+            <guid isPermaLink="false" >
+http://www.nytimes.com/2014/11/08/business/jobs-numbers-for-october-2014-reported-by-labor-department.html
+            </guid>
+
+            <dc:creator>
+By PATRICIA COHEN
+            </dc:creator>
+
+            <media:credit scheme="urn:ebu" >
+John Rucosky/The Tribune-Democrat, via Associated Press
+            </media:credit>
+
+            <media:description>
+A recent job fair in Somerset, Pa. Election Day exit polls found that two-thirds of those surveyed said they believed the economy was getting worse.
+            </media:description>
+
+            <media:content
+                height="151"
+                lang=""
+                url="http://graphics8.nytimes.com/images/2014/11/08/business/08jobs-pic1/08jobs-pic1-moth-v2.jpg"
+                width="151" />
+        </item>
+        <item>
+            <atom:link
+                href="http://www.nytimes.com/2014/11/08/world/europe/ed-miliband-labour-party-leader-britain.html?partner=rss&amp;emc=rss"
+                rel="standout" />
+
+            <title>
+Ed Miliband, British Labour Party Leader, Denies Rumblings of Discontent
+            </title>
+
+            <link>
+http://rss.nytimes.com/c/34625/f/667200/s/40416340/sc/7/l/0L0Snytimes0N0C20A140C110C0A80Cworld0Ceurope0Ced0Emiliband0Elabour0Eparty0Eleader0Ebritain0Bhtml0Dpartner0Frss0Gemc0Frss/story01.htm
+            </link>
+
+            <description>
+Publicly, at least, no lawmakers have called on him to quit, but several days of poor newspaper headlines reflect disappointment in his performance, opinion surveys show.&lt;img width='1' height='1' src='http://rss.nytimes.com/c/34625/f/667200/s/40416340/sc/7/mf.gif' border='0'/&gt;&lt;br clear='all'/&gt;&lt;br/&gt;&lt;br/&gt;&lt;a href="http://da.feedsportal.com/r/211597290586/u/421/f/667200/c/34625/s/40416340/sc/7/rc/1/rc.htm" rel="nofollow"&gt;&lt;img src="http://da.feedsportal.com/r/211597290586/u/421/f/667200/c/34625/s/40416340/sc/7/rc/1/rc.img" border="0"/&gt;&lt;/a&gt;&lt;br/&gt;&lt;a href="http://da.feedsportal.com/r/211597290586/u/421/f/667200/c/34625/s/40416340/sc/7/rc/2/rc.htm" rel="nofollow"&gt;&lt;img src="http://da.feedsportal.com/r/211597290586/u/421/f/667200/c/34625/s/40416340/sc/7/rc/2/rc.img" border="0"/&gt;&lt;/a&gt;&lt;br/&gt;&lt;a href="http://da.feedsportal.com/r/211597290586/u/421/f/667200/c/34625/s/40416340/sc/7/rc/3/rc.htm" rel="nofollow"&gt;&lt;img src="http://da.feedsportal.com/r/211597290586/u/421/f/667200/c/34625/s/40416340/sc/7/rc/3/rc.img" border="0"/&gt;&lt;/a&gt;&lt;br/&gt;&lt;br/&gt;&lt;a href="http://da.feedsportal.com/r/211597290586/u/421/f/667200/c/34625/s/40416340/sc/7/a2.htm"&gt;&lt;img src="http://da.feedsportal.com/r/211597290586/u/421/f/667200/c/34625/s/40416340/sc/7/a2.img" border="0"/&gt;&lt;/a&gt;&lt;img width="1" height="1" src="http://pi.feedsportal.com/r/211597290586/u/421/f/667200/c/34625/s/40416340/sc/7/a2t.img" border="0"/&gt;
+            </description>
+
+            <category domain="http://www.nytimes.com/namespaces/keywords/nyt_per" >
+Miliband, Edward S
+            </category>
+            <category domain="http://www.nytimes.com/namespaces/keywords/des" >
+Legislatures and Parliaments
+            </category>
+            <category domain="http://www.nytimes.com/namespaces/keywords/nyt_geo" >
+Great Britain
+            </category>
+            <category domain="http://www.nytimes.com/namespaces/keywords/nyt_org_all" >
+United Kingdom Independence Party
+            </category>
+            <category domain="http://www.nytimes.com/namespaces/keywords/des" >
+Elections
+            </category>
+            <category domain="http://www.nytimes.com/namespaces/keywords/nyt_org_all" >
+Labour Party (Great Britain)
+            </category>
+
+            <pubDate>
+Fri, 07 Nov 2014 15:47:21 GMT
+            </pubDate>
+
+            <guid isPermaLink="false" >
+http://www.nytimes.com/2014/11/08/world/europe/ed-miliband-labour-party-leader-britain.html
+            </guid>
+
+            <dc:creator>
+By STEPHEN CASTLE
+            </dc:creator>
+
+            <media:credit scheme="urn:ebu" >
+Andrew Matthews/Press Association, via Associated Press
+            </media:credit>
+
+            <media:description>
+Ed Miliband, the British Labour Party leader, buying a bacon sandwich this year. He has come under fire for his eating technique.
+            </media:description>
+
+            <media:content
+                height="151"
+                lang=""
+                url="http://graphics8.nytimes.com/images/2014/11/08/world/europe/08britain/08britain-moth.jpg"
+                width="151" />
+        </item>
+        <item>
+            <atom:link
+                href="http://www.nytimes.com/2014/11/08/world/middleeast/explosions-at-fatah-sites-in-gaza-raise-tensions-with-hamas.html?partner=rss&amp;emc=rss"
+                rel="standout" />
+
+            <title>
+Explosions at Fatah Sites in Gaza Raise Tensions With Hamas
+            </title>
+
+            <link>
+http://rss.nytimes.com/c/34625/f/667200/s/4042a275/sc/11/l/0L0Snytimes0N0C20A140C110C0A80Cworld0Cmiddleeast0Cexplosions0Eat0Efatah0Esites0Ein0Egaza0Eraise0Etensions0Ewith0Ehamas0Bhtml0Dpartner0Frss0Gemc0Frss/story01.htm
+            </link>
+
+            <description>
+The militant group Hamas, now a partner with its longtime rival Fatah, denied responsibility, but many were skeptical.&lt;img width='1' height='1' src='http://rss.nytimes.com/c/34625/f/667200/s/4042a275/sc/11/mf.gif' border='0'/&gt;&lt;br clear='all'/&gt;&lt;br/&gt;&lt;br/&gt;&lt;a href="http://da.feedsportal.com/r/211597337510/u/421/f/667200/c/34625/s/4042a275/sc/11/rc/1/rc.htm" rel="nofollow"&gt;&lt;img src="http://da.feedsportal.com/r/211597337510/u/421/f/667200/c/34625/s/4042a275/sc/11/rc/1/rc.img" border="0"/&gt;&lt;/a&gt;&lt;br/&gt;&lt;a href="http://da.feedsportal.com/r/211597337510/u/421/f/667200/c/34625/s/4042a275/sc/11/rc/2/rc.htm" rel="nofollow"&gt;&lt;img src="http://da.feedsportal.com/r/211597337510/u/421/f/667200/c/34625/s/4042a275/sc/11/rc/2/rc.img" border="0"/&gt;&lt;/a&gt;&lt;br/&gt;&lt;a href="http://da.feedsportal.com/r/211597337510/u/421/f/667200/c/34625/s/4042a275/sc/11/rc/3/rc.htm" rel="nofollow"&gt;&lt;img src="http://da.feedsportal.com/r/211597337510/u/421/f/667200/c/34625/s/4042a275/sc/11/rc/3/rc.img" border="0"/&gt;&lt;/a&gt;&lt;br/&gt;&lt;br/&gt;&lt;a href="http://da.feedsportal.com/r/211597337510/u/421/f/667200/c/34625/s/4042a275/sc/11/a2.htm"&gt;&lt;img src="http://da.feedsportal.com/r/211597337510/u/421/f/667200/c/34625/s/4042a275/sc/11/a2.img" border="0"/&gt;&lt;/a&gt;&lt;img width="1" height="1" src="http://pi.feedsportal.com/r/211597337510/u/421/f/667200/c/34625/s/4042a275/sc/11/a2t.img" border="0"/&gt;
+            </description>
+
+            <category domain="http://www.nytimes.com/namespaces/keywords/nyt_per" >
+Hamdallah, Rami
+            </category>
+            <category domain="http://www.nytimes.com/namespaces/keywords/nyt_org_all" >
+Fatah, Al
+            </category>
+            <category domain="http://www.nytimes.com/namespaces/keywords/nyt_org_all" >
+Palestinian Authority
+            </category>
+            <category domain="http://www.nytimes.com/namespaces/keywords/nyt_org_all" >
+Temple Mount (Jerusalem)
+            </category>
+            <category domain="http://www.nytimes.com/namespaces/keywords/nyt_geo" >
+Gaza Strip
+            </category>
+            <category domain="http://www.nytimes.com/namespaces/keywords/nyt_org_all" >
+Hamas
+            </category>
+
+            <pubDate>
+Fri, 07 Nov 2014 14:41:48 GMT
+            </pubDate>
+
+            <guid isPermaLink="false" >
+http://www.nytimes.com/2014/11/08/world/middleeast/explosions-at-fatah-sites-in-gaza-raise-tensions-with-hamas.html
+            </guid>
+
+            <dc:creator>
+By ISABEL KERSHNER and MAJD AL WAHEIDI
+            </dc:creator>
+        </item>
+        <item>
+            <atom:link
+                href="http://www.nytimes.com/2014/11/08/world/asia/regional-politicians-approve-restart-of-nuclear-plant-in-south-of-japan.html?partner=rss&amp;emc=rss"
+                rel="standout" />
+
+            <title>
+Regional Politicians Approve Restart of Nuclear Plant in South of Japan
+            </title>
+
+            <link>
+http://rss.nytimes.com/c/34625/f/667200/s/404075f5/sc/3/l/0L0Snytimes0N0C20A140C110C0A80Cworld0Casia0Cregional0Epoliticians0Eapprove0Erestart0Eof0Enuclear0Eplant0Ein0Esouth0Eof0Ejapan0Bhtml0Dpartner0Frss0Gemc0Frss/story01.htm
+            </link>
+
+            <description>
+The reactors at the Sendai plant would be the first brought back online under new safety standards introduced in the wake of the Fukushima disaster.&lt;img width='1' height='1' src='http://rss.nytimes.com/c/34625/f/667200/s/404075f5/sc/3/mf.gif' border='0'/&gt;&lt;br clear='all'/&gt;&lt;br/&gt;&lt;br/&gt;&lt;a href="http://da.feedsportal.com/r/211597337509/u/421/f/667200/c/34625/s/404075f5/sc/3/rc/1/rc.htm" rel="nofollow"&gt;&lt;img src="http://da.feedsportal.com/r/211597337509/u/421/f/667200/c/34625/s/404075f5/sc/3/rc/1/rc.img" border="0"/&gt;&lt;/a&gt;&lt;br/&gt;&lt;a href="http://da.feedsportal.com/r/211597337509/u/421/f/667200/c/34625/s/404075f5/sc/3/rc/2/rc.htm" rel="nofollow"&gt;&lt;img src="http://da.feedsportal.com/r/211597337509/u/421/f/667200/c/34625/s/404075f5/sc/3/rc/2/rc.img" border="0"/&gt;&lt;/a&gt;&lt;br/&gt;&lt;a href="http://da.feedsportal.com/r/211597337509/u/421/f/667200/c/34625/s/404075f5/sc/3/rc/3/rc.htm" rel="nofollow"&gt;&lt;img src="http://da.feedsportal.com/r/211597337509/u/421/f/667200/c/34625/s/404075f5/sc/3/rc/3/rc.img" border="0"/&gt;&lt;/a&gt;&lt;br/&gt;&lt;br/&gt;&lt;a href="http://da.feedsportal.com/r/211597337509/u/421/f/667200/c/34625/s/404075f5/sc/3/a2.htm"&gt;&lt;img src="http://da.feedsportal.com/r/211597337509/u/421/f/667200/c/34625/s/404075f5/sc/3/a2.img" border="0"/&gt;&lt;/a&gt;&lt;img width="1" height="1" src="http://pi.feedsportal.com/r/211597337509/u/421/f/667200/c/34625/s/404075f5/sc/3/a2t.img" border="0"/&gt;
+            </description>
+
+            <category domain="http://www.nytimes.com/namespaces/keywords/des" >
+Fukushima Daiichi Nuclear Power Plant (Japan)
+            </category>
+            <category domain="http://www.nytimes.com/namespaces/keywords/des" >
+Japan Earthquake and Tsunami (2011)
+            </category>
+            <category domain="http://www.nytimes.com/namespaces/keywords/nyt_geo" >
+Sendai (Japan)
+            </category>
+            <category domain="http://www.nytimes.com/namespaces/keywords/des" >
+Nuclear Energy
+            </category>
+
+            <pubDate>
+Fri, 07 Nov 2014 14:38:27 GMT
+            </pubDate>
+
+            <guid isPermaLink="false" >
+http://www.nytimes.com/2014/11/08/world/asia/regional-politicians-approve-restart-of-nuclear-plant-in-south-of-japan.html
+            </guid>
+
+            <dc:creator>
+By JONATHAN SOBLE
+            </dc:creator>
+        </item>
+        <item>
+            <atom:link
+                href="http://www.nytimes.com/2014/11/08/world/europe/spain-princess-cristina-tax-fraud-charges.html?partner=rss&amp;emc=rss"
+                rel="standout" />
+
+            <title>
+Spanish Court Upholds Tax Fraud Charges Against Princess Cristina
+            </title>
+
+            <link>
+http://rss.nytimes.com/c/34625/f/667200/s/40434854/sc/11/l/0L0Snytimes0N0C20A140C110C0A80Cworld0Ceurope0Cspain0Eprincess0Ecristina0Etax0Efraud0Echarges0Bhtml0Dpartner0Frss0Gemc0Frss/story01.htm
+            </link>
+
+            <description>
+The court agreed to drop the more serious money laundering charges that were also filed against her.&lt;img width='1' height='1' src='http://rss.nytimes.com/c/34625/f/667200/s/40434854/sc/11/mf.gif' border='0'/&gt;&lt;br clear='all'/&gt;
+            </description>
+
+            <category domain="http://www.nytimes.com/namespaces/keywords/mdes" >
+Embezzlement
+            </category>
+            <category domain="http://www.nytimes.com/namespaces/keywords/nyt_per" >
+Cristina, Princess of Spain
+            </category>
+            <category domain="http://www.nytimes.com/namespaces/keywords/nyt_per" >
+Urdangarin, Inaki
+            </category>
+            <category domain="http://www.nytimes.com/namespaces/keywords/des" >
+Royal Family
+            </category>
+            <category domain="http://www.nytimes.com/namespaces/keywords/nyt_org_all" >
+Instituto Noos
+            </category>
+
+            <pubDate>
+Fri, 07 Nov 2014 14:30:37 GMT
+            </pubDate>
+
+            <guid isPermaLink="false" >
+http://www.nytimes.com/2014/11/08/world/europe/spain-princess-cristina-tax-fraud-charges.html
+            </guid>
+
+            <dc:creator>
+By RAPHAEL MINDER
+            </dc:creator>
+
+            <media:credit scheme="urn:ebu" >
+Paul Hanna/Reuters
+            </media:credit>
+
+            <media:description>
+Princess Cristina of Spain in February. She has been entangled in a graft case centered on whether her husband and his business associates embezzled millions of euros.
+            </media:description>
+
+            <media:content
+                height="151"
+                lang=""
+                url="http://graphics8.nytimes.com/images/2014/11/08/world/europe/08spain/08spain-moth.jpg"
+                width="151" />
+        </item>
+        <item>
+            <atom:link
+                href="http://www.nytimes.com/2014/11/08/world/asia/china-japan-reach-accord-on-disputed-islands-senkaku-diaoyu.html?partner=rss&amp;emc=rss"
+                rel="standout" />
+
+            <title>
+China and Japan Reach Accord on Disputed Islands: Let’s Agree to Disagree
+            </title>
+
+            <link>
+http://rss.nytimes.com/c/34625/f/667200/s/40412cff/sc/1/l/0L0Snytimes0N0C20A140C110C0A80Cworld0Casia0Cchina0Ejapan0Ereach0Eaccord0Eon0Edisputed0Eislands0Esenkaku0Ediaoyu0Bhtml0Dpartner0Frss0Gemc0Frss/story01.htm
+            </link>
+
+            <description>
+Signaling a potential thaw in their long-frozen relations, the two nations said they would work to keep tensions in the East China Sea from escalating.&lt;img width='1' height='1' src='http://rss.nytimes.com/c/34625/f/667200/s/40412cff/sc/1/mf.gif' border='0'/&gt;&lt;br clear='all'/&gt;&lt;br/&gt;&lt;br/&gt;&lt;a href="http://da.feedsportal.com/r/211597319113/u/421/f/667200/c/34625/s/40412cff/sc/1/rc/1/rc.htm" rel="nofollow"&gt;&lt;img src="http://da.feedsportal.com/r/211597319113/u/421/f/667200/c/34625/s/40412cff/sc/1/rc/1/rc.img" border="0"/&gt;&lt;/a&gt;&lt;br/&gt;&lt;a href="http://da.feedsportal.com/r/211597319113/u/421/f/667200/c/34625/s/40412cff/sc/1/rc/2/rc.htm" rel="nofollow"&gt;&lt;img src="http://da.feedsportal.com/r/211597319113/u/421/f/667200/c/34625/s/40412cff/sc/1/rc/2/rc.img" border="0"/&gt;&lt;/a&gt;&lt;br/&gt;&lt;a href="http://da.feedsportal.com/r/211597319113/u/421/f/667200/c/34625/s/40412cff/sc/1/rc/3/rc.htm" rel="nofollow"&gt;&lt;img src="http://da.feedsportal.com/r/211597319113/u/421/f/667200/c/34625/s/40412cff/sc/1/rc/3/rc.img" border="0"/&gt;&lt;/a&gt;&lt;br/&gt;&lt;br/&gt;&lt;a href="http://da.feedsportal.com/r/211597319113/u/421/f/667200/c/34625/s/40412cff/sc/1/a2.htm"&gt;&lt;img src="http://da.feedsportal.com/r/211597319113/u/421/f/667200/c/34625/s/40412cff/sc/1/a2.img" border="0"/&gt;&lt;/a&gt;&lt;img width="1" height="1" src="http://pi.feedsportal.com/r/211597319113/u/421/f/667200/c/34625/s/40412cff/sc/1/a2t.img" border="0"/&gt;
+            </description>
+
+            <category domain="http://www.nytimes.com/namespaces/keywords/des" >
+Defense and Military Forces
+            </category>
+            <category domain="http://www.nytimes.com/namespaces/keywords/nyt_geo" >
+Senkaku Islands
+            </category>
+            <category domain="http://www.nytimes.com/namespaces/keywords/nyt_geo" >
+East China Sea
+            </category>
+            <category domain="http://www.nytimes.com/namespaces/keywords/nyt_org_all" >
+Asia-Pacific Economic Cooperation
+            </category>
+            <category domain="http://www.nytimes.com/namespaces/keywords/nyt_geo" >
+Japan
+            </category>
+            <category domain="http://www.nytimes.com/namespaces/keywords/nyt_per" >
+Abe, Shinzo
+            </category>
+            <category domain="http://www.nytimes.com/namespaces/keywords/nyt_geo" >
+China
+            </category>
+
+            <pubDate>
+Fri, 07 Nov 2014 11:59:50 GMT
+            </pubDate>
+
+            <guid isPermaLink="false" >
+http://www.nytimes.com/2014/11/08/world/asia/china-japan-reach-accord-on-disputed-islands-senkaku-diaoyu.html
+            </guid>
+
+            <dc:creator>
+By JANE PERLEZ
+            </dc:creator>
+        </item>
+        <item>
+            <atom:link
+                href="http://www.nytimes.com/2014/11/08/world/asia/indian-navy-ship-sinks-off-visakhapatnam.html?partner=rss&amp;emc=rss"
+                rel="standout" />
+
+            <title>
+Indian Navy Ship Sinks, Killing at Least One Crew Member
+            </title>
+
+            <link>
+http://rss.nytimes.com/c/34625/f/667200/s/4040ae8d/sc/3/l/0L0Snytimes0N0C20A140C110C0A80Cworld0Casia0Cindian0Enavy0Eship0Esinks0Eoff0Evisakhapatnam0Bhtml0Dpartner0Frss0Gemc0Frss/story01.htm
+            </link>
+
+            <description>
+The vessel, used to collect torpedoes from practice firings, developed a leak off the coast of the southern Indian port of Visakhapatnam.&lt;img width='1' height='1' src='http://rss.nytimes.com/c/34625/f/667200/s/4040ae8d/sc/3/mf.gif' border='0'/&gt;&lt;br clear='all'/&gt;&lt;br/&gt;&lt;br/&gt;&lt;a href="http://da.feedsportal.com/r/211597317821/u/421/f/667200/c/34625/s/4040ae8d/sc/3/rc/1/rc.htm" rel="nofollow"&gt;&lt;img src="http://da.feedsportal.com/r/211597317821/u/421/f/667200/c/34625/s/4040ae8d/sc/3/rc/1/rc.img" border="0"/&gt;&lt;/a&gt;&lt;br/&gt;&lt;a href="http://da.feedsportal.com/r/211597317821/u/421/f/667200/c/34625/s/4040ae8d/sc/3/rc/2/rc.htm" rel="nofollow"&gt;&lt;img src="http://da.feedsportal.com/r/211597317821/u/421/f/667200/c/34625/s/4040ae8d/sc/3/rc/2/rc.img" border="0"/&gt;&lt;/a&gt;&lt;br/&gt;&lt;a href="http://da.feedsportal.com/r/211597317821/u/421/f/667200/c/34625/s/4040ae8d/sc/3/rc/3/rc.htm" rel="nofollow"&gt;&lt;img src="http://da.feedsportal.com/r/211597317821/u/421/f/667200/c/34625/s/4040ae8d/sc/3/rc/3/rc.img" border="0"/&gt;&lt;/a&gt;&lt;br/&gt;&lt;br/&gt;&lt;a href="http://da.feedsportal.com/r/211597317821/u/421/f/667200/c/34625/s/4040ae8d/sc/3/a2.htm"&gt;&lt;img src="http://da.feedsportal.com/r/211597317821/u/421/f/667200/c/34625/s/4040ae8d/sc/3/a2.img" border="0"/&gt;&lt;/a&gt;&lt;img width="1" height="1" src="http://pi.feedsportal.com/r/211597317821/u/421/f/667200/c/34625/s/4040ae8d/sc/3/a2t.img" border="0"/&gt;
+            </description>
+
+            <category domain="http://www.nytimes.com/namespaces/keywords/des" >
+Maritime Accidents and Safety
+            </category>
+            <category domain="http://www.nytimes.com/namespaces/keywords/nyt_geo" >
+New Delhi (India)
+            </category>
+            <category domain="http://www.nytimes.com/namespaces/keywords/des" >
+Torpedoes
+            </category>
+
+            <pubDate>
+Fri, 07 Nov 2014 11:24:11 GMT
+            </pubDate>
+
+            <guid isPermaLink="false" >
+http://www.nytimes.com/2014/11/08/world/asia/indian-navy-ship-sinks-off-visakhapatnam.html
+            </guid>
+
+            <dc:creator>
+By NIDA NAJAR
+            </dc:creator>
+        </item>
+        <item>
+            <atom:link
+                href="http://www.nytimes.com/2014/11/08/world/asia/south-korea-sets-independent-inquiry-into-ferry-disaster.html?partner=rss&amp;emc=rss"
+                rel="standout" />
+
+            <title>
+South Korea Sets Independent Inquiry Into Ferry Disaster
+            </title>
+
+            <link>
+http://rss.nytimes.com/c/34625/f/667200/s/4040ae86/sc/11/l/0L0Snytimes0N0C20A140C110C0A80Cworld0Casia0Csouth0Ekorea0Esets0Eindependent0Einquiry0Einto0Eferry0Edisaster0Bhtml0Dpartner0Frss0Gemc0Frss/story01.htm
+            </link>
+
+            <description>
+South Korean legislators passed a bill initiating the inquiry into the sinking of the ferry Sewol in April, which killed 304 people.&lt;img width='1' height='1' src='http://rss.nytimes.com/c/34625/f/667200/s/4040ae86/sc/11/mf.gif' border='0'/&gt;&lt;br clear='all'/&gt;&lt;br/&gt;&lt;br/&gt;&lt;a href="http://da.feedsportal.com/r/211597317818/u/421/f/667200/c/34625/s/4040ae86/sc/11/rc/1/rc.htm" rel="nofollow"&gt;&lt;img src="http://da.feedsportal.com/r/211597317818/u/421/f/667200/c/34625/s/4040ae86/sc/11/rc/1/rc.img" border="0"/&gt;&lt;/a&gt;&lt;br/&gt;&lt;a href="http://da.feedsportal.com/r/211597317818/u/421/f/667200/c/34625/s/4040ae86/sc/11/rc/2/rc.htm" rel="nofollow"&gt;&lt;img src="http://da.feedsportal.com/r/211597317818/u/421/f/667200/c/34625/s/4040ae86/sc/11/rc/2/rc.img" border="0"/&gt;&lt;/a&gt;&lt;br/&gt;&lt;a href="http://da.feedsportal.com/r/211597317818/u/421/f/667200/c/34625/s/4040ae86/sc/11/rc/3/rc.htm" rel="nofollow"&gt;&lt;img src="http://da.feedsportal.com/r/211597317818/u/421/f/667200/c/34625/s/4040ae86/sc/11/rc/3/rc.img" border="0"/&gt;&lt;/a&gt;&lt;br/&gt;&lt;br/&gt;&lt;a href="http://da.feedsportal.com/r/211597317818/u/421/f/667200/c/34625/s/4040ae86/sc/11/a2.htm"&gt;&lt;img src="http://da.feedsportal.com/r/211597317818/u/421/f/667200/c/34625/s/4040ae86/sc/11/a2.img" border="0"/&gt;&lt;/a&gt;&lt;img width="1" height="1" src="http://pi.feedsportal.com/r/211597317818/u/421/f/667200/c/34625/s/4040ae86/sc/11/a2t.img" border="0"/&gt;
+            </description>
+
+            <category domain="http://www.nytimes.com/namespaces/keywords/des" >
+Maritime Accidents and Safety
+            </category>
+            <category domain="http://www.nytimes.com/namespaces/keywords/nyt_geo" >
+South Korea
+            </category>
+            <category domain="http://www.nytimes.com/namespaces/keywords/nyt_per" >
+Park Geun-hye
+            </category>
+
+            <pubDate>
+Fri, 07 Nov 2014 11:21:55 GMT
+            </pubDate>
+
+            <guid isPermaLink="false" >
+http://www.nytimes.com/2014/11/08/world/asia/south-korea-sets-independent-inquiry-into-ferry-disaster.html
+            </guid>
+
+            <dc:creator>
+By CHOE SANG-HUN
+            </dc:creator>
+        </item>
+        <item>
+            <title>
+Jerusalem Unrest Underscores Need for Peace Talks: EU's Mogherini
+            </title>
+
+            <link>
+http://rss.nytimes.com/c/34625/f/667200/s/403e4170/sc/8/l/0L0Snytimes0N0Creuters0C20A140C110C0A70Cworld0Cmiddleeast0C0A7reuters0Emideast0Ejerusalem0Eviolence0Bhtml0Dpartner0Frss0Gemc0Frss/story01.htm
+            </link>
+
+            <description>
+The EU's new foreign affairs chief said on Friday that a surge of violence in Jerusalem made it all the more critical that Israel and the Palestinians return to negotiations quickly.&lt;img width='1' height='1' src='http://rss.nytimes.com/c/34625/f/667200/s/403e4170/sc/8/mf.gif' border='0'/&gt;&lt;br clear='all'/&gt;&lt;br/&gt;&lt;br/&gt;&lt;a href="http://da.feedsportal.com/r/211597305164/u/421/f/667200/c/34625/s/403e4170/sc/8/rc/1/rc.htm" rel="nofollow"&gt;&lt;img src="http://da.feedsportal.com/r/211597305164/u/421/f/667200/c/34625/s/403e4170/sc/8/rc/1/rc.img" border="0"/&gt;&lt;/a&gt;&lt;br/&gt;&lt;a href="http://da.feedsportal.com/r/211597305164/u/421/f/667200/c/34625/s/403e4170/sc/8/rc/2/rc.htm" rel="nofollow"&gt;&lt;img src="http://da.feedsportal.com/r/211597305164/u/421/f/667200/c/34625/s/403e4170/sc/8/rc/2/rc.img" border="0"/&gt;&lt;/a&gt;&lt;br/&gt;&lt;a href="http://da.feedsportal.com/r/211597305164/u/421/f/667200/c/34625/s/403e4170/sc/8/rc/3/rc.htm" rel="nofollow"&gt;&lt;img src="http://da.feedsportal.com/r/211597305164/u/421/f/667200/c/34625/s/403e4170/sc/8/rc/3/rc.img" border="0"/&gt;&lt;/a&gt;&lt;br/&gt;&lt;br/&gt;&lt;a href="http://da.feedsportal.com/r/211597305164/u/421/f/667200/c/34625/s/403e4170/sc/8/a2.htm"&gt;&lt;img src="http://da.feedsportal.com/r/211597305164/u/421/f/667200/c/34625/s/403e4170/sc/8/a2.img" border="0"/&gt;&lt;/a&gt;&lt;img width="1" height="1" src="http://pi.feedsportal.com/r/211597305164/u/421/f/667200/c/34625/s/403e4170/sc/8/a2t.img" border="0"/&gt;
+            </description>
+
+            <pubDate>
+Fri, 07 Nov 2014 11:17:33 GMT
+            </pubDate>
+
+            <guid isPermaLink="false" >
+http://www.nytimes.com/reuters/2014/11/07/world/middleeast/07reuters-mideast-jerusalem-violence.html
+            </guid>
+
+            <dc:creator>
+By REUTERS
+            </dc:creator>
+        </item>
+        <item>
+            <atom:link
+                href="http://www.nytimes.com/2014/11/08/world/asia/to-impress-apec-leaders-china-cracks-down-on-beijing-life.html?partner=rss&amp;emc=rss"
+                rel="standout" />
+
+            <title>
+To Impress APEC Leaders, China Cracks Down on Beijing Life
+            </title>
+
+            <link>
+http://rss.nytimes.com/c/34625/f/667200/s/404075f0/sc/30/l/0L0Snytimes0N0C20A140C110C0A80Cworld0Casia0Cto0Eimpress0Eapec0Eleaders0Echina0Ecracks0Edown0Eon0Ebeijing0Elife0Bhtml0Dpartner0Frss0Gemc0Frss/story01.htm
+            </link>
+
+            <description>
+Determined to show a cleaner version of Beijing, the Chinese authorities have ordered dozens of temporary changes that are upending people’s lives.&lt;img width='1' height='1' src='http://rss.nytimes.com/c/34625/f/667200/s/404075f0/sc/30/mf.gif' border='0'/&gt;&lt;br clear='all'/&gt;
+            </description>
+
+            <category domain="http://www.nytimes.com/namespaces/keywords/nyt_org_all" >
+Asia-Pacific Economic Cooperation
+            </category>
+            <category domain="http://www.nytimes.com/namespaces/keywords/nyt_geo" >
+Beijing (China)
+            </category>
+            <category domain="http://www.nytimes.com/namespaces/keywords/des" >
+Air Pollution
+            </category>
+            <category domain="http://www.nytimes.com/namespaces/keywords/nyt_geo" >
+China
+            </category>
+
+            <pubDate>
+Fri, 07 Nov 2014 11:08:07 GMT
+            </pubDate>
+
+            <guid isPermaLink="false" >
+http://www.nytimes.com/2014/11/08/world/asia/to-impress-apec-leaders-china-cracks-down-on-beijing-life.html
+            </guid>
+
+            <dc:creator>
+By DIDI KIRSTEN TATLOW
+            </dc:creator>
+        </item>
+        <item>
+            <title>
+China and Japan Agree to Resume Dialogue
+            </title>
+
+            <link>
+http://rss.nytimes.com/c/34625/f/667200/s/403fbc1a/sc/30/l/0L0Snytimes0N0Caponline0C20A140C110C0A70Cworld0Casia0Cap0Eas0Echina0Ejapan0Bhtml0Dpartner0Frss0Gemc0Frss/story01.htm
+            </link>
+
+            <description>
+China said Friday it reached agreement with Japan to ramp up high-level contacts, the strongest indication yet of a possible meeting between Chinese President Xi Jinping and Japanese Prime Minister Shinzo Abe at next week's Asia-Pacific Economic Cooperation summit.&lt;img width='1' height='1' src='http://rss.nytimes.com/c/34625/f/667200/s/403fbc1a/sc/30/mf.gif' border='0'/&gt;&lt;br clear='all'/&gt;&lt;br/&gt;&lt;br/&gt;&lt;a href="http://da.feedsportal.com/r/211597283475/u/421/f/667200/c/34625/s/403fbc1a/sc/30/rc/1/rc.htm" rel="nofollow"&gt;&lt;img src="http://da.feedsportal.com/r/211597283475/u/421/f/667200/c/34625/s/403fbc1a/sc/30/rc/1/rc.img" border="0"/&gt;&lt;/a&gt;&lt;br/&gt;&lt;a href="http://da.feedsportal.com/r/211597283475/u/421/f/667200/c/34625/s/403fbc1a/sc/30/rc/2/rc.htm" rel="nofollow"&gt;&lt;img src="http://da.feedsportal.com/r/211597283475/u/421/f/667200/c/34625/s/403fbc1a/sc/30/rc/2/rc.img" border="0"/&gt;&lt;/a&gt;&lt;br/&gt;&lt;a href="http://da.feedsportal.com/r/211597283475/u/421/f/667200/c/34625/s/403fbc1a/sc/30/rc/3/rc.htm" rel="nofollow"&gt;&lt;img src="http://da.feedsportal.com/r/211597283475/u/421/f/667200/c/34625/s/403fbc1a/sc/30/rc/3/rc.img" border="0"/&gt;&lt;/a&gt;&lt;br/&gt;&lt;br/&gt;&lt;a href="http://da.feedsportal.com/r/211597283475/u/421/f/667200/c/34625/s/403fbc1a/sc/30/a2.htm"&gt;&lt;img src="http://da.feedsportal.com/r/211597283475/u/421/f/667200/c/34625/s/403fbc1a/sc/30/a2.img" border="0"/&gt;&lt;/a&gt;&lt;img width="1" height="1" src="http://pi.feedsportal.com/r/211597283475/u/421/f/667200/c/34625/s/403fbc1a/sc/30/a2t.img" border="0"/&gt;
+            </description>
+
+            <pubDate>
+Fri, 07 Nov 2014 10:02:44 GMT
+            </pubDate>
+
+            <guid isPermaLink="false" >
+http://www.nytimes.com/aponline/2014/11/07/world/asia/ap-as-china-japan.html
+            </guid>
+
+            <dc:creator>
+By THE ASSOCIATED PRESS
+            </dc:creator>
+        </item>
+        <item>
+            <atom:link
+                href="http://www.nytimes.com/2014/11/07/sports/holes-in-kenyas-doping-system-cast-a-shadow-on-all-its-runners.html?partner=rss&amp;emc=rss"
+                rel="standout" />
+
+            <title>
+Sports of The Times: Problems With Antidoping System Cast a Shadow on Kenyan Runners
+            </title>
+
+            <link>
+http://rss.nytimes.com/c/34625/f/667200/s/403dd0c6/sc/14/l/0L0Snytimes0N0C20A140C110C0A70Csports0Choles0Ein0Ekenyas0Edoping0Esystem0Ecast0Ea0Eshadow0Eon0Eall0Eits0Erunners0Bhtml0Dpartner0Frss0Gemc0Frss/story01.htm
+            </link>
+
+            <description>
+The Kenyan marathon runner Rita Jeptoo failed an initial doping screening, raising questions about doping enforcement in that African nation.&lt;img width='1' height='1' src='http://rss.nytimes.com/c/34625/f/667200/s/403dd0c6/sc/14/mf.gif' border='0'/&gt;&lt;br clear='all'/&gt;&lt;br/&gt;&lt;br/&gt;&lt;a href="http://da.feedsportal.com/r/211597323068/u/421/f/667200/c/34625/s/403dd0c6/sc/14/rc/1/rc.htm" rel="nofollow"&gt;&lt;img src="http://da.feedsportal.com/r/211597323068/u/421/f/667200/c/34625/s/403dd0c6/sc/14/rc/1/rc.img" border="0"/&gt;&lt;/a&gt;&lt;br/&gt;&lt;a href="http://da.feedsportal.com/r/211597323068/u/421/f/667200/c/34625/s/403dd0c6/sc/14/rc/2/rc.htm" rel="nofollow"&gt;&lt;img src="http://da.feedsportal.com/r/211597323068/u/421/f/667200/c/34625/s/403dd0c6/sc/14/rc/2/rc.img" border="0"/&gt;&lt;/a&gt;&lt;br/&gt;&lt;a href="http://da.feedsportal.com/r/211597323068/u/421/f/667200/c/34625/s/403dd0c6/sc/14/rc/3/rc.htm" rel="nofollow"&gt;&lt;img src="http://da.feedsportal.com/r/211597323068/u/421/f/667200/c/34625/s/403dd0c6/sc/14/rc/3/rc.img" border="0"/&gt;&lt;/a&gt;&lt;br/&gt;&lt;br/&gt;&lt;a href="http://da.feedsportal.com/r/211597323068/u/421/f/667200/c/34625/s/403dd0c6/sc/14/a2.htm"&gt;&lt;img src="http://da.feedsportal.com/r/211597323068/u/421/f/667200/c/34625/s/403dd0c6/sc/14/a2.img" border="0"/&gt;&lt;/a&gt;&lt;img width="1" height="1" src="http://pi.feedsportal.com/r/211597323068/u/421/f/667200/c/34625/s/403dd0c6/sc/14/a2t.img" border="0"/&gt;
+            </description>
+
+            <category domain="http://www.nytimes.com/namespaces/keywords/des" >
+Doping (Sports)
+            </category>
+            <category domain="http://www.nytimes.com/namespaces/keywords/mdes" >
+Running
+            </category>
+            <category domain="http://www.nytimes.com/namespaces/keywords/des" >
+Tests (Drug Use)
+            </category>
+            <category domain="http://www.nytimes.com/namespaces/keywords/mdes" >
+Marathon Running
+            </category>
+            <category domain="http://www.nytimes.com/namespaces/keywords/des" >
+New York City Marathon
+            </category>
+            <category domain="http://www.nytimes.com/namespaces/keywords/nyt_org_all" >
+International Assn of Athletics Federations
+            </category>
+
+            <pubDate>
+Fri, 07 Nov 2014 10:01:33 GMT
+            </pubDate>
+
+            <guid isPermaLink="false" >
+http://www.nytimes.com/2014/11/07/sports/holes-in-kenyas-doping-system-cast-a-shadow-on-all-its-runners.html
+            </guid>
+
+            <dc:creator>
+By JULIET MACUR
+            </dc:creator>
+
+            <media:credit scheme="urn:ebu" >
+Jonathan Daniel/Getty Images
+            </media:credit>
+
+            <media:description>
+Rita Jeptoo of Kenya, a three-time winner of the Boston Marathon, recently failed an initial test for the banned substance EPO.
+            </media:description>
+
+            <media:content
+                height="151"
+                lang=""
+                url="http://graphics8.nytimes.com/images/2014/11/07/sports/Y-MACUR/Y-MACUR-moth-v2.jpg"
+                width="151" />
+        </item>
+        <item>
+            <atom:link
+                href="http://lens.blogs.nytimes.com/2014/11/07/family-time-on-prison-buses/?partner=rss&amp;emc=rss"
+                rel="standout" />
+
+            <title>
+Lens Blog: Family Time on Prison Buses
+            </title>
+
+            <link>
+http://rss.nytimes.com/c/34625/f/667200/s/4042cf0e/sc/10/l/0Llens0Bblogs0Bnytimes0N0C20A140C110C0A70Cfamily0Etime0Eon0Eprison0Ebuses0C0Dpartner0Frss0Gemc0Frss/story01.htm
+            </link>
+
+            <description>
+A little-known network of buses and vans takes people from New York City to visit relatives in prisons scattered in small towns across the state.&lt;img width='1' height='1' src='http://rss.nytimes.com/c/34625/f/667200/s/4042cf0e/sc/10/mf.gif' border='0'/&gt;&lt;br clear='all'/&gt;
+            </description>
+
+            <category domain="http://www.nytimes.com/namespaces/" >
+New York City
+            </category>
+            <category domain="http://www.nytimes.com/namespaces/" >
+Attica
+            </category>
+            <category domain="http://www.nytimes.com/namespaces/" >
+Photography
+            </category>
+            <category domain="http://www.nytimes.com/namespaces/" >
+Germany
+            </category>
+            <category domain="http://www.nytimes.com/namespaces/" >
+Bronx (NYC)
+            </category>
+            <category domain="http://www.nytimes.com/namespaces/" >
+Manhattan (NYC)
+            </category>
+            <category domain="http://www.nytimes.com/namespaces/" >
+Jacobia Dahm
+            </category>
+            <category domain="http://www.nytimes.com/namespaces/" >
+Buses
+            </category>
+            <category domain="http://www.nytimes.com/namespaces/" >
+Brooklyn (NYC)
+            </category>
+            <category domain="http://www.nytimes.com/namespaces/" >
+Canada
+            </category>
+            <category domain="http://www.nytimes.com/namespaces/" >
+Andrew Boryga
+            </category>
+
+            <pubDate>
+Fri, 07 Nov 2014 10:00:16 GMT
+            </pubDate>
+
+            <guid isPermaLink="false" >
+http://lens.blogs.nytimes.com/2014/11/07/family-time-on-prison-buses/
+            </guid>
+
+            <dc:creator>
+By ANDREW BORYGA
+            </dc:creator>
+
+            <media:credit scheme="urn:ebu" >
+Jacobia Dahm
+            </media:credit>
+
+            <media:description>
+Attica is a maximum-security prison in upstate New York. Like all maximum-security prisons, Attica has walls instead of fences, which are reminiscent of medieval castles.
+            </media:description>
+
+            <media:content
+                height="151"
+                lang=""
+                url="http://graphics8.nytimes.com/images/2014/11/06/blogs/20141106-lens-jacobia-3/20141106-lens-jacobia-3-moth.jpg"
+                width="151" />
+        </item>
+        <item>
+            <atom:link
+                href="http://www.nytimes.com/2014/11/07/world/europe/in-britain-guidelines-for-spying-on-lawyers-and-clients.html?partner=rss&amp;emc=rss"
+                rel="standout" />
+
+            <title>
+In Britain, Guidelines for Spying on Lawyers and Clients
+            </title>
+
+            <link>
+http://rss.nytimes.com/c/34625/f/667200/s/403dd0c2/sc/8/l/0L0Snytimes0N0C20A140C110C0A70Cworld0Ceurope0Cin0Ebritain0Eguidelines0Efor0Espying0Eon0Elawyers0Eand0Eclients0Bhtml0Dpartner0Frss0Gemc0Frss/story01.htm
+            </link>
+
+            <description>
+British spies have the authority to intercept privileged communications — and may have illegally exploited that access — according to confidential documents that were released Thursday.&lt;img width='1' height='1' src='http://rss.nytimes.com/c/34625/f/667200/s/403dd0c2/sc/8/mf.gif' border='0'/&gt;&lt;br clear='all'/&gt;&lt;br/&gt;&lt;br/&gt;&lt;a href="http://da.feedsportal.com/r/211597323070/u/421/f/667200/c/34625/s/403dd0c2/sc/8/rc/1/rc.htm" rel="nofollow"&gt;&lt;img src="http://da.feedsportal.com/r/211597323070/u/421/f/667200/c/34625/s/403dd0c2/sc/8/rc/1/rc.img" border="0"/&gt;&lt;/a&gt;&lt;br/&gt;&lt;a href="http://da.feedsportal.com/r/211597323070/u/421/f/667200/c/34625/s/403dd0c2/sc/8/rc/2/rc.htm" rel="nofollow"&gt;&lt;img src="http://da.feedsportal.com/r/211597323070/u/421/f/667200/c/34625/s/403dd0c2/sc/8/rc/2/rc.img" border="0"/&gt;&lt;/a&gt;&lt;br/&gt;&lt;a href="http://da.feedsportal.com/r/211597323070/u/421/f/667200/c/34625/s/403dd0c2/sc/8/rc/3/rc.htm" rel="nofollow"&gt;&lt;img src="http://da.feedsportal.com/r/211597323070/u/421/f/667200/c/34625/s/403dd0c2/sc/8/rc/3/rc.img" border="0"/&gt;&lt;/a&gt;&lt;br/&gt;&lt;br/&gt;&lt;a href="http://da.feedsportal.com/r/211597323070/u/421/f/667200/c/34625/s/403dd0c2/sc/8/a2.htm"&gt;&lt;img src="http://da.feedsportal.com/r/211597323070/u/421/f/667200/c/34625/s/403dd0c2/sc/8/a2.img" border="0"/&gt;&lt;/a&gt;&lt;img width="1" height="1" src="http://pi.feedsportal.com/r/211597323070/u/421/f/667200/c/34625/s/403dd0c2/sc/8/a2t.img" border="0"/&gt;
+            </description>
+
+            <category domain="http://www.nytimes.com/namespaces/keywords/des" >
+Surveillance of Citizens by Government
+            </category>
+            <category domain="http://www.nytimes.com/namespaces/keywords/nyt_geo" >
+Libya
+            </category>
+            <category domain="http://www.nytimes.com/namespaces/keywords/nyt_org_all" >
+Government Communications Headquarters (Great Britain)
+            </category>
+            <category domain="http://www.nytimes.com/namespaces/keywords/mdes" >
+Suits and Litigation (Civil)
+            </category>
+            <category domain="http://www.nytimes.com/namespaces/keywords/nyt_per" >
+Snowden, Edward J
+            </category>
+            <category domain="http://www.nytimes.com/namespaces/keywords/nyt_geo" >
+Great Britain
+            </category>
+            <category domain="http://www.nytimes.com/namespaces/keywords/nyt_org_all" >
+British Secret Intelligence Service
+            </category>
+            <category domain="http://www.nytimes.com/namespaces/keywords/nyt_org_all" >
+Security Service (MI5)
+            </category>
+            <category domain="http://www.nytimes.com/namespaces/keywords/mdes" >
+Espionage and Intelligence Services
+            </category>
+
+            <pubDate>
+Fri, 07 Nov 2014 02:56:52 GMT
+            </pubDate>
+
+            <guid isPermaLink="false" >
+http://www.nytimes.com/2014/11/07/world/europe/in-britain-guidelines-for-spying-on-lawyers-and-clients.html
+            </guid>
+
+            <dc:creator>
+By KATRIN BENNHOLD
+            </dc:creator>
+        </item>
+        <item>
+            <atom:link
+                href="http://www.nytimes.com/2014/11/07/world/asia/another-ex-commando-says-he-shot-bin-laden.html?partner=rss&amp;emc=rss"
+                rel="standout" />
+
+            <title>
+Another Ex-Commando Says He Shot Bin Laden
+            </title>
+
+            <link>
+http://rss.nytimes.com/c/34625/f/667200/s/403dd0c4/sc/24/l/0L0Snytimes0N0C20A140C110C0A70Cworld0Casia0Canother0Eex0Ecommando0Esays0Ehe0Eshot0Ebin0Eladen0Bhtml0Dpartner0Frss0Gemc0Frss/story01.htm
+            </link>
+
+            <description>
+Robert O’Neill, a former member of the Navy SEALs, has come forward claiming to have shot the Qaeda leader during the daring operation in Pakistan in 2011.&lt;img width='1' height='1' src='http://rss.nytimes.com/c/34625/f/667200/s/403dd0c4/sc/24/mf.gif' border='0'/&gt;&lt;br clear='all'/&gt;&lt;br/&gt;&lt;br/&gt;&lt;a href="http://da.feedsportal.com/r/211597323069/u/421/f/667200/c/34625/s/403dd0c4/sc/24/rc/1/rc.htm" rel="nofollow"&gt;&lt;img src="http://da.feedsportal.com/r/211597323069/u/421/f/667200/c/34625/s/403dd0c4/sc/24/rc/1/rc.img" border="0"/&gt;&lt;/a&gt;&lt;br/&gt;&lt;a href="http://da.feedsportal.com/r/211597323069/u/421/f/667200/c/34625/s/403dd0c4/sc/24/rc/2/rc.htm" rel="nofollow"&gt;&lt;img src="http://da.feedsportal.com/r/211597323069/u/421/f/667200/c/34625/s/403dd0c4/sc/24/rc/2/rc.img" border="0"/&gt;&lt;/a&gt;&lt;br/&gt;&lt;a href="http://da.feedsportal.com/r/211597323069/u/421/f/667200/c/34625/s/403dd0c4/sc/24/rc/3/rc.htm" rel="nofollow"&gt;&lt;img src="http://da.feedsportal.com/r/211597323069/u/421/f/667200/c/34625/s/403dd0c4/sc/24/rc/3/rc.img" border="0"/&gt;&lt;/a&gt;&lt;br/&gt;&lt;br/&gt;&lt;a href="http://da.feedsportal.com/r/211597323069/u/421/f/667200/c/34625/s/403dd0c4/sc/24/a2.htm"&gt;&lt;img src="http://da.feedsportal.com/r/211597323069/u/421/f/667200/c/34625/s/403dd0c4/sc/24/a2.img" border="0"/&gt;&lt;/a&gt;&lt;img width="1" height="1" src="http://pi.feedsportal.com/r/211597323069/u/421/f/667200/c/34625/s/403dd0c4/sc/24/a2t.img" border="0"/&gt;
+            </description>
+
+            <category domain="http://www.nytimes.com/namespaces/keywords/mdes" >
+United States Defense and Military Forces
+            </category>
+            <category domain="http://www.nytimes.com/namespaces/keywords/nyt_org_all" >
+Navy Seals
+            </category>
+            <category domain="http://www.nytimes.com/namespaces/keywords/nyt_per" >
+Bissonnette, Matt
+            </category>
+            <category domain="http://www.nytimes.com/namespaces/keywords/nyt_geo" >
+Abbottabad (Pakistan)
+            </category>
+            <category domain="http://www.nytimes.com/namespaces/keywords/nyt_per" >
+Robert O'Neill
+            </category>
+            <category domain="http://www.nytimes.com/namespaces/keywords/nyt_per" >
+bin Laden, Osama
+            </category>
+            <category domain="http://www.nytimes.com/namespaces/keywords/mdes" >
+Classified Information and State Secrets
+            </category>
+
+            <pubDate>
+Fri, 07 Nov 2014 02:45:11 GMT
+            </pubDate>
+
+            <guid isPermaLink="false" >
+http://www.nytimes.com/2014/11/07/world/asia/another-ex-commando-says-he-shot-bin-laden.html
+            </guid>
+
+            <dc:creator>
+By NICHOLAS KULISH, CHRISTOPHER DREW and SEAN D. NAYLOR
+            </dc:creator>
+
+            <media:credit scheme="urn:ebu" >
+Walter Hinick/The Montana Standard, via Associated Press
+            </media:credit>
+
+            <media:description>
+Robert O’Neill, a former member of SEAL Team 6, has said that he fired two shots that killed Osama bin Laden.
+            </media:description>
+
+            <media:content
+                height="151"
+                lang=""
+                url="http://graphics8.nytimes.com/images/2014/11/07/world/07seals-alt/07seals-alt-moth.jpg"
+                width="151" />
+        </item>
+        <item>
+            <atom:link
+                href="http://www.nytimes.com/2014/11/07/us/politics/midterms-for-clinton-aides-arent-all-gloom-.html?partner=rss&amp;emc=rss"
+                rel="standout" />
+
+            <title>
+Midterms, for Clinton Team, Aren’t All Gloom
+            </title>
+
+            <link>
+http://rss.nytimes.com/c/34625/f/667200/s/403fc189/sc/1/l/0L0Snytimes0N0C20A140C110C0A70Cus0Cpolitics0Cmidterms0Efor0Eclinton0Eaides0Earent0Eall0Egloom0E0Bhtml0Dpartner0Frss0Gemc0Frss/story01.htm
+            </link>
+
+            <description>
+The Democratic debacle in Tuesday’s midterm elections has put fresh urgency on Hillary Rodham Clinton’s efforts to create a blueprint for a 2016 presidential candidacy.&lt;img width='1' height='1' src='http://rss.nytimes.com/c/34625/f/667200/s/403fc189/sc/1/mf.gif' border='0'/&gt;&lt;br clear='all'/&gt;
+            </description>
+
+            <category domain="http://www.nytimes.com/namespaces/keywords/des" >
+Presidential Election of 2016
+            </category>
+            <category domain="http://www.nytimes.com/namespaces/keywords/nyt_per" >
+Clinton, Hillary Rodham
+            </category>
+            <category domain="http://www.nytimes.com/namespaces/keywords/mdes" >
+United States Politics and Government
+            </category>
+            <category domain="http://www.nytimes.com/namespaces/keywords/des" >
+Midterm Elections (2014)
+            </category>
+
+            <pubDate>
+Fri, 07 Nov 2014 02:26:19 GMT
+            </pubDate>
+
+            <guid isPermaLink="false" >
+http://www.nytimes.com/2014/11/07/us/politics/midterms-for-clinton-aides-arent-all-gloom-.html
+            </guid>
+
+            <dc:creator>
+By AMY CHOZICK
+            </dc:creator>
+
+            <media:credit scheme="urn:ebu" >
+Jonathan Bachman/Reuters
+            </media:credit>
+
+            <media:description>
+Hillary Rodham Clinton
+            </media:description>
+
+            <media:content
+                height="151"
+                lang=""
+                url="http://graphics8.nytimes.com/images/2014/11/07/us/politics/CLINTON/CLINTON-moth.jpg"
+                width="151" />
+        </item>
+        <item>
+            <atom:link
+                href="http://www.nytimes.com/2014/11/07/sports/soccer/secret-fifa-report-stirs-dispute-between-investigators.html?partner=rss&amp;emc=rss"
+                rel="standout" />
+
+            <title>
+Secret FIFA Report Stirs Dispute Between Investigators
+            </title>
+
+            <link>
+http://rss.nytimes.com/c/34625/f/667200/s/403dd0cb/sc/24/l/0L0Snytimes0N0C20A140C110C0A70Csports0Csoccer0Csecret0Efifa0Ereport0Estirs0Edispute0Ebetween0Einvestigators0Bhtml0Dpartner0Frss0Gemc0Frss/story01.htm
+            </link>
+
+            <description>
+A report on the circumstances surrounding the winning World Cup bids by Russia and Qatar has not been released, and the men at the center of the investigation disagree about whether it should ever be made public.&lt;img width='1' height='1' src='http://rss.nytimes.com/c/34625/f/667200/s/403dd0cb/sc/24/mf.gif' border='0'/&gt;&lt;br clear='all'/&gt;&lt;br/&gt;&lt;br/&gt;&lt;a href="http://da.feedsportal.com/r/211597323067/u/421/f/667200/c/34625/s/403dd0cb/sc/24/rc/1/rc.htm" rel="nofollow"&gt;&lt;img src="http://da.feedsportal.com/r/211597323067/u/421/f/667200/c/34625/s/403dd0cb/sc/24/rc/1/rc.img" border="0"/&gt;&lt;/a&gt;&lt;br/&gt;&lt;a href="http://da.feedsportal.com/r/211597323067/u/421/f/667200/c/34625/s/403dd0cb/sc/24/rc/2/rc.htm" rel="nofollow"&gt;&lt;img src="http://da.feedsportal.com/r/211597323067/u/421/f/667200/c/34625/s/403dd0cb/sc/24/rc/2/rc.img" border="0"/&gt;&lt;/a&gt;&lt;br/&gt;&lt;a href="http://da.feedsportal.com/r/211597323067/u/421/f/667200/c/34625/s/403dd0cb/sc/24/rc/3/rc.htm" rel="nofollow"&gt;&lt;img src="http://da.feedsportal.com/r/211597323067/u/421/f/667200/c/34625/s/403dd0cb/sc/24/rc/3/rc.img" border="0"/&gt;&lt;/a&gt;&lt;br/&gt;&lt;br/&gt;&lt;a href="http://da.feedsportal.com/r/211597323067/u/421/f/667200/c/34625/s/403dd0cb/sc/24/a2.htm"&gt;&lt;img src="http://da.feedsportal.com/r/211597323067/u/421/f/667200/c/34625/s/403dd0cb/sc/24/a2.img" border="0"/&gt;&lt;/a&gt;&lt;img width="1" height="1" src="http://pi.feedsportal.com/r/211597323067/u/421/f/667200/c/34625/s/403dd0cb/sc/24/a2t.img" border="0"/&gt;
+            </description>
+
+            <category domain="http://www.nytimes.com/namespaces/keywords/mdes" >
+Ethics and Official Misconduct
+            </category>
+            <category domain="http://www.nytimes.com/namespaces/keywords/des" >
+World Cup 2022 (Soccer)
+            </category>
+            <category domain="http://www.nytimes.com/namespaces/keywords/des" >
+World Cup 2018 (Soccer)
+            </category>
+            <category domain="http://www.nytimes.com/namespaces/keywords/nyt_org_all" >
+International Federation of Association Football (FIFA)
+            </category>
+            <category domain="http://www.nytimes.com/namespaces/keywords/mdes" >
+Soccer
+            </category>
+            <category domain="http://www.nytimes.com/namespaces/keywords/nyt_per" >
+Garcia, Michael J
+            </category>
+
+            <pubDate>
+Fri, 07 Nov 2014 02:02:30 GMT
+            </pubDate>
+
+            <guid isPermaLink="false" >
+http://www.nytimes.com/2014/11/07/sports/soccer/secret-fifa-report-stirs-dispute-between-investigators.html
+            </guid>
+
+            <dc:creator>
+By SAM BORDEN
+            </dc:creator>
+
+            <media:credit scheme="urn:ebu" >
+Sebastien Bozon/Agence France-Presse — Getty Images
+            </media:credit>
+
+            <media:description>
+Michael J. Garcia, left, at the end of a news conference in Zurich in 2012 with Hans-Joachim Eckert, a German judge who has chosen not to release Garcia’s report on the 2018 and 2022 World Cup bids.
+            </media:description>
+
+            <media:content
+                height="151"
+                lang=""
+                url="http://graphics8.nytimes.com/images/2014/11/07/sports/Y-JP-SOCCER/Y-JP-SOCCER-moth.jpg"
+                width="151" />
+        </item>
+        <item>
+            <atom:link
+                href="http://www.nytimes.com/2014/11/07/business/international/in-ukraine-crisis-us-businesses-face-tit-for-tat-response-to-sanctions.html?partner=rss&amp;emc=rss"
+                rel="standout" />
+
+            <title>
+In Ukraine Crisis, U.S. Businesses Face Tit-for-Tat Response to Sanctions
+            </title>
+
+            <link>
+http://rss.nytimes.com/c/34625/f/667200/s/403fbc0a/sc/1/l/0L0Snytimes0N0C20A140C110C0A70Cbusiness0Cinternational0Cin0Eukraine0Ecrisis0Eus0Ebusinesses0Eface0Etit0Efor0Etat0Eresponse0Eto0Esanctions0Bhtml0Dpartner0Frss0Gemc0Frss/story01.htm
+            </link>
+
+            <description>
+American brands doing business in Russia have become political targets since the European Union and United States enacted sanctions.&lt;img width='1' height='1' src='http://rss.nytimes.com/c/34625/f/667200/s/403fbc0a/sc/1/mf.gif' border='0'/&gt;&lt;br clear='all'/&gt;
+            </description>
+
+            <category domain="http://www.nytimes.com/namespaces/keywords/nyt_geo" >
+Russia
+            </category>
+            <category domain="http://www.nytimes.com/namespaces/keywords/mdes" >
+Oil (Petroleum) and Gasoline
+            </category>
+            <category domain="http://www.nytimes.com/namespaces/keywords/des" >
+Embargoes and Sanctions
+            </category>
+            <category domain="http://www.nytimes.com/namespaces/keywords/des" >
+Fast Food Industry
+            </category>
+            <category domain="http://www.nytimes.com/namespaces/keywords/des" >
+Banking and Financial Institutions
+            </category>
+            <category domain="http://www.nytimes.com/namespaces/keywords/mdes" >
+Corporations
+            </category>
+            <category domain="http://www.nytimes.com/namespaces/keywords/des" >
+International Relations
+            </category>
+
+            <pubDate>
+Fri, 07 Nov 2014 01:47:53 GMT
+            </pubDate>
+
+            <guid isPermaLink="false" >
+http://www.nytimes.com/2014/11/07/business/international/in-ukraine-crisis-us-businesses-face-tit-for-tat-response-to-sanctions.html
+            </guid>
+
+            <dc:creator>
+By ANDREW E. KRAMER
+            </dc:creator>
+
+            <media:credit scheme="urn:ebu" >
+Max Avdeev for The New York Times
+            </media:credit>
+
+            <media:description>
+Once hugely popular in Russia, McDonald's recently reported its steepest quarterly decline since 2002.
+            </media:description>
+
+            <media:content
+                height="151"
+                lang=""
+                url="http://graphics8.nytimes.com/images/2014/10/31/business/sanctions-pic1/sanctions-pic1-moth.jpg"
+                width="151" />
+        </item>
+        <item>
+            <atom:link
+                href="http://www.nytimes.com/2014/11/07/us/politics/-meager-returns-for-the-democrats-biggest-donor-tom-steyer.html?partner=rss&amp;emc=rss"
+                rel="standout" />
+
+            <title>
+Meager Returns for the Democrats’ Biggest Donor
+            </title>
+
+            <link>
+http://rss.nytimes.com/c/34625/f/667200/s/403dd0c9/sc/7/l/0L0Snytimes0N0C20A140C110C0A70Cus0Cpolitics0C0Emeager0Ereturns0Efor0Ethe0Edemocrats0Ebiggest0Edonor0Etom0Esteyer0Bhtml0Dpartner0Frss0Gemc0Frss/story01.htm
+            </link>
+
+            <description>
+Tom Steyer, the billionaire environmentalist who spent at least $57 million of his own money to influence Tuesday’s outcome, appears to have largely wasted his time and money.&lt;img width='1' height='1' src='http://rss.nytimes.com/c/34625/f/667200/s/403dd0c9/sc/7/mf.gif' border='0'/&gt;&lt;br clear='all'/&gt;&lt;br/&gt;&lt;br/&gt;&lt;a href="http://da.feedsportal.com/r/211597323066/u/421/f/667200/c/34625/s/403dd0c9/sc/7/rc/1/rc.htm" rel="nofollow"&gt;&lt;img src="http://da.feedsportal.com/r/211597323066/u/421/f/667200/c/34625/s/403dd0c9/sc/7/rc/1/rc.img" border="0"/&gt;&lt;/a&gt;&lt;br/&gt;&lt;a href="http://da.feedsportal.com/r/211597323066/u/421/f/667200/c/34625/s/403dd0c9/sc/7/rc/2/rc.htm" rel="nofollow"&gt;&lt;img src="http://da.feedsportal.com/r/211597323066/u/421/f/667200/c/34625/s/403dd0c9/sc/7/rc/2/rc.img" border="0"/&gt;&lt;/a&gt;&lt;br/&gt;&lt;a href="http://da.feedsportal.com/r/211597323066/u/421/f/667200/c/34625/s/403dd0c9/sc/7/rc/3/rc.htm" rel="nofollow"&gt;&lt;img src="http://da.feedsportal.com/r/211597323066/u/421/f/667200/c/34625/s/403dd0c9/sc/7/rc/3/rc.img" border="0"/&gt;&lt;/a&gt;&lt;br/&gt;&lt;br/&gt;&lt;a href="http://da.feedsportal.com/r/211597323066/u/421/f/667200/c/34625/s/403dd0c9/sc/7/a2.htm"&gt;&lt;img src="http://da.feedsportal.com/r/211597323066/u/421/f/667200/c/34625/s/403dd0c9/sc/7/a2.img" border="0"/&gt;&lt;/a&gt;&lt;img width="1" height="1" src="http://pi.feedsportal.com/r/211597323066/u/421/f/667200/c/34625/s/403dd0c9/sc/7/a2t.img" border="0"/&gt;
+            </description>
+
+            <category domain="http://www.nytimes.com/namespaces/keywords/nyt_per" >
+Steyer, Thomas F
+            </category>
+            <category domain="http://www.nytimes.com/namespaces/keywords/des" >
+Global Warming
+            </category>
+            <category domain="http://www.nytimes.com/namespaces/keywords/nyt_org_all" >
+NextGen Climate
+            </category>
+            <category domain="http://www.nytimes.com/namespaces/keywords/des" >
+Campaign Finance
+            </category>
+            <category domain="http://www.nytimes.com/namespaces/keywords/des" >
+Midterm Elections (2014)
+            </category>
+            <category domain="http://www.nytimes.com/namespaces/keywords/mdes" >
+Environment
+            </category>
+            <category domain="http://www.nytimes.com/namespaces/keywords/mdes" >
+Law and Legislation
+            </category>
+
+            <pubDate>
+Fri, 07 Nov 2014 01:45:01 GMT
+            </pubDate>
+
+            <guid isPermaLink="false" >
+http://www.nytimes.com/2014/11/07/us/politics/-meager-returns-for-the-democrats-biggest-donor-tom-steyer.html
+            </guid>
+
+            <dc:creator>
+By CORAL DAVENPORT
+            </dc:creator>
+
+            <media:credit scheme="urn:ebu" >
+Damian Dovarganes/Associated Press
+            </media:credit>
+
+            <media:description>
+Tom Steyer at a school in October. The $57 million he spent on the elections backed few winners.
+            </media:description>
+
+            <media:content
+                height="151"
+                lang=""
+                url="http://graphics8.nytimes.com/images/2014/11/07/us/STEYER/STEYER-moth.jpg"
+                width="151" />
+        </item>
+        <item>
+            <atom:link
+                href="http://www.nytimes.com/2014/11/09/movies/red-army-charts-rise-and-fall-of-a-soviet-hockey-team.html?partner=rss&amp;emc=rss"
+                rel="standout" />
+
+            <title>
+‘Red Army’ Charts Rise and Fall of a Soviet Hockey Team
+            </title>
+
+            <link>
+http://rss.nytimes.com/c/34625/f/667200/s/403e0a34/sc/17/l/0L0Snytimes0N0C20A140C110C0A90Cmovies0Cred0Earmy0Echarts0Erise0Eand0Efall0Eof0Ea0Esoviet0Ehockey0Eteam0Bhtml0Dpartner0Frss0Gemc0Frss/story01.htm
+            </link>
+
+            <description>
+“Red Army” traces the rise and fall of the Soviet hockey team of the 1970s and ’80s, whose grace and skill were unmatched, even as the players chafed at restrictions.&lt;img width='1' height='1' src='http://rss.nytimes.com/c/34625/f/667200/s/403e0a34/sc/17/mf.gif' border='0'/&gt;&lt;br clear='all'/&gt;
+            </description>
+
+            <category domain="http://www.nytimes.com/namespaces/keywords/nyt_ttl" >
+Red Army (Movie)
+            </category>
+            <category domain="http://www.nytimes.com/namespaces/keywords/nyt_per" >
+Polsky, Gabe
+            </category>
+            <category domain="http://www.nytimes.com/namespaces/keywords/des" >
+Hockey, Ice
+            </category>
+            <category domain="http://www.nytimes.com/namespaces/keywords/des" >
+Movies
+            </category>
+
+            <pubDate>
+Fri, 07 Nov 2014 01:01:07 GMT
+            </pubDate>
+
+            <guid isPermaLink="false" >
+http://www.nytimes.com/2014/11/09/movies/red-army-charts-rise-and-fall-of-a-soviet-hockey-team.html
+            </guid>
+
+            <dc:creator>
+By CHARLES McGRATH
+            </dc:creator>
+
+            <media:credit scheme="urn:ebu" >
+Polsky Films/Sony Pictures Classics
+            </media:credit>
+
+            <media:description>
+The Soviet hockey team’s much-feared “K.L.M.” unit in 1988.
+            </media:description>
+
+            <media:content
+                height="151"
+                lang=""
+                url="http://graphics8.nytimes.com/images/2014/11/09/arts/09REDARMY2/09REDARMY2-moth-v2.jpg"
+                width="151" />
+        </item>
+        <item>
+            <atom:link
+                href="http://www.nytimes.com/2014/11/07/business/airbag-maker-takata-is-said-to-have-conducted-secret-tests.html?partner=rss&amp;emc=rss"
+                rel="standout" />
+
+            <title>
+Takata Saw and Hid Risk in Airbags in 2004, Former Workers Say
+            </title>
+
+            <link>
+http://rss.nytimes.com/c/34625/f/667200/s/403ced6a/sc/8/l/0L0Snytimes0N0C20A140C110C0A70Cbusiness0Cairbag0Emaker0Etakata0Eis0Esaid0Eto0Ehave0Econducted0Esecret0Etests0Bhtml0Dpartner0Frss0Gemc0Frss/story01.htm
+            </link>
+
+            <description>
+When secret tests a decade ago showed its airbags could crack and explode, the company tried to erase the evidence, former employees said.&lt;img width='1' height='1' src='http://rss.nytimes.com/c/34625/f/667200/s/403ced6a/sc/8/mf.gif' border='0'/&gt;&lt;br clear='all'/&gt;&lt;br/&gt;&lt;br/&gt;&lt;a href="http://da.feedsportal.com/r/211597297929/u/421/f/667200/c/34625/s/403ced6a/sc/8/rc/1/rc.htm" rel="nofollow"&gt;&lt;img src="http://da.feedsportal.com/r/211597297929/u/421/f/667200/c/34625/s/403ced6a/sc/8/rc/1/rc.img" border="0"/&gt;&lt;/a&gt;&lt;br/&gt;&lt;a href="http://da.feedsportal.com/r/211597297929/u/421/f/667200/c/34625/s/403ced6a/sc/8/rc/2/rc.htm" rel="nofollow"&gt;&lt;img src="http://da.feedsportal.com/r/211597297929/u/421/f/667200/c/34625/s/403ced6a/sc/8/rc/2/rc.img" border="0"/&gt;&lt;/a&gt;&lt;br/&gt;&lt;a href="http://da.feedsportal.com/r/211597297929/u/421/f/667200/c/34625/s/403ced6a/sc/8/rc/3/rc.htm" rel="nofollow"&gt;&lt;img src="http://da.feedsportal.com/r/211597297929/u/421/f/667200/c/34625/s/403ced6a/sc/8/rc/3/rc.img" border="0"/&gt;&lt;/a&gt;&lt;br/&gt;&lt;br/&gt;&lt;a href="http://da.feedsportal.com/r/211597297929/u/421/f/667200/c/34625/s/403ced6a/sc/8/a2.htm"&gt;&lt;img src="http://da.feedsportal.com/r/211597297929/u/421/f/667200/c/34625/s/403ced6a/sc/8/a2.img" border="0"/&gt;&lt;/a&gt;&lt;img width="1" height="1" src="http://pi.feedsportal.com/r/211597297929/u/421/f/667200/c/34625/s/403ced6a/sc/8/a2t.img" border="0"/&gt;
+            </description>
+
+            <category domain="http://www.nytimes.com/namespaces/keywords/nyt_org_all" >
+Takata Corp
+            </category>
+            <category domain="http://www.nytimes.com/namespaces/keywords/des" >
+Automobile Safety Features and Defects
+            </category>
+            <category domain="http://www.nytimes.com/namespaces/keywords/des" >
+Traffic Accidents and Safety
+            </category>
+            <category domain="http://www.nytimes.com/namespaces/keywords/mdes" >
+Factories and Manufacturing
+            </category>
+
+            <pubDate>
+Fri, 07 Nov 2014 00:34:39 GMT
+            </pubDate>
+
+            <guid isPermaLink="false" >
+http://www.nytimes.com/2014/11/07/business/airbag-maker-takata-is-said-to-have-conducted-secret-tests.html
+            </guid>
+
+            <dc:creator>
+By HIROKO TABUCHI
+            </dc:creator>
+
+            <media:credit scheme="urn:ebu" >
+Shizuo Kambayashi/Associated Press
+            </media:credit>
+
+            <media:description>
+Inside a Takata showroom in Tokyo on Thursday.
+            </media:description>
+
+            <media:content
+                height="151"
+                lang=""
+                url="http://graphics8.nytimes.com/images/2014/11/07/business/07takata-web1/07takata-web1-moth-v2.jpg"
+                width="151" />
+        </item>
+        <item>
+            <atom:link
+                href="http://www.nytimes.com/2014/11/07/us/appeals-court-upholds-same-sex-marriage-ban.html?partner=rss&amp;emc=rss"
+                rel="standout" />
+
+            <title>
+Court Upholds Marriage Bans in Four States
+            </title>
+
+            <link>
+http://rss.nytimes.com/c/34625/f/667200/s/403bdf22/sc/8/l/0L0Snytimes0N0C20A140C110C0A70Cus0Cappeals0Ecourt0Eupholds0Esame0Esex0Emarriage0Eban0Bhtml0Dpartner0Frss0Gemc0Frss/story01.htm
+            </link>
+
+            <description>
+Setting up a Supreme Court case, the decision overturned lower court rulings in Kentucky, Michigan, Ohio and Tennessee that were in favor of same-sex marriage.&lt;img width='1' height='1' src='http://rss.nytimes.com/c/34625/f/667200/s/403bdf22/sc/8/mf.gif' border='0'/&gt;&lt;br clear='all'/&gt;&lt;br/&gt;&lt;br/&gt;&lt;a href="http://da.feedsportal.com/r/211597305493/u/421/f/667200/c/34625/s/403bdf22/sc/8/rc/1/rc.htm" rel="nofollow"&gt;&lt;img src="http://da.feedsportal.com/r/211597305493/u/421/f/667200/c/34625/s/403bdf22/sc/8/rc/1/rc.img" border="0"/&gt;&lt;/a&gt;&lt;br/&gt;&lt;a href="http://da.feedsportal.com/r/211597305493/u/421/f/667200/c/34625/s/403bdf22/sc/8/rc/2/rc.htm" rel="nofollow"&gt;&lt;img src="http://da.feedsportal.com/r/211597305493/u/421/f/667200/c/34625/s/403bdf22/sc/8/rc/2/rc.img" border="0"/&gt;&lt;/a&gt;&lt;br/&gt;&lt;a href="http://da.feedsportal.com/r/211597305493/u/421/f/667200/c/34625/s/403bdf22/sc/8/rc/3/rc.htm" rel="nofollow"&gt;&lt;img src="http://da.feedsportal.com/r/211597305493/u/421/f/667200/c/34625/s/403bdf22/sc/8/rc/3/rc.img" border="0"/&gt;&lt;/a&gt;&lt;br/&gt;&lt;br/&gt;&lt;a href="http://da.feedsportal.com/r/211597305493/u/421/f/667200/c/34625/s/403bdf22/sc/8/a2.htm"&gt;&lt;img src="http://da.feedsportal.com/r/211597305493/u/421/f/667200/c/34625/s/403bdf22/sc/8/a2.img" border="0"/&gt;&lt;/a&gt;&lt;img width="1" height="1" src="http://pi.feedsportal.com/r/211597305493/u/421/f/667200/c/34625/s/403bdf22/sc/8/a2t.img" border="0"/&gt;
+            </description>
+
+            <category domain="http://www.nytimes.com/namespaces/keywords/nyt_org_all" >
+United States Court of Appeal for the Sixth Circuit
+            </category>
+            <category domain="http://www.nytimes.com/namespaces/keywords/nyt_geo" >
+Michigan
+            </category>
+            <category domain="http://www.nytimes.com/namespaces/keywords/des" >
+Same-Sex Marriage, Civil Unions and Domestic Partnerships
+            </category>
+
+            <pubDate>
+Thu, 06 Nov 2014 23:41:02 GMT
+            </pubDate>
+
+            <guid isPermaLink="false" >
+http://www.nytimes.com/2014/11/07/us/appeals-court-upholds-same-sex-marriage-ban.html
+            </guid>
+
+            <dc:creator>
+By ERIK ECKHOLM
+            </dc:creator>
+        </item>
+    </channel>
+
+</rss>
