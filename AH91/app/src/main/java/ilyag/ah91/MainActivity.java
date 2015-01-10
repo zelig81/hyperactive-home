@@ -3,11 +3,13 @@ package ilyag.ah91;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.parse.Parse;
 import com.parse.ParseACL;
@@ -40,14 +42,15 @@ public class MainActivity extends ActionBarActivity {
         defaultACL.setPublicWriteAccess(true);
         defaultACL.setPublicReadAccess(true);
         ParseACL.setDefaultACL(defaultACL, true);
-        ParseQuery<ParseObject> query = ParseQuery.getQuery("users");
-        query.selectKeys(Arrays.asList("user", "password"));
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("zusers");
+        query.selectKeys(Arrays.asList("zuser", "zpassword"));
         try {
             list = query.find();
         } catch (ParseException e) {
-            e.printStackTrace();
+            Log.e("ilyag1", e.getMessage());
         }
         tv = (TextView)findViewById(R.id.textView);
+
 
 
         bAdd.setOnClickListener(new View.OnClickListener() {
@@ -64,9 +67,9 @@ public class MainActivity extends ActionBarActivity {
                 Intent intent = new Intent(MainActivity.this, ShowActivity.class);
                 ArrayList<String> users = new ArrayList<>();
                 for(ParseObject po : list){
-                    users.add(po.getString("user"));
+                    users.add(po.getString("zuser"));
                 }
-                intent.putExtra("users", users);
+                intent.putExtra("zusers", users);
                 startActivityForResult(intent, 1);
             }
         });
@@ -85,6 +88,7 @@ public class MainActivity extends ActionBarActivity {
     protected void onResume() {
         super.onResume();
         tv.setText("" + list.size());
+
     }
 
     /**
@@ -108,9 +112,9 @@ public class MainActivity extends ActionBarActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(requestCode == 0 && resultCode >= 0){
-            ParseObject po = new ParseObject("users");
-            po.add("user", data.getStringExtra("user"));
-            po.add("password", data.getStringExtra("password"));
+            ParseObject po = new ParseObject("zusers");
+            po.put("zuser", data.getStringExtra("zuser"));
+            po.put("zpassword", data.getStringExtra("zpassword"));
             po.saveInBackground();
             list.add(po);
             tv.setText("" + list.size());

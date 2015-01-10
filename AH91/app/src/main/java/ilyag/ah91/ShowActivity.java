@@ -19,8 +19,8 @@ public class ShowActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show);
-        ArrayAdapter<String> aa = new ArrayAdapter<String>(ShowActivity.this, android.R.layout.simple_dropdown_item_1line,(ArrayList <String>)getIntent().getSerializableExtra("users"));
-        Toast.makeText(this, "" + (ArrayList <String>)getIntent().getSerializableExtra("users"), Toast.LENGTH_LONG).show();
+        ArrayAdapter<String> aa = new ArrayAdapter<String>(ShowActivity.this, android.R.layout.simple_dropdown_item_1line,(ArrayList <String>)getIntent().getSerializableExtra("zusers"));
+        Toast.makeText(this, "" + (ArrayList <String>)getIntent().getSerializableExtra("zusers"), Toast.LENGTH_LONG).show();
         ListView lv = (ListView)findViewById(R.id.lvUserListSA);
         lv.setAdapter(aa);
         bReturn = (Button)findViewById(R.id.bReturnSA);

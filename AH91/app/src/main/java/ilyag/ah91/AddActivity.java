@@ -36,8 +36,8 @@ public class AddActivity extends ActionBarActivity {
                 String sUser = etUser.getText().toString();
                 String sPassword = etPassword.getText().toString();
                 if (sUser != null && sPassword != null && !"".equals(sUser) && !"".equals(sPassword)) {
-                    intent.putExtra("user", sUser);
-                    intent.putExtra("password", sPassword);
+                    intent.putExtra("zuser", sUser);
+                    intent.putExtra("zpassword", sPassword);
                     setResult(0, intent);
                 }else {
                     Toast.makeText(getApplication(), "don't forget to type something in both fields", Toast.LENGTH_LONG).show();
