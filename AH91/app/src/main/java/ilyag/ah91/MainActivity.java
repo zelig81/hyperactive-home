@@ -2,6 +2,7 @@ package ilyag.ah91;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
@@ -11,6 +12,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.parse.CountCallback;
 import com.parse.Parse;
 import com.parse.ParseACL;
 import com.parse.ParseAnalytics;
@@ -27,12 +29,14 @@ public class MainActivity extends ActionBarActivity {
     Button bAdd, bShow;
     TextView tv;
     List<ParseObject> list = null;
+    Handler handler = new Handler();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        bAdd = (Button)findViewById(R.id.bAddUserMA);
-        bShow = (Button)findViewById(R.id.bShowUsersMA);
+        bAdd = (Button) findViewById(R.id.bAddUserMA);
+        bShow = (Button) findViewById(R.id.bShowUsersMA);
         Parse.initialize(this, "55xzOXMlrupi2Ak3G5GHudXITvRwjcB93M2mBdTp", "jJUVHrwq64dWrxW7TRMPfjryzG3896sYKeUP1WJd");
         ParseUser.enableAutomaticUser();
         ParseUser.getCurrentUser().saveInBackground();
@@ -49,8 +53,7 @@ public class MainActivity extends ActionBarActivity {
         } catch (ParseException e) {
             Log.e("ilyag1", e.getMessage());
         }
-        tv = (TextView)findViewById(R.id.textView);
-
+        tv = (TextView) findViewById(R.id.textView);
 
 
         bAdd.setOnClickListener(new View.OnClickListener() {
@@ -66,7 +69,7 @@ public class MainActivity extends ActionBarActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, ShowActivity.class);
                 ArrayList<String> users = new ArrayList<>();
-                for(ParseObject po : list){
+                for (ParseObject po : list) {
                     users.add(po.getString("zuser"));
                 }
                 intent.putExtra("zusers", users);
@@ -97,7 +100,7 @@ public class MainActivity extends ActionBarActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        for (ParseObject po : list){
+        for (ParseObject po : list) {
             po.saveInBackground();
         }
     }
@@ -111,12 +114,39 @@ public class MainActivity extends ActionBarActivity {
      */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if(requestCode == 0 && resultCode >= 0){
-            ParseObject po = new ParseObject("zusers");
-            po.put("zuser", data.getStringExtra("zuser"));
-            po.put("zpassword", data.getStringExtra("zpassword"));
-            po.saveInBackground();
-            list.add(po);
+        if (requestCode == 0 && resultCode >= 0) {
+            final String user = data.getStringExtra("zuser");
+            final String password = data.getStringExtra("zpassword");
+            ParseQuery<ParseObject> query = new ParseQuery<ParseObject>("zusers");
+            query.whereEqualTo("zuser", user);
+            query.countInBackground(new CountCallback() {
+                @Override
+                public void done(int i, ParseException e) {
+                    if (e == null) {
+                        if (i == 0) {
+                            ParseObject po = new ParseObject("zusers");
+                            po.put("zuser", user);
+                            po.put("zpassword", password);
+                            po.saveInBackground();
+                            list.add(po);
+                            tv.setText("" + list.size());
+                        }else{
+                            tv.setText("There is such user exists. Total count of users remains " + list.size());
+                        }
+                    } else {
+                        Log.e("ilyag1", e.getMessage());
+                    }
+                }
+            });
+        }
+        if (requestCode == 1 && resultCode >= 0) {
+            ParseQuery<ParseObject> query = ParseQuery.getQuery("zusers");
+            query.selectKeys(Arrays.asList("zuser", "zpassword"));
+            try {
+                list = query.find();
+            } catch (ParseException e) {
+                Log.e("ilyag1", e.getMessage());
+            }
             tv.setText("" + list.size());
         }
         super.onActivityResult(requestCode, resultCode, data);

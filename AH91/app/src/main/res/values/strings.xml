@@ -12,5 +12,7 @@
     <string name="hintPasswordAA">type password for the new user</string>
     <string name="title_activity_show">ShowActivity</string>
     <string name="tReturn">return</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="tDOK">OK</string>
 
 </resources>
