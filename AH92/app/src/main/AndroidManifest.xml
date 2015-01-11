@@ -16,6 +16,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".MakePhotoActivity"
+            android:label="@string/title_activity_make_photo" >
+        </activity>
+        <activity
+            android:name=".ShowPhotosActivity"
+            android:label="@string/title_activity_show_photos" >
+        </activity>
     </application>
 
 </manifest>
