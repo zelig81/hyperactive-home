@@ -131,7 +131,7 @@ public class MainActivity extends ActionBarActivity {
                             list.add(po);
                             tv.setText("" + list.size());
                         }else{
-                            tv.setText("There is such user exists. Total count of users remains " + list.size());
+                            tv.setText("Such a user already exists. Total count of users remains " + list.size());
                         }
                     } else {
                         Log.e("ilyag1", e.getMessage());
