@@ -11,56 +11,74 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New Button"
-        android:id="@+id/button"
+        android:text="@string/tbMakePhoto"
+        android:id="@+id/bMakePhoto"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"/>
+        />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New Button"
-        android:id="@+id/button2"
-        android:layout_below="@+id/button"
+        android:text="@string/tbShowAlbum"
+        android:id="@+id/bShowAlbum"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignRight="@+id/bMakePhoto"
+        />
+
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="date"
+        android:ems="10"
+        android:id="@+id/etDateFrom"
+        android:hint="@string/hintDateFrom"
+        android:layout_below="@+id/bShowAlbum"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="time"
+        android:ems="10"
+        android:id="@+id/etTimeFrom"
+        android:hint="@string/hintTimeFrom"
+        android:layout_below="@+id/etDateFrom"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_alignRight="@+id/button"
-        android:layout_alignEnd="@+id/button"/>
+        android:layout_alignRight="@+id/etDateFrom"
+        android:layout_alignEnd="@+id/etDateFrom"/>
 
-    <DatePicker
+    <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/datePicker"
-        android:layout_below="@+id/button2"
+        android:inputType="date"
+        android:ems="10"
+        android:id="@+id/etDateTo"
+        android:hint="@string/hintDateTo"
+        android:layout_below="@+id/etTimeFrom"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"/>
-
-    <TimePicker
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/timePicker"
-        android:layout_below="@+id/button2"
-        android:layout_alignRight="@+id/button2"
-        android:layout_alignEnd="@+id/button2"/>
-
-    <DatePicker
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/datePicker2"
-        android:layout_centerVertical="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"/>
-
-    <TimePicker
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/timePicker2"
-        android:layout_centerVertical="true"
+        android:layout_alignParentStart="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="time"
+        android:ems="10"
+        android:id="@+id/etTimeTo"
+        android:hint="@string/hintTimeTo"
+        android:layout_below="@+id/etDateTo"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"/>
 
 
 </RelativeLayout>

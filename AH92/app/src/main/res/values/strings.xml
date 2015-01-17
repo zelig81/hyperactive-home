@@ -6,5 +6,12 @@
     <string name="action_settings">Settings</string>
     <string name="title_activity_make_photo">MakePhotoActivity</string>
     <string name="title_activity_show_photos">ShowPhotosActivity</string>
+    <string name="tFrom">From Date:</string>
+    <string name="tbMakePhoto">Make Photo</string>
+    <string name="tbShowAlbum">Show Album</string>
+    <string name="hintDateFrom">press to choose date from</string>
+    <string name="hintTimeFrom">click to choose time from</string>
+    <string name="hintDateTo">click to choose date to</string>
+    <string name="hintTimeTo">click to choose time to</string>
 
 </resources>
