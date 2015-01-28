@@ -9,10 +9,8 @@
     <string name="tFrom">From Date:</string>
     <string name="tbMakePhoto">Make Photo</string>
     <string name="tbShowAlbum">Show Album</string>
-    <string name="hintDateFrom">type date from (for example 3/31/2014) or press long on the field to choose</string>
-    <string name="hintTimeFrom">type time from (for example 14:03) or press long on the field to choose</string>
-    <string name="hintDateTo">type date to (for example 3/31/2014) or press long on the field to choose</string>
-    <string name="hintTimeTo">type time to (for example 14:03) or press long on the field to choose</string>
+    <string name="hintDateFrom">type date from (for example "3/31/2014 3:10") or press long on the field to choose</string>
+    <string name="hintDateTo">type date to (for example "3/31/2015 23:56") or press long on the field to choose</string>
     <string name="tReturn">Return</string>
     <string name="tOK">OK</string>
 

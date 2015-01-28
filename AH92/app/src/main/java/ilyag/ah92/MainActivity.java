@@ -1,13 +1,20 @@
 package ilyag.ah92;
 
+import android.app.DialogFragment;
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.parse.Parse;
@@ -21,7 +28,7 @@ import java.util.Locale;
 
 public class MainActivity extends ActionBarActivity {
     Button bMake, bShow;
-    EditText etDataFrom, etDataTo, etTimeFrom, etTimeTo;
+    EditText etDataFrom, etDataTo;
     TextView tvResult;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,8 +39,6 @@ public class MainActivity extends ActionBarActivity {
 
         etDataFrom = (EditText)findViewById(R.id.etDateFrom);
         etDataTo = (EditText)findViewById(R.id.etDateTo);
-        etTimeFrom = (EditText)findViewById(R.id.etTimeFrom);
-        etTimeTo = (EditText)findViewById(R.id.etTimeTo);
         tvResult = (TextView)findViewById(R.id.tvResult);
 
         Parse.enableLocalDatastore(this);
@@ -53,29 +58,27 @@ public class MainActivity extends ActionBarActivity {
             public void onClick(View v) {
                 String sDateFrom = etDataFrom.getText().toString();
                 String sDateTo = etDataTo.getText().toString();
-                String sTimeFrom = etTimeFrom.getText().toString();
-                String sTimeTo = etTimeTo.getText().toString();
                 Calendar calFrom = Calendar.getInstance();
                 Calendar calTo = Calendar.getInstance();
                 SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy, HHmm", Locale.ENGLISH);
                 try {
-                    calFrom.setTime(sdf.parse(sDateFrom + ", " + sTimeFrom));
-                    calTo.setTime(sdf.parse(sDateTo + ", " + sTimeTo));
+                    calFrom.setTime(sdf.parse(sDateFrom));
+                    calTo.setTime(sdf.parse(sDateTo));
                 } catch (ParseException e) {
-                    Toast.makeText(MainActivity.this, "wrong format of time interval from = [" + sDateFrom + "] [" + sTimeFrom + "] to = [" + sDateTo + "] [" + sTimeTo + "]", Toast.LENGTH_LONG).show();
-
-
+                    Toast.makeText(MainActivity.this, "wrong format of time interval from = [" + sDateFrom + "] to = [" + sDateTo + "]", Toast.LENGTH_LONG).show();
                     Log.e("ilyag1", e.getMessage());
+                    return;
                 }
 
-                boolean check = dateCheck(sDateFrom, sDateTo);
-                check = check && timeCheck(sTimeFrom, sTimeTo);
+                boolean check = calFrom.before(calTo);
                 if (check == true) {
-                    Toast.makeText(MainActivity.this, "right format of time interval from = [" + sDateFrom + "] [" + sTimeFrom + "] to = [" + sDateTo + "] [" + sTimeTo + "]", Toast.LENGTH_LONG).show();
+                    Toast.makeText(MainActivity.this, "right format of time interval from = [" + sDateFrom + " to = [" + sDateTo + "]", Toast.LENGTH_LONG).show();
 
-                    //Intent i = new Intent(MainActivity.this, ShowPhotosActivity.class);
-                    //i.putExtra();
-                    //startActivityForResult(i, 2);
+                    Intent i = new Intent(MainActivity.this, ShowPhotosActivity.class);
+                    startActivityForResult(i, 2);
+
+                }else{
+                    Toast.makeText(MainActivity.this, "wrong interval from = [" + sDateFrom + "] to = [" + sDateTo + "]", Toast.LENGTH_LONG).show();
 
                 }
             }
@@ -84,30 +87,66 @@ public class MainActivity extends ActionBarActivity {
         View.OnLongClickListener dateChooser = new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                tvResult.setText("date " + ((EditText)v).getText().toString());
+                FragmentTransaction ft = getFragmentManager().beginTransaction();
+                DialogFragment newFragment = MyDialog.newInstance();
+                ft.add(R.layout.dialog_date_picker, newFragment);
+                ft.commit();
                 return false;
             }
         } ;
-        View.OnLongClickListener timeChooser = new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                tvResult.setText("time " + ((EditText)v).getText().toString());
-                return false;
-            }
-        } ;
+
 
         etDataFrom.setOnLongClickListener(dateChooser);
         etDataTo.setOnLongClickListener(dateChooser);
-        etTimeTo.setOnLongClickListener(timeChooser);
-        etTimeFrom.setOnLongClickListener(timeChooser);
     }
 
-    private boolean timeCheck(String sTimeFrom, String sTimeTo) {
-        return true;
-    }
+    public static class MyDialog extends DialogFragment {
+        String title, type;
+        static MyDialog newInstance(){
+            MyDialog md = new MyDialog();
+            return md;
+        }
 
-    private boolean dateCheck(String sDateFrom, String sDateTo) {
-        return true;
+        /**
+         * Called to have the fragment instantiate its user interface view.
+         * This is optional, and non-graphical fragments can return null (which
+         * is the default implementation).  This will be called between
+         * {@link #onCreate(android.os.Bundle)} and {@link #onActivityCreated(android.os.Bundle)}.
+         * <p/>
+         * <p>If you return a View from here, you will later be called in
+         * {@link #onDestroyView} when the view is being released.
+         *
+         * @param inflater           The LayoutInflater object that can be used to inflate
+         *                           any views in the fragment,
+         * @param container          If non-null, this is the parent view that the fragment's
+         *                           UI should be attached to.  The fragment should not add the view itself,
+         *                           but this can be used to generate the LayoutParams of the view.
+         * @param savedInstanceState If non-null, this fragment is being re-constructed
+         *                           from a previous saved state as given here.
+         * @return Return the View for the fragment's UI, or null.
+         */
+        @Nullable
+        @Override
+        public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+            View v =  inflater.inflate(R.layout.dialog_date_picker, container, false);
+            DatePicker dp = (DatePicker)v.findViewById(R.id.dpDatePicker);
+            TimePicker tp = (TimePicker)v.findViewById(R.id.dpTimePicker);
+            Button bOK, bReturn;
+            bOK = (Button)v.findViewById(R.id.bDPOK);
+            bReturn = (Button)v.findViewById(R.id.bDPReturn);
+            bReturn.setOnClickListener(new View.OnClickListener() {
+                /**
+                 * Called when a view has been clicked.
+                 *
+                 * @param v The view that was clicked.
+                 */
+                @Override
+                public void onClick(View v) {
+                    dismiss();
+                }
+            });
+            return v;
+        }
     }
 
 

@@ -31,7 +31,6 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="date"
         android:ems="10"
         android:id="@+id/etDateFrom"
         android:hint="@string/hintDateFrom"
@@ -39,46 +38,25 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"/>
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="time"
-        android:ems="10"
-        android:id="@+id/etTimeFrom"
-        android:hint="@string/hintTimeFrom"
-        android:layout_below="@+id/etDateFrom"
-        android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_alignRight="@+id/etDateFrom"
-        android:layout_alignEnd="@+id/etDateFrom"/>
+        android:ellipsize="end"
+        android:lines="2"/>
+
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="date"
         android:ems="10"
         android:id="@+id/etDateTo"
         android:hint="@string/hintDateTo"
-        android:layout_below="@+id/etTimeFrom"
+        android:layout_below="@+id/etDateFrom"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"/>
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="time"
-        android:ems="10"
-        android:id="@+id/etTimeTo"
-        android:hint="@string/hintTimeTo"
-        android:layout_below="@+id/etDateTo"
-        android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"/>
+        android:ellipsize="end"
+        android:lines="2"/>
+
 
     <TextView
         android:layout_width="wrap_content"
@@ -87,8 +65,8 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_alignRight="@+id/etTimeTo"
-        android:layout_alignEnd="@+id/etTimeTo"/>
+        android:layout_alignRight="@+id/etDateTo"
+        android:layout_alignEnd="@+id/etDateTo"/>
 
 
 </RelativeLayout>
