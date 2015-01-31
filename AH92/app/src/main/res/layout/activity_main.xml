@@ -35,12 +35,12 @@
         android:id="@+id/etDateFrom"
         android:hint="@string/hintDateFrom"
         android:layout_below="@+id/bShowAlbum"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:ellipsize="end"
-        android:lines="2"/>
+        android:lines="2"
+        android:layout_toLeftOf="@+id/bChooseDateFrom"
+        android:layout_toStartOf="@+id/bChooseDateFrom"/>
 
 
     <EditText
@@ -52,10 +52,10 @@
         android:layout_below="@+id/etDateFrom"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
         android:ellipsize="end"
-        android:lines="2"/>
+        android:lines="2"
+        android:layout_alignRight="@+id/etDateFrom"
+        android:layout_alignEnd="@+id/etDateFrom"/>
 
 
     <TextView
@@ -67,6 +67,24 @@
         android:layout_alignParentStart="true"
         android:layout_alignRight="@+id/etDateTo"
         android:layout_alignEnd="@+id/etDateTo"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tbChooseDateFrom"
+        android:id="@+id/bChooseDateFrom"
+        android:layout_below="@+id/bShowAlbum"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tbChooseDateTo"
+        android:id="@+id/bChooseDateTo"
+        android:layout_below="@+id/etDateFrom"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"/>
 
 
 </RelativeLayout>

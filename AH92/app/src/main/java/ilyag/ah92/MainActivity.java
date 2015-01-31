@@ -27,7 +27,7 @@ import java.util.Locale;
 
 
 public class MainActivity extends ActionBarActivity {
-    Button bMake, bShow;
+    Button bMake, bShow, bChooseFrom, bChooseTo;
     EditText etDataFrom, etDataTo;
     TextView tvResult;
     @Override
@@ -36,6 +36,8 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
         bMake = (Button)findViewById(R.id.bMakePhoto);
         bShow = (Button)findViewById(R.id.bShowAlbum);
+        bChooseFrom = (Button)findViewById(R.id.bChooseDateFrom);
+        bChooseTo = (Button)findViewById(R.id.bChooseDateTo);
 
         etDataFrom = (EditText)findViewById(R.id.etDateFrom);
         etDataTo = (EditText)findViewById(R.id.etDateTo);
@@ -84,20 +86,19 @@ public class MainActivity extends ActionBarActivity {
             }
         });
 
-        View.OnLongClickListener dateChooser = new View.OnLongClickListener() {
+        View.OnClickListener dateChooser = new View.OnClickListener() {
             @Override
-            public boolean onLongClick(View v) {
+            public void onClick(View v) {
                 FragmentTransaction ft = getFragmentManager().beginTransaction();
                 DialogFragment newFragment = MyDialog.newInstance();
                 ft.add(R.layout.dialog_date_picker, newFragment);
                 ft.commit();
-                return false;
             }
         } ;
 
+        bChooseFrom.setOnClickListener(dateChooser);
+        bChooseTo.setOnClickListener(dateChooser);
 
-        etDataFrom.setOnLongClickListener(dateChooser);
-        etDataTo.setOnLongClickListener(dateChooser);
     }
 
     public static class MyDialog extends DialogFragment {
