@@ -1,9 +1,12 @@
 package ilyag.ah92;
 
 import android.app.DialogFragment;
+import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
@@ -29,7 +32,10 @@ import java.util.Locale;
 public class MainActivity extends ActionBarActivity {
     Button bMake, bShow, bChooseFrom, bChooseTo;
     EditText etDataFrom, etDataTo;
+    static EditText ETToChange;
+    static Handler handler = new Handler();
     TextView tvResult;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,8 +56,7 @@ public class MainActivity extends ActionBarActivity {
         bMake.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(MainActivity.this, MakePhotoActivity.class);
-                startActivityForResult(i, 1);
+                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
             }
         });
 
@@ -62,7 +67,7 @@ public class MainActivity extends ActionBarActivity {
                 String sDateTo = etDataTo.getText().toString();
                 Calendar calFrom = Calendar.getInstance();
                 Calendar calTo = Calendar.getInstance();
-                SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy, HHmm", Locale.ENGLISH);
+                SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy HH:mm", Locale.ENGLISH);
                 try {
                     calFrom.setTime(sdf.parse(sDateFrom));
                     calTo.setTime(sdf.parse(sDateTo));
@@ -74,8 +79,6 @@ public class MainActivity extends ActionBarActivity {
 
                 boolean check = calFrom.before(calTo);
                 if (check == true) {
-                    Toast.makeText(MainActivity.this, "right format of time interval from = [" + sDateFrom + " to = [" + sDateTo + "]", Toast.LENGTH_LONG).show();
-
                     Intent i = new Intent(MainActivity.this, ShowPhotosActivity.class);
                     startActivityForResult(i, 2);
 
@@ -86,61 +89,65 @@ public class MainActivity extends ActionBarActivity {
             }
         });
 
-        View.OnClickListener dateChooser = new View.OnClickListener() {
+        bChooseFrom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 FragmentTransaction ft = getFragmentManager().beginTransaction();
-                DialogFragment newFragment = MyDialog.newInstance();
-                ft.add(R.layout.dialog_date_picker, newFragment);
-                ft.commit();
+                Fragment prev = getFragmentManager().findFragmentByTag("before");
+                if (prev != null){
+                    ft.remove(prev);
+                }
+                ft.addToBackStack(null);
+                ETToChange = etDataFrom;
+                DialogFragment df = MyDialog.newInstance();
+                df.show(ft, "before");
             }
-        } ;
-
-        bChooseFrom.setOnClickListener(dateChooser);
-        bChooseTo.setOnClickListener(dateChooser);
+        });
+        bChooseTo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentTransaction ft = getFragmentManager().beginTransaction();
+                Fragment prev = getFragmentManager().findFragmentByTag("after");
+                if (prev != null){
+                    ft.remove(prev);
+                }
+                ft.addToBackStack(null);
+                ETToChange = etDataTo;
+                DialogFragment df = MyDialog.newInstance();
+                df.show(ft, "after");
+            }
+        });
 
     }
 
     public static class MyDialog extends DialogFragment {
         String title, type;
         static MyDialog newInstance(){
-            MyDialog md = new MyDialog();
-            return md;
+            return new MyDialog();
         }
 
-        /**
-         * Called to have the fragment instantiate its user interface view.
-         * This is optional, and non-graphical fragments can return null (which
-         * is the default implementation).  This will be called between
-         * {@link #onCreate(android.os.Bundle)} and {@link #onActivityCreated(android.os.Bundle)}.
-         * <p/>
-         * <p>If you return a View from here, you will later be called in
-         * {@link #onDestroyView} when the view is being released.
-         *
-         * @param inflater           The LayoutInflater object that can be used to inflate
-         *                           any views in the fragment,
-         * @param container          If non-null, this is the parent view that the fragment's
-         *                           UI should be attached to.  The fragment should not add the view itself,
-         *                           but this can be used to generate the LayoutParams of the view.
-         * @param savedInstanceState If non-null, this fragment is being re-constructed
-         *                           from a previous saved state as given here.
-         * @return Return the View for the fragment's UI, or null.
-         */
         @Nullable
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
             View v =  inflater.inflate(R.layout.dialog_date_picker, container, false);
-            DatePicker dp = (DatePicker)v.findViewById(R.id.dpDatePicker);
-            TimePicker tp = (TimePicker)v.findViewById(R.id.dpTimePicker);
+            final DatePicker dp = (DatePicker)v.findViewById(R.id.dpDatePicker);
+            final TimePicker tp = (TimePicker)v.findViewById(R.id.dpTimePicker);
             Button bOK, bReturn;
             bOK = (Button)v.findViewById(R.id.bDPOK);
+            bOK.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    handler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            ETToChange.setText(dp.getMonth() + "/" + dp.getDayOfMonth() + "/" + dp.getYear() + " " + tp.getCurrentHour() + ":" + tp.getCurrentMinute());
+                        }
+                    });
+                    dismiss();
+                }
+            });
             bReturn = (Button)v.findViewById(R.id.bDPReturn);
             bReturn.setOnClickListener(new View.OnClickListener() {
-                /**
-                 * Called when a view has been clicked.
-                 *
-                 * @param v The view that was clicked.
-                 */
                 @Override
                 public void onClick(View v) {
                     dismiss();
