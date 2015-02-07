@@ -49,7 +49,7 @@ public class MainActivity extends ActionBarActivity {
     static Handler handler = new Handler();
     Uri fileUri;
     TextView tvResult;
-    SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm", Locale.ENGLISH);
+    static SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm", Locale.ENGLISH);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,6 +101,8 @@ public class MainActivity extends ActionBarActivity {
                 boolean check = calFrom.before(calTo);
                 if (check == true) {
                     Intent i = new Intent(MainActivity.this, ShowPhotosActivity.class);
+                    i.putExtra("from",calFrom);
+                    i.putExtra("to",calTo);
                     startActivity(i);
 
                 } else {
