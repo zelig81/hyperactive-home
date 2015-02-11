@@ -87,22 +87,22 @@ public class MainActivity extends ActionBarActivity {
             public void onClick(View v) {
                 String sDateFrom = etDataFrom.getText().toString();
                 String sDateTo = etDataTo.getText().toString();
-                Calendar calFrom = Calendar.getInstance();
-                Calendar calTo = Calendar.getInstance();
+                Date dateFrom = new Date();
+                Date dateTo = new Date();
                 try {
-                    calFrom.setTime(sdf.parse(sDateFrom));
-                    calTo.setTime(sdf.parse(sDateTo));
+                    dateFrom = sdf.parse(sDateFrom);
+                    dateTo = sdf.parse(sDateTo);
                 } catch (ParseException e) {
                     Toast.makeText(MainActivity.this, "wrong format of time interval from = [" + sDateFrom + "] to = [" + sDateTo + "]", Toast.LENGTH_LONG).show();
                     Log.e("ilyag1", e.getMessage());
                     return;
                 }
 
-                boolean check = calFrom.before(calTo);
+                boolean check = dateTo.after(dateFrom);
                 if (check == true) {
                     Intent i = new Intent(MainActivity.this, ShowPhotosActivity.class);
-                    i.putExtra("from",calFrom);
-                    i.putExtra("to",calTo);
+                    i.putExtra("from",dateFrom);
+                    i.putExtra("to",dateTo);
                     startActivity(i);
 
                 } else {
@@ -164,7 +164,7 @@ public class MainActivity extends ActionBarActivity {
                     handler.post(new Runnable() {
                         @Override
                         public void run() {
-                            ETToChange.setText(dp.getYear() + "/" + dp.getMonth() + "/" + dp.getDayOfMonth() + " " + tp.getCurrentHour() + ":" + tp.getCurrentMinute());
+                            ETToChange.setText(dp.getYear() + "/" + (dp.getMonth() + 1) + "/" + dp.getDayOfMonth() + " " + tp.getCurrentHour() + ":" + tp.getCurrentMinute());
                         }
                     });
                     dismiss();
@@ -188,15 +188,15 @@ public class MainActivity extends ActionBarActivity {
             options.inSampleSize=32;
             Bitmap bitmap = BitmapFactory.decodeFile(fileUri.getPath(),options);
             iv.setImageBitmap(bitmap);
-            Calendar cal = Calendar.getInstance();
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
             ParseFile file = new ParseFile("picture.jpg", baos.toByteArray());
             ParseObject po = new ParseObject("Picture");
-            po.put("zDate",cal.getTime());
+            Date date = new Date();
+            po.put("zDate",date);
             po.put("zFile",file);
             po.saveInBackground();
-            tvResult.setText("uploaded photo from : " + sdf.format(cal.getTime()) + " with size " + bitmap.getByteCount());
+            tvResult.setText("uploaded photo from : " + sdf.format(date) + " with size " + bitmap.getByteCount());
         }
         super.onActivityResult(requestCode, resultCode, data);
     }

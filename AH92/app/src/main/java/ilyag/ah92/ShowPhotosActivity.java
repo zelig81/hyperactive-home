@@ -10,6 +10,7 @@ import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 
@@ -22,15 +23,14 @@ public class ShowPhotosActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_photos);
         Bundle bundle = getIntent().getExtras();
-        final Calendar calFrom = (Calendar) bundle.getSerializable("from");
-        final Calendar calTo = (Calendar) bundle.getSerializable("to");
+        final Date dateFrom = (Date) bundle.getSerializable("from");
+        final Date dateTo = (Date) bundle.getSerializable("to");
         final TextView aspTV = (TextView) findViewById(R.id.aspTVResult);
-        aspTV.setText("from " + MainActivity.sdf.format(calFrom.getTime()) + " to " + MainActivity.sdf.format(calTo.getTime()));
-
-        final ParseQuery<ParseObject> query = new ParseQuery<ParseObject>("Picture");
+        aspTV.setText("from " + MainActivity.sdf.format(dateFrom) + " to " + MainActivity.sdf.format(dateTo));
+        ParseQuery<ParseObject> query = new ParseQuery<ParseObject>("Picture");
         try {
-            query.whereGreaterThan("zDate", calFrom.getTime());
-            query.whereLessThan("zDate", calTo.getTime());
+            query.whereGreaterThanOrEqualTo("zDate", dateFrom);
+            query.whereLessThanOrEqualTo("zDate", dateTo);
             query.orderByDescending("zDate");
             List<ParseObject> results = query.find();
             for(ParseObject po : results) {
