@@ -1,5 +1,7 @@
 package ilyag.ah92;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.ActionBarActivity;
@@ -7,6 +9,7 @@ import android.widget.GridView;
 import android.widget.TextView;
 
 import com.parse.ParseException;
+import com.parse.ParseFile;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
@@ -32,7 +35,7 @@ public class ShowPhotosActivity extends ActionBarActivity {
         final TextView aspTV = (TextView) findViewById(R.id.aspTVResult);
         GridView gv = (GridView)findViewById(R.id.gridView);
         ArrayList<Date> dates = new ArrayList<>();
-        ArrayList<File> files = new ArrayList<>();
+        ArrayList<Bitmap> files = new ArrayList<>();
         aspTV.setText("from " + MainActivity.sdf.format(dateFrom) + " to " + MainActivity.sdf.format(dateTo));
         ParseQuery<ParseObject> query = new ParseQuery<ParseObject>("Picture");
         try {
@@ -42,7 +45,10 @@ public class ShowPhotosActivity extends ActionBarActivity {
             List<ParseObject> results = query.find();
             for(ParseObject po : results) {
                 dates.add((Date)po.get("zDate"));
-                files.add((File)po.get("zFile"));
+                ParseFile pf = (ParseFile)po.get("zFile");
+                byte[] bFile = pf.getData();
+                Bitmap bitmap = BitmapFactory.decodeByteArray(bFile,0,bFile.length);
+                files.add(bitmap);
             }
         } catch (ParseException e) {
             e.printStackTrace();

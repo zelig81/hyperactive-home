@@ -1,10 +1,15 @@
 package ilyag.ah92;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.ListAdapter;
+import android.widget.TextView;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -16,8 +21,8 @@ import java.util.Date;
 public class GridAdapter extends BaseAdapter {
     private Context mContext;
     ArrayList<Date> dates;
-    ArrayList<File> files;
-    public GridAdapter(Context showPhotosActivity, ArrayList<Date> dates, ArrayList<File> files) {
+    ArrayList<Bitmap> files;
+    public GridAdapter(Context showPhotosActivity, ArrayList<Date> dates, ArrayList<Bitmap> files) {
         mContext = showPhotosActivity;
         this.dates = dates;
         this.files = files;
@@ -76,6 +81,12 @@ public class GridAdapter extends BaseAdapter {
      */
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        return null;
+        convertView = LayoutInflater.from(mContext).inflate(R.layout.grid, null);
+        ImageView iv = (ImageView)convertView.findViewById(R.id.ivPicture);
+        TextView tv = (TextView)convertView.findViewById(R.id.tvDate);
+        tv.setText(MainActivity.sdf.format(dates.get(position)));
+        iv.setImageBitmap(files.get(position));
+
+        return convertView;
     }
 }
