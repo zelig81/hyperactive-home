@@ -3,14 +3,18 @@ package ilyag.ah92;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.ActionBarActivity;
+import android.widget.GridView;
 import android.widget.TextView;
 
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
+import java.io.File;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 
@@ -26,6 +30,9 @@ public class ShowPhotosActivity extends ActionBarActivity {
         final Date dateFrom = (Date) bundle.getSerializable("from");
         final Date dateTo = (Date) bundle.getSerializable("to");
         final TextView aspTV = (TextView) findViewById(R.id.aspTVResult);
+        GridView gv = (GridView)findViewById(R.id.gridView);
+        ArrayList<Date> dates = new ArrayList<>();
+        ArrayList<File> files = new ArrayList<>();
         aspTV.setText("from " + MainActivity.sdf.format(dateFrom) + " to " + MainActivity.sdf.format(dateTo));
         ParseQuery<ParseObject> query = new ParseQuery<ParseObject>("Picture");
         try {
@@ -34,37 +41,15 @@ public class ShowPhotosActivity extends ActionBarActivity {
             query.orderByDescending("zDate");
             List<ParseObject> results = query.find();
             for(ParseObject po : results) {
-                aspTV.setText(aspTV.getText().toString() + "\n" + MainActivity.sdf.format(po.get("zDate")));
+                dates.add((Date)po.get("zDate"));
+                files.add((File)po.get("zFile"));
             }
         } catch (ParseException e) {
             e.printStackTrace();
         }
-//        ParseQueryAdapter.QueryFactory<ParseObject> factory = new ParseQueryAdapter.QueryFactory<ParseObject>() {
-//            @Override
-//            public ParseQuery<ParseObject> create() {
-//                final ParseQuery<ParseObject> query = new ParseQuery<ParseObject>("Picture");
-//                query.whereGreaterThanOrEqualTo("zDate", calFrom.getTime());
-//                query.whereLessThanOrEqualTo("zDate", calTo.getTime());
-//                query.orderByDescending("zDate");
-//                handler.post(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        try {
-//                            aspTV.setText(query.count() + "");
-//                        } catch (ParseException e) {
-//                            e.printStackTrace();
-//                        }
-//                    }
-//                });
-//                return query;
-//            }
-//        };
-//        final ParseQueryAdapter<ParseObject> pqAdapter = new ParseQueryAdapter<ParseObject>(this, factory);
-//        pqAdapter.setImageKey("zFile");
-//
-//        ListView lv = (ListView) findViewById(R.id.listView);
-//        lv.setAdapter(pqAdapter);
-
+        if (dates.size() * files.size() > 0){
+            gv.setAdapter(new GridAdapter(this, dates, files));
+        }
 
     }
 

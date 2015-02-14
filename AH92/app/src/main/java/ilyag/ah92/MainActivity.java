@@ -65,7 +65,7 @@ public class MainActivity extends ActionBarActivity {
         etDataTo = (EditText) findViewById(R.id.etDateTo);
         tvResult = (TextView) findViewById(R.id.tvResult);
 
-        Parse.enableLocalDatastore(this);
+        //Parse.enableLocalDatastore(this); //commenting because enableOfflineStore() called multiple times.
 
         Parse.initialize(this, "rtGoLjEKfTGODrWQmjwOmUkOcPGGVo2JaOwivPqb", "LHQtKOC9d4jsQf8ypaXE92GdOPxqvLT685RjBWam");
 
@@ -87,8 +87,7 @@ public class MainActivity extends ActionBarActivity {
             public void onClick(View v) {
                 String sDateFrom = etDataFrom.getText().toString();
                 String sDateTo = etDataTo.getText().toString();
-                Date dateFrom = new Date();
-                Date dateTo = new Date();
+                Date dateFrom, dateTo;
                 try {
                     dateFrom = sdf.parse(sDateFrom);
                     dateTo = sdf.parse(sDateTo);
