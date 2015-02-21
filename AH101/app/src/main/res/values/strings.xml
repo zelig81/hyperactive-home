@@ -2,7 +2,10 @@
 <resources>
 
     <string name="app_name">AH101</string>
-    <string name="hello_world">Hello world!</string>
+    <string name="sTVOutput">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="sBShowLast10">Show last 10 coordinates</string>
+    <string name="sSToggleService">Toggle Service</string>
+    <string name="sIntervalHint">time interval in milliseconds (default 10000)</string>
 
 </resources>
