@@ -89,6 +89,11 @@ public class MainActivity extends ActionBarActivity {
             int count = query.count();
             if (count != 10) {
                 Toast.makeText(this, "count of parseobjects in gps_info: " + count, Toast.LENGTH_LONG).show();
+                for (int i=0; i < 10; i++){
+                    ParseObject po = new ParseObject("gps_info");
+                    po.put("running_number", i);
+                    po.save();
+                }
             }
         } catch (ParseException e) {
             Log.e("ilyag1", e.getMessage());
@@ -126,7 +131,7 @@ public class MainActivity extends ActionBarActivity {
      */
     @Override
     protected void onPause() {
-
+        mService.stopProcess();
         super.onPause();
     }
 
