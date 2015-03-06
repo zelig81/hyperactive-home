@@ -84,20 +84,19 @@ public class MyService extends Service implements LocationListener {
 
             }
         };
-        Log.i("ilyag1", "1");
-        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 1, 1, locationListener);
-        Log.i("ilyag1", "2");
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, msInterval, 0.00000000001f, locationListener);
+        ParseQuery<ParseObject> query = new ParseQuery<ParseObject>("gps_info");
+        query.orderByDescending("updatedAt");
+        try {
+            list = query.find();
+        } catch (ParseException e) {
+            Log.e("ilyag1", e.getMessage());
+        }
+        running_number = list.get(0).getInt("running_number");
 
         new Thread(new Runnable() {
             @Override
             public void run() {
-                ParseQuery<ParseObject> query = new ParseQuery<ParseObject>("gps_info");
-                query.orderByDescending("updatedAt");
-                try {
-                    list = query.find();
-                } catch (ParseException e) {
-                    Log.e("ilyag1", e.getMessage());
-                }
                 if (list == null) {
                     mContext.handler.post(new Runnable() {
                         @Override
@@ -106,11 +105,9 @@ public class MyService extends Service implements LocationListener {
                         }
                     });
                 } else {
-                    running_number = list.get(0).getInt("running_number");
                     while (bGoingOn) {
                         running_number = (running_number + 1) % 10;
-                        lastLocation = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-                        Log.i("ilyag1", "3");
+                        lastLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
                         try {
                             list.get(running_number).put("geopoint", new ParseGeoPoint(lastLocation.getLatitude(), lastLocation.getLongitude()));
                             list.get(running_number).save();
