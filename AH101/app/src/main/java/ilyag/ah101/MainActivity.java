@@ -11,6 +11,7 @@ import android.os.IBinder;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -20,8 +21,12 @@ import android.widget.Toast;
 
 import com.parse.Parse;
 import com.parse.ParseException;
+import com.parse.ParseGeoPoint;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -120,7 +125,22 @@ public class MainActivity extends ActionBarActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                tv.setText("button clicked");
+                ParseQuery<ParseObject> query = new ParseQuery<ParseObject>("gps_info");
+                query.orderByDescending("updatedAt");
+                try {
+                    List<ParseObject> poList = query.find();
+                    List<String> sList = new ArrayList<String>();
+                    for (ParseObject po : poList){
+                        ParseGeoPoint geoPoint = (ParseGeoPoint) po.get("geopoint");
+                        sList.add(po.get("running_number") + " :: " + geoPoint.toString());
+                    }
+                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(MainActivity.this,android.R.layout.simple_list_item_1,sList);
+                    lv.setAdapter(adapter);
+                    tv.setText("button clicked");
+                } catch (ParseException e) {
+                    Log.e("ilyag1", e.getMessage());
+                }
+
             }
         });
     }
