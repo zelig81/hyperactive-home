@@ -31,10 +31,6 @@ public class MainActivity extends ActionBarActivity {
     ListView lv;
     MyService mService;
     boolean mBound;
-    EditText etInteval;
-    Handler handler = new Handler();
-    Location mCurrentLocation;
-
     private ServiceConnection mConnection = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
@@ -48,6 +44,9 @@ public class MainActivity extends ActionBarActivity {
             mBound = false;
         }
     };
+    EditText etInteval;
+    Handler handler = new Handler();
+    Location mCurrentLocation;
     private String mLastUpdateTime;
 
     @Override
@@ -89,7 +88,7 @@ public class MainActivity extends ActionBarActivity {
             int count = query.count();
             if (count != 10) {
                 Toast.makeText(this, "count of parseobjects in gps_info: " + count, Toast.LENGTH_LONG).show();
-                for (int i=0; i < 10; i++){
+                for (int i = 0; i < 10; i++) {
                     ParseObject po = new ParseObject("gps_info");
                     po.put("running_number", i);
                     po.save();

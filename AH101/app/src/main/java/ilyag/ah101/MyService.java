@@ -9,12 +9,9 @@ import android.location.LocationManager;
 import android.os.Binder;
 import android.os.Bundle;
 import android.os.IBinder;
-import android.os.Looper;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.location.LocationRequest;
 import com.parse.ParseException;
 import com.parse.ParseGeoPoint;
 import com.parse.ParseObject;
@@ -26,8 +23,8 @@ import java.util.List;
  * Created by gorban on 2/20/2015.
  */
 public class MyService extends Service implements LocationListener {
-    boolean bGoingOn = false;
     private final IBinder mBinder = new LocalBinder();
+    boolean bGoingOn = false;
     int running_number;
     List<ParseObject> list;
     LocationManager locationManager;
@@ -51,7 +48,7 @@ public class MyService extends Service implements LocationListener {
     @Override
     public void onCreate() {
         super.onCreate();
-        locationManager = (LocationManager)MyService.this.getSystemService(Context.LOCATION_SERVICE);
+        locationManager = (LocationManager) MyService.this.getSystemService(Context.LOCATION_SERVICE);
     }
 
     public void stopProcess() {
@@ -115,10 +112,10 @@ public class MyService extends Service implements LocationListener {
                         lastLocation = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
                         Log.i("ilyag1", "3");
                         try {
-                            list.get(running_number).put("geopoint",new ParseGeoPoint(lastLocation.getLatitude(), lastLocation.getLongitude()));
+                            list.get(running_number).put("geopoint", new ParseGeoPoint(lastLocation.getLatitude(), lastLocation.getLongitude()));
                             list.get(running_number).save();
                         } catch (ParseException e) {
-                            Log.e("ilyag1",e.getMessage());
+                            Log.e("ilyag1", e.getMessage());
                             bGoingOn = false;
                         }
                         mContext.handler.post(new Runnable() {
