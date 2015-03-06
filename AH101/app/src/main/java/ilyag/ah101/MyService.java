@@ -1,19 +1,20 @@
 package ilyag.ah101;
 
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
 import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Binder;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.os.Looper;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
-import com.google.android.gms.location.LocationServices;
 import com.parse.ParseException;
 import com.parse.ParseGeoPoint;
 import com.parse.ParseObject;
@@ -24,14 +25,25 @@ import java.util.List;
 /**
  * Created by gorban on 2/20/2015.
  */
-public class MyService extends Service implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener {
+public class MyService extends Service implements LocationListener {
     boolean bGoingOn = false;
     private final IBinder mBinder = new LocalBinder();
     int running_number;
-    LocationRequest mLocationRequest;
-    private GoogleApiClient mGoogleAPIClient;
-    private Location mCurrentLocation;
     List<ParseObject> list;
+    LocationManager locationManager;
+    LocationListener locationListener;
+    private MainActivity mainActivity;
+    private Location lastLocation;
+
+    /**
+     * Called by the system when the service is first created.  Do not call this method directly.
+     */
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        bGoingOn = false;
+    }
 
     /**
      * Called by the system when the service is first created.  Do not call this method directly.
@@ -39,28 +51,46 @@ public class MyService extends Service implements GoogleApiClient.ConnectionCall
     @Override
     public void onCreate() {
         super.onCreate();
-        mGoogleAPIClient = new GoogleApiClient.Builder(this).addApi(LocationServices.API).addConnectionCallbacks(this).addOnConnectionFailedListener(this).build();
+        locationManager = (LocationManager)MyService.this.getSystemService(Context.LOCATION_SERVICE);
     }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        bGoingOn = false;
-        LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleAPIClient, this);
-    }
-
 
     public void stopProcess() {
         bGoingOn = false;
+        locationManager.removeUpdates(locationListener);
     }
 
     public void startMyProcess(final long msInterval, final MainActivity mContext) {
         Log.e("ilyag1", "started my process");
-
+        mainActivity = mContext;
         if (msInterval < 1) {
             return;
         }
         bGoingOn = true;
+        locationListener = new LocationListener() {
+            @Override
+            public void onLocationChanged(Location location) {
+
+            }
+
+            @Override
+            public void onStatusChanged(String provider, int status, Bundle extras) {
+
+            }
+
+            @Override
+            public void onProviderEnabled(String provider) {
+
+            }
+
+            @Override
+            public void onProviderDisabled(String provider) {
+
+            }
+        };
+        Log.i("ilyag1", "1");
+        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 1, 1, locationListener);
+        Log.i("ilyag1", "2");
+
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -80,13 +110,21 @@ public class MyService extends Service implements GoogleApiClient.ConnectionCall
                     });
                 } else {
                     running_number = list.get(0).getInt("running_number");
-                    createLocationUpdate(msInterval);
                     while (bGoingOn) {
-                        running_number = (running_number + 1)%10;
+                        running_number = (running_number + 1) % 10;
+                        lastLocation = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+                        Log.i("ilyag1", "3");
+                        try {
+                            list.get(running_number).put("geopoint",new ParseGeoPoint(lastLocation.getLatitude(), lastLocation.getLongitude()));
+                            list.get(running_number).save();
+                        } catch (ParseException e) {
+                            Log.e("ilyag1",e.getMessage());
+                            bGoingOn = false;
+                        }
                         mContext.handler.post(new Runnable() {
                             @Override
                             public void run() {
-                                mContext.tv.setText("Last updated gps running number:" + running_number + ". Longitude: " + mCurrentLocation.getLongitude() + " / Latitude: " + mCurrentLocation.getLatitude());
+                                mContext.tv.setText("Last updated gps running number:" + running_number + "\nLongitude: " + lastLocation.getLongitude() + " / Latitude: " + lastLocation.getLatitude());
                             }
                         });
                         try {
@@ -102,61 +140,50 @@ public class MyService extends Service implements GoogleApiClient.ConnectionCall
 
     }
 
-    public void createLocationUpdate(long interval) {
-        mLocationRequest = new LocationRequest();
-        mLocationRequest.setFastestInterval(interval);
-        mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
-        mLocationRequest.setInterval(interval);
-        Log.i("ilyag1", "set location request in createLocationUpdate");
-    }
-
     @Override
     public IBinder onBind(Intent intent) {
         return mBinder;
     }
 
     @Override
-    public void onConnected(Bundle bundle) {
-        if (bGoingOn) {
-            startLocationUpdates();
-        }
-    }
-
-    private void startLocationUpdates() {
-        LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleAPIClient, mLocationRequest, this);
-        Log.i("ilyag1", "started LocationServices in startLocationUpdates + object of GoogleApiClient=" + mGoogleAPIClient.toString());
-    }
-
-    @Override
-    public void onConnectionSuspended(int i) {
-
+    public void onLocationChanged(final Location location) {
+        mainActivity.handler.post(new Runnable() {
+            @Override
+            public void run() {
+                mainActivity.tv.setText(location.toString());
+            }
+        });
     }
 
     @Override
-    public void onLocationChanged(Location location) {
-        mCurrentLocation = location;
-        Log.i("ilyag1", "onLocationChanged");
-        try {
-            updateParseDatabase(running_number, mCurrentLocation);
-        } catch (ParseException e) {
-            Log.e("ilyag1", e.getMessage());
-        }
+    public void onStatusChanged(String provider, int status, Bundle extras) {
+
     }
 
-    private void updateParseDatabase(int running_number, Location mCurrentLocation) throws ParseException {
-        if (list != null) {
-            Log.i("ilyag1","before updateParseDatabase update");
-            ParseObject poToUpdate = list.get(running_number);
-            poToUpdate.put("geopoint", new ParseGeoPoint(mCurrentLocation.getLatitude(), mCurrentLocation.getLongitude()));
-            Log.i("ilyag1", mCurrentLocation.getLatitude() + "=======================" + mCurrentLocation.getLongitude());
-            poToUpdate.save();
-        }
-    }
-
+    /**
+     * Called when the provider is enabled by the user.
+     *
+     * @param provider the name of the location provider associated with this
+     *                 update.
+     */
     @Override
-    public void onConnectionFailed(ConnectionResult connectionResult) {
+    public void onProviderEnabled(String provider) {
 
     }
+
+    /**
+     * Called when the provider is disabled by the user. If requestLocationUpdates
+     * is called on an already disabled provider, this method is called
+     * immediately.
+     *
+     * @param provider the name of the location provider associated with this
+     *                 update.
+     */
+    @Override
+    public void onProviderDisabled(String provider) {
+
+    }
+
 
     public class LocalBinder extends Binder {
         MyService getService() {
