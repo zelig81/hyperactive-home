@@ -3,6 +3,7 @@ package ilyag.ah101;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -51,7 +52,7 @@ public class MyService extends Service implements LocationListener {
         locationManager = (LocationManager) MyService.this.getSystemService(Context.LOCATION_SERVICE);
     }
 
-    public void stopProcess() {
+    public void stopMyProcess() {
         bGoingOn = false;
         locationManager.removeUpdates(locationListener);
     }
@@ -84,7 +85,13 @@ public class MyService extends Service implements LocationListener {
 
             }
         };
-        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, msInterval, 0.00000000001f, locationListener);
+        Criteria criteria = new Criteria();
+        criteria.setBearingRequired(false);
+        criteria.setAltitudeRequired(false);
+        //criteria.setAccuracy(Criteria.ACCURACY_HIGH);
+        criteria.setPowerRequirement(Criteria.POWER_HIGH);
+        final String provider = locationManager.getBestProvider(criteria,true);
+        locationManager.requestLocationUpdates(provider, 1, 0f, locationListener);
         ParseQuery<ParseObject> query = new ParseQuery<ParseObject>("gps_info");
         query.orderByDescending("updatedAt");
         try {
@@ -107,7 +114,7 @@ public class MyService extends Service implements LocationListener {
                 } else {
                     while (bGoingOn) {
                         running_number = (running_number + 1) % 10;
-                        lastLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+                        lastLocation = locationManager.getLastKnownLocation(provider);
                         try {
                             list.get(running_number).put("geopoint", new ParseGeoPoint(lastLocation.getLatitude(), lastLocation.getLongitude()));
                             list.get(running_number).save();

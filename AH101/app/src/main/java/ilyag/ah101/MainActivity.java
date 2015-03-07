@@ -115,7 +115,7 @@ public class MainActivity extends ActionBarActivity {
                         mService.startMyProcess(interval, MainActivity.this);
                         tv.setText("running service");
                     } else {
-                        mService.stopProcess();
+                        mService.stopMyProcess();
                         tv.setText("service is stopped");
                     }
                 }
@@ -150,7 +150,7 @@ public class MainActivity extends ActionBarActivity {
      */
     @Override
     protected void onPause() {
-        mService.stopProcess();
+        mService.stopMyProcess();
         super.onPause();
     }
 
