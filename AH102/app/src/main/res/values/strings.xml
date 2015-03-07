@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">AH102</string>
+
+
+    <string name="title_section1">Section 1</string>
+    <string name="title_section2">Section 2</string>
+    <string name="title_section3">Section 3</string>
+
+    <string name="hello_world">Hello world!</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="sLogOff">Sign out</string>
+    <string name="sLogIn">Sign in</string>
+    <string name="sSendToUser1">Send to user1</string>
+    <string name="sSendToUser2">Send to user2</string>
+    <string name="sSendToUser3">Send to user3</string>
+    <string name="hintEditText">type your message here</string>
+    <string name="sSend">Send to chosen user</string>
+</resources>

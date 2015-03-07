@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvUser"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"/>
+
+    <ToggleButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tbSignIn"
+        android:textOn="@string/sLogOff"
+        android:textOff="@string/sLogIn"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/sSend"
+        android:id="@+id/bSend"
+        android:layout_below="@+id/spinner"
+        android:layout_alignRight="@+id/editText"
+        android:layout_alignEnd="@+id/editText"/>
+
+    <EditText
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/editText"
+        android:layout_above="@+id/tvMessage"
+        android:layout_below="@+id/bSend"
+        android:scrollbarAlwaysDrawVerticalTrack="true"
+        android:singleLine="false"
+        android:gravity="start"
+        android:ellipsize="middle"
+        android:hint="@string/hintEditText"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:background="@color/highlighted_text_material_dark"
+        android:autoText="true"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginBottom="5dp"/>
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Would be message"
+        android:id="@+id/tvMessage"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentLeft="true"/>
+
+    <Spinner
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/spinner"
+        android:layout_below="@+id/tbSignIn"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"/>
+</RelativeLayout>
