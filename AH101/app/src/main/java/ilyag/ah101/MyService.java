@@ -40,7 +40,7 @@ public class MyService extends Service implements LocationListener {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        bGoingOn = false;
+        stopMyProcess();
     }
 
     /**
@@ -135,6 +135,7 @@ public class MyService extends Service implements LocationListener {
                             bGoingOn = false;
                         }
                     }
+                    stopMyProcess();
                 }
             }
         }).start();
@@ -148,12 +149,6 @@ public class MyService extends Service implements LocationListener {
 
     @Override
     public void onLocationChanged(final Location location) {
-        mainActivity.handler.post(new Runnable() {
-            @Override
-            public void run() {
-                mainActivity.tv.setText(location.toString());
-            }
-        });
     }
 
     @Override
@@ -161,30 +156,15 @@ public class MyService extends Service implements LocationListener {
 
     }
 
-    /**
-     * Called when the provider is enabled by the user.
-     *
-     * @param provider the name of the location provider associated with this
-     *                 update.
-     */
     @Override
     public void onProviderEnabled(String provider) {
 
     }
 
-    /**
-     * Called when the provider is disabled by the user. If requestLocationUpdates
-     * is called on an already disabled provider, this method is called
-     * immediately.
-     *
-     * @param provider the name of the location provider associated with this
-     *                 update.
-     */
     @Override
     public void onProviderDisabled(String provider) {
 
     }
-
 
     public class LocalBinder extends Binder {
         MyService getService() {

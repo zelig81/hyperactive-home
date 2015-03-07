@@ -51,8 +51,6 @@ public class MainActivity extends ActionBarActivity {
     };
     EditText etInteval;
     Handler handler = new Handler();
-    Location mCurrentLocation;
-    private String mLastUpdateTime;
 
     @Override
     protected void onStop() {
@@ -132,11 +130,10 @@ public class MainActivity extends ActionBarActivity {
                     List<String> sList = new ArrayList<String>();
                     for (ParseObject po : poList){
                         ParseGeoPoint geoPoint = (ParseGeoPoint) po.get("geopoint");
-                        sList.add(po.get("running_number") + " :: " + geoPoint.toString());
+                        sList.add(po.get("running_number") + geoPoint.toString());
                     }
                     ArrayAdapter<String> adapter = new ArrayAdapter<String>(MainActivity.this,android.R.layout.simple_list_item_1,sList);
                     lv.setAdapter(adapter);
-                    tv.setText("button clicked");
                 } catch (ParseException e) {
                     Log.e("ilyag1", e.getMessage());
                 }
