@@ -16,4 +16,7 @@
     <string name="sSendToUser3">Send to user3</string>
     <string name="hintEditText">type your message here</string>
     <string name="sSend">Send to chosen user</string>
+    <string name="sCancel">Cancel</string>
+    <string name="hintUser">type username</string>
+    <string name="hintPassword">type password</string>
 </resources>
