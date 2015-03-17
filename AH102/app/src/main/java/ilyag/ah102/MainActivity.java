@@ -6,6 +6,7 @@ import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -22,10 +23,19 @@ import android.widget.ToggleButton;
 import com.parse.Parse;
 import com.parse.ParseException;
 import com.parse.ParseInstallation;
+import com.parse.ParsePush;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
+import com.parse.SaveCallback;
+import com.parse.SendCallback;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 
@@ -38,6 +48,7 @@ public class MainActivity extends Activity {
     static ToggleButton tbSignInOut;
     static ParseUser puCurrentUser;
     static ParseInstallation piCurrentInstallation;
+    Handler handler = new Handler();
 
     @Override
     protected void onResume() {
@@ -67,11 +78,27 @@ public class MainActivity extends Activity {
 
             @Override
             public void onClick(View v) {
-                ParseUser user = ParseUser.getCurrentUser();
-                if (user == null) {
+                if (puCurrentUser == null) {
                     tvMessage.setText("no signed user");
                 } else {
-                    tvMessage.setText(user.getObjectId() + " / " + user.getUsername());
+                    final String sToUser = spinner.getSelectedItem().toString();
+                    final String sMessage = et.getText().toString();
+                    ParsePush parsePush = new ParsePush();
+                    JSONObject data = null;
+                    try {
+                        data = new JSONObject("{\"alert\": \"" + sMessage + "\"}");
+                    } catch (JSONException e) {
+                        Log.e("ilyag1", e.getMessage());
+                    }
+                    parsePush.setData(data);
+                    parsePush.setChannel(sToUser);
+                    parsePush.setMessage(puCurrentUser.getUsername() + " sent you:" + sMessage);
+                    try {
+                        parsePush.send();
+                    } catch (ParseException e) {
+                        Log.e("ilyag1", e.getMessage());
+                        tvMessage.setText(e.getMessage());
+                    }
                 }
             }
         });
@@ -80,7 +107,11 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View v) {
                 if (!tbSignInOut.isChecked()) {
-                    logout();
+                    try {
+                        logout();
+                    } catch (ParseException e) {
+                        Log.e("ilyag1", e.getMessage());
+                    }
                 } else {
                     FragmentTransaction ft = getFragmentManager().beginTransaction();
                     Fragment fragment = getFragmentManager().findFragmentByTag("ah102dialog");
@@ -101,7 +132,7 @@ public class MainActivity extends Activity {
     protected void onPause() {
         super.onPause();
         if (puCurrentUser != null) {
-            ParseInstallation.getCurrentInstallation();
+            ParsePush.unsubscribeInBackground(puCurrentUser.getUsername());
             try {
                 puCurrentUser.save();
             } catch (ParseException e) {
@@ -149,7 +180,7 @@ public class MainActivity extends Activity {
                             dismiss();
                         }
                     } catch (ParseException e) {
-                        Log.e("ilyag1", "no such etUser");
+                        Log.e("ilyag1", "no such user");
                         Toast.makeText(getActivity(), "no such user", Toast.LENGTH_LONG).show();
                     }
 
@@ -171,6 +202,7 @@ public class MainActivity extends Activity {
         if (puUser != null) {
             tvUser.setText(puUser.getUsername());
             puCurrentUser = ParseUser.getCurrentUser();
+            ParsePush.subscribeInBackground(puCurrentUser.getUsername());
             ParseQuery<ParseUser> query = ParseUser.getQuery();
             query.whereNotEqualTo("username", puUser.getUsername());
             List<ParseUser> puList = query.find();
@@ -188,11 +220,10 @@ public class MainActivity extends Activity {
         }
     }
 
-    public static void logout() {
+    public static void logout() throws ParseException {
         ParseUser.logOut();
         spinner.setAdapter(null);
-        List<String> channels = piCurrentInstallation.getList("channels");
-        if ()
+        ParsePush.unsubscribeInBackground(puCurrentUser.getUsername());
         puCurrentUser = null;
         tbSignInOut.setChecked(false);
         tvUser.setText("no user");
