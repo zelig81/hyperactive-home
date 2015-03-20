@@ -88,9 +88,14 @@ public class MyService extends Service implements LocationListener {
         Criteria criteria = new Criteria();
         criteria.setBearingRequired(false);
         criteria.setAltitudeRequired(false);
-        //criteria.setAccuracy(Criteria.ACCURACY_HIGH);
         criteria.setPowerRequirement(Criteria.POWER_HIGH);
         final String provider = locationManager.getBestProvider(criteria,true);
+        mContext.handler.post(new Runnable() {
+            @Override
+            public void run() {
+                mContext.tv.setText("is provider " + provider + " available? " + locationManager.isProviderEnabled(provider));
+            }
+        });
         locationManager.requestLocationUpdates(provider, 1, 0f, locationListener);
         ParseQuery<ParseObject> query = new ParseQuery<ParseObject>("gps_info");
         query.orderByDescending("updatedAt");
