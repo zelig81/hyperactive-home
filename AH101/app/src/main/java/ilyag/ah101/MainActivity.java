@@ -4,13 +4,15 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
-import android.location.Location;
+import android.location.Geocoder;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -36,6 +38,8 @@ public class MainActivity extends ActionBarActivity {
     ListView lv;
     MyService mService;
     boolean mBound;
+    List<ParseObject> poList;
+
     private ServiceConnection mConnection = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
@@ -83,7 +87,6 @@ public class MainActivity extends ActionBarActivity {
         lv = (ListView) findViewById(R.id.listView);
         etInteval = (EditText) findViewById(R.id.etInterval);
         tv.setText("service is stopped");
-        Parse.enableLocalDatastore(this);
         Parse.initialize(this, "1U2uuILYFaYH8wnzNY3WQCcHXy2wmjudN3YvxPNP", "8Ix1v3GfzSwnXyqmvzY1dov4hgixOseXSFQllVsz");
 
         ParseQuery<ParseObject> query = new ParseQuery<ParseObject>("gps_info");
@@ -126,18 +129,34 @@ public class MainActivity extends ActionBarActivity {
                 ParseQuery<ParseObject> query = new ParseQuery<ParseObject>("gps_info");
                 query.orderByDescending("updatedAt");
                 try {
-                    List<ParseObject> poList = query.find();
+                    poList = query.find();
                     List<String> sList = new ArrayList<String>();
-                    for (ParseObject po : poList){
+                    for (ParseObject po : poList) {
                         ParseGeoPoint geoPoint = (ParseGeoPoint) po.get("geopoint");
                         sList.add(po.get("running_number") + geoPoint.toString());
                     }
-                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(MainActivity.this,android.R.layout.simple_list_item_1,sList);
+                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(MainActivity.this, android.R.layout.simple_list_item_1, sList);
                     lv.setAdapter(adapter);
                 } catch (ParseException e) {
                     Log.e("ilyag1", e.getMessage());
                 }
 
+            }
+        });
+
+        lv.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+                ParseObject po = poList.get(i);
+                ParseGeoPoint pgp = (ParseGeoPoint)po.get("geopoint");
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                String sUri = "geo:" + pgp.getLatitude() + "," + pgp.getLongitude() + "?z=16";
+                Uri uri = Uri.parse(sUri);
+                intent.setData(uri); //geo:47.6,-122.3?z=11
+                if (intent.resolveActivity(getPackageManager()) != null){
+                    startActivity(intent);
+                }
+                return false;
             }
         });
     }
@@ -147,7 +166,9 @@ public class MainActivity extends ActionBarActivity {
      */
     @Override
     protected void onPause() {
-        mService.stopMyProcess();
+        if (mService.bGoingOn) {
+            mService.stopMyProcess();
+        }
         super.onPause();
     }
 

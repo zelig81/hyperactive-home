@@ -25,7 +25,7 @@ import java.util.List;
  */
 public class MyService extends Service implements LocationListener {
     private final IBinder mBinder = new LocalBinder();
-    boolean bGoingOn = false;
+    public boolean bGoingOn = false;
     int running_number;
     List<ParseObject> list;
     LocationManager locationManager;
@@ -54,7 +54,8 @@ public class MyService extends Service implements LocationListener {
 
     public void stopMyProcess() {
         bGoingOn = false;
-        locationManager.removeUpdates(locationListener);
+        if (locationListener != null)
+            locationManager.removeUpdates(locationListener);
     }
 
     public void startMyProcess(final long msInterval, final MainActivity mContext) {
@@ -89,7 +90,8 @@ public class MyService extends Service implements LocationListener {
         criteria.setBearingRequired(false);
         criteria.setAltitudeRequired(false);
         criteria.setPowerRequirement(Criteria.POWER_HIGH);
-        final String provider = locationManager.getBestProvider(criteria,true);
+        final String provider = locationManager.getBestProvider(criteria, true);
+        locationManager.isProviderEnabled(provider);
         mContext.handler.post(new Runnable() {
             @Override
             public void run() {
