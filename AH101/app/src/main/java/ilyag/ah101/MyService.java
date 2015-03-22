@@ -3,7 +3,6 @@ package ilyag.ah101;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
-import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -59,10 +58,10 @@ public class MyService extends Service implements LocationListener {
             locationManager.removeUpdates(locationListener);
     }
 
-    public void startMyProcess(final long msInterval, final MainActivity mContext) {
+    public void startMyProcess(final long interval, final MainActivity mContext) {
         Log.e("ilyag1", "started my process");
         mainActivity = mContext;
-        if (msInterval < 1) {
+        if (interval < 1) {
             return;
         }
         bGoingOn = true;
@@ -89,25 +88,26 @@ public class MyService extends Service implements LocationListener {
         };
 
         provider = LocationManager.NETWORK_PROVIDER;
-        if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)){
+        Log.i("ilyag1", provider + " is enabled: " + locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER));
+        if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
             provider = LocationManager.GPS_PROVIDER;
-        }else if (locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)){
-            provider = LocationManager.NETWORK_PROVIDER;
-        }else{
-            mContext.handler.post(new Runnable() {
-                @Override
-                public void run() {
-                    mContext.tv.setText("no location providers enabled");
-                    mContext.switch1.setChecked(false);
-                }
-            });
-        }
-        mContext.handler.post(new Runnable() {
-            @Override
-            public void run() {
-                mContext.tv.setText("is provider " + provider + " available? " + locationManager.isProviderEnabled(provider));
+            Log.i("ilyag1", provider + " is enabled");
+        } else {
+            if (locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
+                provider = LocationManager.NETWORK_PROVIDER;
+                Log.i("ilyag1", provider + " is enabled");
+            } else {
+                mContext.handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        Log.i("ilyag1", "no providers enabled");
+                        mContext.tv.setText("no location providers enabled");
+                        mContext.switch1.setChecked(false);
+                    }
+                });
+                return;
             }
-        });
+        }
         locationManager.requestLocationUpdates(provider, 1, 0f, locationListener);
         ParseQuery<ParseObject> query = new ParseQuery<ParseObject>("gps_info");
         query.orderByDescending("updatedAt");
@@ -130,9 +130,19 @@ public class MyService extends Service implements LocationListener {
                     });
                 } else {
                     while (bGoingOn) {
-                        running_number = (running_number + 1) % 10;
+                        try {
+                            Thread.sleep(interval * 1000);
+                        } catch (InterruptedException e) {
+                            Log.e("ilyag1", e.getMessage());
+                            bGoingOn = false;
+                        }
                         lastLocation = locationManager.getLastKnownLocation(provider);
-                        Log.e("ilyag1", "is last location null: " + (lastLocation == null) + "\n provider is: " + provider);
+                        if (lastLocation == null) {
+                            Log.i("ilyag1", "there is no cache for provider: " + provider);
+                            continue;
+                        } else {
+                            running_number = (running_number + 1) % 10;
+                        }
                         try {
                             list.get(running_number).put("geopoint", new ParseGeoPoint(lastLocation.getLatitude(), lastLocation.getLongitude())); //NPE on gps off
                             list.get(running_number).save();
@@ -146,12 +156,6 @@ public class MyService extends Service implements LocationListener {
                                 mContext.tv.setText("Last updated gps running number:" + running_number + "\nLongitude: " + lastLocation.getLongitude() + " / Latitude: " + lastLocation.getLatitude());
                             }
                         });
-                        try {
-                            Thread.sleep(msInterval);
-                        } catch (InterruptedException e) {
-                            Log.e("ilyag1", e.getMessage());
-                            bGoingOn = false;
-                        }
                     }
                     stopMyProcess();
                 }

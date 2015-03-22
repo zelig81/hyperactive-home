@@ -27,6 +27,7 @@ import com.parse.ParseGeoPoint;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
+import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -109,7 +110,7 @@ public class MainActivity extends ActionBarActivity {
             public void onClick(View v) {
                 if (mBound) {
                     if (switch1.isChecked()) {
-                        long interval = 10000;
+                        long interval = 10;
                         if (!"".equals(etInteval.getText().toString())) {
                             interval = Long.parseLong(etInteval.getText().toString());
                         }
@@ -133,7 +134,7 @@ public class MainActivity extends ActionBarActivity {
                     List<String> sList = new ArrayList<String>();
                     for (ParseObject po : poList) {
                         ParseGeoPoint geoPoint = (ParseGeoPoint) po.get("geopoint");
-                        sList.add(po.get("running_number") + geoPoint.toString());
+                        sList.add(po.get("running_number") + ": " + geoPoint.toString() + " / " + DateFormat.getDateTimeInstance().format(po.getUpdatedAt()));
                     }
                     ArrayAdapter<String> adapter = new ArrayAdapter<String>(MainActivity.this, android.R.layout.simple_list_item_1, sList);
                     lv.setAdapter(adapter);
