@@ -32,6 +32,7 @@ public class MyService extends Service implements LocationListener {
     LocationListener locationListener;
     private MainActivity mainActivity;
     private Location lastLocation;
+    private String provider;
 
     /**
      * Called by the system when the service is first created.  Do not call this method directly.
@@ -86,12 +87,21 @@ public class MyService extends Service implements LocationListener {
 
             }
         };
-        Criteria criteria = new Criteria();
-        criteria.setBearingRequired(false);
-        criteria.setAltitudeRequired(false);
-        criteria.setPowerRequirement(Criteria.POWER_HIGH);
-        final String provider = locationManager.getBestProvider(criteria, true);
-        locationManager.isProviderEnabled(provider);
+
+        provider = LocationManager.NETWORK_PROVIDER;
+        if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)){
+            provider = LocationManager.GPS_PROVIDER;
+        }else if (locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)){
+            provider = LocationManager.NETWORK_PROVIDER;
+        }else{
+            mContext.handler.post(new Runnable() {
+                @Override
+                public void run() {
+                    mContext.tv.setText("no location providers enabled");
+                    mContext.switch1.setChecked(false);
+                }
+            });
+        }
         mContext.handler.post(new Runnable() {
             @Override
             public void run() {
@@ -122,8 +132,9 @@ public class MyService extends Service implements LocationListener {
                     while (bGoingOn) {
                         running_number = (running_number + 1) % 10;
                         lastLocation = locationManager.getLastKnownLocation(provider);
+                        Log.e("ilyag1", "is last location null: " + (lastLocation == null) + "\n provider is: " + provider);
                         try {
-                            list.get(running_number).put("geopoint", new ParseGeoPoint(lastLocation.getLatitude(), lastLocation.getLongitude()));
+                            list.get(running_number).put("geopoint", new ParseGeoPoint(lastLocation.getLatitude(), lastLocation.getLongitude())); //NPE on gps off
                             list.get(running_number).save();
                         } catch (ParseException e) {
                             Log.e("ilyag1", e.getMessage());
