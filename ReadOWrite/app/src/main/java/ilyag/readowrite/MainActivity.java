@@ -11,7 +11,7 @@ import android.view.View;
 import android.widget.Toast;
 
 
-public class MainActivity extends Activity implements WriteFragment.OnFragmentInteractionListener {
+public class MainActivity extends Activity implements WriteFragment.OnFragmentInteractionListener, ReadFragment.OnFragmentInteractionListener {
     Fragment readFragment, writeFragment;
     boolean isRead = true;
 
@@ -21,6 +21,8 @@ public class MainActivity extends Activity implements WriteFragment.OnFragmentIn
         setContentView(R.layout.activity_main);
         readFragment = new ReadFragment();
         writeFragment = new WriteFragment();
+
+
 
         View fragmentContainer = findViewById(R.id.fragment_container);
 
@@ -33,18 +35,24 @@ public class MainActivity extends Activity implements WriteFragment.OnFragmentIn
 
         fragmentContainer.setOnTouchListener(new OnSwipeTouchListener(this) {
 
+            @Override
             public boolean onTouch(View v, MotionEvent event) {
-                return gestureDetector.onTouchEvent(event);
+                return gestureDetector !=null && gestureDetector.onTouchEvent(event);
+
             }
 
+            @Override
             public void onSwipeRight() {
-                Toast.makeText(MainActivity.this, "right", Toast.LENGTH_SHORT).show();
-                move();
+                if (isRead) {
+                    move();
+                }
             }
 
+            @Override
             public void onSwipeLeft() {
-                Toast.makeText(MainActivity.this, "left", Toast.LENGTH_SHORT).show();
-                move();
+                if (!isRead) {
+                    move();
+                }
             }
         });
     }

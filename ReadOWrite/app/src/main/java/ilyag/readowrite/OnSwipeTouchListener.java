@@ -1,42 +1,25 @@
 package ilyag.readowrite;
+
 import android.content.Context;
+import android.util.Log;
 import android.view.GestureDetector;
 import android.view.GestureDetector.SimpleOnGestureListener;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
 
-public class OnSwipeTouchListener implements OnTouchListener {
+public abstract class OnSwipeTouchListener implements OnTouchListener {
 
     protected final GestureDetector gestureDetector;
 
-    public OnSwipeTouchListener (Context ctx){
+    public OnSwipeTouchListener(Context ctx) {
         gestureDetector = new GestureDetector(ctx, new GestureListener());
-    }
-
-    /**
-     * Called when a touch event is dispatched to a view. This allows listeners to
-     * get a chance to respond before the target view.
-     *
-     * @param v     The view the touch event has been dispatched to.
-     * @param event The MotionEvent object containing full information about
-     *              the event.
-     * @return True if the listener has consumed the event, false otherwise.
-     */
-    @Override
-    public boolean onTouch(View v, MotionEvent event) {
-        return false;
     }
 
     private final class GestureListener extends SimpleOnGestureListener {
 
         private static final int SWIPE_THRESHOLD = 100;
         private static final int SWIPE_VELOCITY_THRESHOLD = 100;
-
-        @Override
-        public boolean onDown(MotionEvent e) {
-            return true;
-        }
 
         @Override
         public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
@@ -54,31 +37,17 @@ public class OnSwipeTouchListener implements OnTouchListener {
                     }
                     result = true;
                 }
-                else if (Math.abs(diffY) > SWIPE_THRESHOLD && Math.abs(velocityY) > SWIPE_VELOCITY_THRESHOLD) {
-                    if (diffY > 0) {
-                        onSwipeBottom();
-                    } else {
-                        onSwipeTop();
-                    }
-                }
                 result = true;
 
             } catch (Exception exception) {
-                exception.printStackTrace();
+                Log.e("ilyag1", exception.getMessage());
             }
             return result;
         }
     }
 
-    public void onSwipeRight() {
-    }
+    public abstract void onSwipeRight();
 
-    public void onSwipeLeft() {
-    }
+    public abstract void onSwipeLeft();
 
-    public void onSwipeTop() {
-    }
-
-    public void onSwipeBottom() {
-    }
 }
