@@ -1,38 +1,46 @@
 package ilyag.readowrite;
 
-import android.app.ActionBar;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 import android.view.ViewConfiguration;
-import android.view.ViewGroup;
+
+import com.parse.Parse;
 
 import java.lang.reflect.Field;
 import java.util.Locale;
 
 
-public class MainActivity extends FragmentActivity {
+public class MainActivity extends ActionBarActivity implements NavigationDrawerFragment.NavigationDrawerCallbacks {
     boolean isRead = true;
-
     SectionsPagerAdapter mSectionsPagerAdapter;
-
     ViewPager mViewPager;
+    private NavigationDrawerFragment mNavigationDrawerFragment;
+    private CharSequence mTitle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        
-        ActionBar actionBar = getActionBar();
-        actionBar.show();
+
+        Parse.initialize(this, "1NndmK1Klf4TUMYqSPOQOcm7g81IkJkbonCEkXsK", "mNkhEUaevwRRVaxZqlWxYADA0W2gN9SEHf5ZPNHQ");
+
+
+        mNavigationDrawerFragment = (NavigationDrawerFragment)
+                getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
+        mTitle = getTitle();
+
+        // Set up the drawer.
+        mNavigationDrawerFragment.setUp(
+                R.id.navigation_drawer,
+                (DrawerLayout) findViewById(R.id.drawer_layout));
         try {
             ViewConfiguration vc = ViewConfiguration.get(this);
             Field menuKeyField = ViewConfiguration.class.getDeclaredField("sHasPermanentMenuKey");
@@ -56,12 +64,20 @@ public class MainActivity extends FragmentActivity {
 
     }
 
+    @Override
+    public void onNavigationDrawerItemSelected(int position) {
+        // update the main content by replacing fragments
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction()
+                .replace(R.id.container, PlaceholderFragment.getFragment(position + 1))
+                .commit();
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.menu_main, menu);
+        menuInflater.inflate(R.menu.menu_action, menu);
         return true;
     }
 
@@ -80,6 +96,22 @@ public class MainActivity extends FragmentActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    public static class PlaceholderFragment {
+        public static android.support.v4.app.Fragment getFragment(int position) {
+            switch (position) {
+                case 0:
+                    return new ReadUpdatesFragment();
+                case 1:
+                    return new ReadMyshelfFragment();
+                case 2:
+                    return new ReadSearchFragment();
+                default:
+                    return null;
+            }
+
+        }
+
+    }
 
     /**
      * A {@link android.support.v4.app.FragmentPagerAdapter} that returns a fragment corresponding to
@@ -93,19 +125,8 @@ public class MainActivity extends FragmentActivity {
 
         @Override
         public android.support.v4.app.Fragment getItem(int position) {
-            switch (position){
-                case 0:
-                    return new ReadUpdatesFragment();
-                case 1:
-                    return new ReadMyshelfFragment();
-                case 2:
-                    return new ReadSearchFragment();
-                default:
-                    return null;
-            }
-            // getItem is called to instantiate the fragment for the given page.
-            // Return a PlaceholderFragment (defined as a static inner class below).
-            //return PlaceholderFragment.newInstance(position + 1);
+
+            return PlaceholderFragment.getFragment(position);
         }
 
         @Override

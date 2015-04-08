@@ -5,7 +5,6 @@ import android.util.Log;
 import android.view.GestureDetector;
 import android.view.GestureDetector.SimpleOnGestureListener;
 import android.view.MotionEvent;
-import android.view.View;
 import android.view.View.OnTouchListener;
 
 public abstract class OnSwipeTouchListener implements OnTouchListener {
@@ -15,6 +14,10 @@ public abstract class OnSwipeTouchListener implements OnTouchListener {
     public OnSwipeTouchListener(Context ctx) {
         gestureDetector = new GestureDetector(ctx, new GestureListener());
     }
+
+    public abstract void onSwipeRight();
+
+    public abstract void onSwipeLeft();
 
     private final class GestureListener extends SimpleOnGestureListener {
 
@@ -45,9 +48,5 @@ public abstract class OnSwipeTouchListener implements OnTouchListener {
             return result;
         }
     }
-
-    public abstract void onSwipeRight();
-
-    public abstract void onSwipeLeft();
 
 }
