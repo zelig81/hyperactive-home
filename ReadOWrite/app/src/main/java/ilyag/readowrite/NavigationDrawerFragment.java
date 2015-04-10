@@ -233,9 +233,10 @@ public class NavigationDrawerFragment extends Fragment {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (mDrawerToggle.onOptionsItemSelected(item)) {
+            Toast.makeText(getActivity(), "item " + item, Toast.LENGTH_LONG).show();
             return true;
         }
-
+        Toast.makeText(getActivity(), "outter item " + item, Toast.LENGTH_LONG).show();
         if (item.getItemId() == R.id.menu_item_change_to_reader_mode) {
             Toast.makeText(getActivity(), "reader action.", Toast.LENGTH_SHORT).show();
             return true;

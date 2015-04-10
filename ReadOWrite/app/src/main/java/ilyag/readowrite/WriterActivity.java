@@ -12,7 +12,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.ViewConfiguration;
-import android.widget.Toast;
 
 import com.parse.Parse;
 
@@ -20,7 +19,7 @@ import java.lang.reflect.Field;
 import java.util.Locale;
 
 
-public class MainActivity extends ActionBarActivity implements NavigationDrawerFragment.NavigationDrawerCallbacks {
+public class WriterActivity extends ActionBarActivity implements NavigationDrawerFragment.NavigationDrawerCallbacks {
     boolean isRead = true;
     SectionsPagerAdapter mSectionsPagerAdapter;
     ViewPager mViewPager;
@@ -71,8 +70,9 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
         // update the main content by replacing fragments
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
-                        .replace(R.id.container, PlaceholderFragment.getFragment(position))
-                        .commit();
+                .replace(R.id.container, PlaceholderFragment.getFragment(position))
+                .commit();
+
     }
 
     @Override
