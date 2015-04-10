@@ -1,23 +1,24 @@
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <!--xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.example.ilya.myapplication"
-    xmlns:app="http://schemas.android.com/apk/res-auto"-->
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="ilyag.readowrite.MainActivity"
+    >
 
     <item
         android:id="@+id/menu_item_change_to_reader_mode"
         android:orderInCategory="100"
-        android:showAsAction="always"
+        app:showAsAction="always"
         android:title="@string/change_to_reader_main" />
 
     <item
         android:id="@+id/menu_item_change_to_writer_mode"
-        android:showAsAction="always"
+        app:showAsAction="always"
         android:title="@string/change_to_writer_main" />
 
     <item
         android:id="@+id/menu_item_settings"
         android:orderInCategory="100"
-        android:showAsAction="never"
+        app:showAsAction="never"
         android:title="@string/action_settings" />
 
 

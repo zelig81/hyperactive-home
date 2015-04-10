@@ -67,10 +67,18 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
     @Override
     public void onNavigationDrawerItemSelected(int position) {
         // update the main content by replacing fragments
+
         FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction()
-                .replace(R.id.container, PlaceholderFragment.getFragment(position + 1))
-                .commit();
+        fragmentManager.beginTransaction();
+        switch (position){
+            case 0:
+                fragmentManager.replace(R.id.container, ReadPagerFragment.newInstance()).commit();
+                break;
+            case 1:
+                fragmentManager.replace(R.id.container, PlaceholderFragment.getFragment(position))
+                        .commit();
+                break;
+        }
     }
 
     @Override
