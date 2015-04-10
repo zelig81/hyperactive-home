@@ -97,16 +97,15 @@ public class NavigationDrawerFragment extends Fragment {
                 selectItem(position);
             }
         });
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
+        mDrawerListView.setAdapter(new ArrayAdapter<String>(
                 getActionBar().getThemedContext(),
                 android.R.layout.simple_list_item_activated_1,
                 android.R.id.text1,
                 new String[]{
                         getString(R.string.change_to_reader_main),
                         getString(R.string.change_to_writer_main),
-                        getString(R.string.action_settings)
-                });
-        mDrawerListView.setAdapter(arrayAdapter);
+                        getString(R.string.action_settings),
+                }));
         mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
         return mDrawerListView;
     }
@@ -229,17 +228,6 @@ public class NavigationDrawerFragment extends Fragment {
         super.onConfigurationChanged(newConfig);
         // Forward the new configuration the drawer toggle component.
         mDrawerToggle.onConfigurationChanged(newConfig);
-    }
-
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        // If the drawer is open, show the global app actions in the action bar. See also
-        // showGlobalContextActionBar, which controls the top-left area of the action bar.
-        if (mDrawerLayout != null && isDrawerOpen()) {
-            //inflater.inflate(R.menu.menu_main, menu);
-            showGlobalContextActionBar();
-        }
-        super.onCreateOptionsMenu(menu, inflater);
     }
 
     @Override
