@@ -88,6 +88,7 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
         if (id == R.id.action_settings) {
             return true;
         } else if (id == R.id.action_search) {
+            mViewPager.setCurrentItem(2,true);
             return true;
         } else if (id == R.id.action_refresh) {
             return true;
